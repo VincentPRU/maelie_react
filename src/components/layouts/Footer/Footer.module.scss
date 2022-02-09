@@ -1,0 +1,25 @@
+/*******************************
+
+    Specific component styling
+    +++
+    Vincent Poirier Ruel 08/02/2022
+
+********************************/
+
+.footer_Component {
+
+    
+    padding: 3rem;
+    background-color: grey;
+
+    /* Correspond to the maxWidthPageContainer */
+    > div {
+        display: flex;
+
+        > section {
+             
+        }
+    }
+
+
+}
