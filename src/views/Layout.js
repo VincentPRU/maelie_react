@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 
 import SceneForm from './pages/SceneForm/SceneForm';
-import ChoraleFormPage from './pages/ChoraleFormPage';
+import ChoraleFormPage from './pages/ChoraleForm/ChoraleFormPage';
 import Credits from './pages/Credits';
 import Home from './pages/Home';
 import AdminPage from './pages/AdminPage';

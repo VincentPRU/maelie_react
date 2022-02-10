@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
-
+import React, { useState } from 'react';
 
 import { firestore, storage } from '../../../firebase';
 import FormContainer from '../../../components/forms/container/FormContainer';
+import ContactForm from '../../../components/forms/form/contactForm/ContactForm';
+import CreditForm from '../../../components/forms/form/creditForm/CreditForm';
+import AudioScenesForm from '../../../components/forms/form/ScencesForm/AudioScenesForm';
 
 import styles from './SceneForm.module.scss'
 
@@ -10,9 +12,6 @@ import styles from './SceneForm.module.scss'
 
 
 const SceneForm = () => {
-
-      // store the file url in the state
-    const [users, setUsers] = useState([]);//by default, empty array
 
     const [userForm, setUserForm] = useState({
       occupation: '',
@@ -22,185 +21,227 @@ const SceneForm = () => {
     })
 
     const [mainForm, setMainForm] = useState({
-      groupName: '',
-      artistesName: '',
+      artistName: '',
+      participantsName: '',
       school: '',
       age: null,
       city: '',
       country: '',
-      audioFiles: [{
-        audio1: "",
-        audio2: "3",
-        audio3: "",
-        audio4: "",
-        audio5: ""
-      }]
+      contactRef: null,
+      audioFiles: {
+        audio1: null,
+        audio2: null,
+        audio3: null,
+        audio4: null,
+        audio5: null
+      }
     })
 
-    
-      const onSubmit = async (e) => {
+    const [audioForm, setAudioForm] = useState({
+      audio1: null,
+      audio2: null,
+      audio3: null,
+      audio4: null,
+      audio5: null
+    })
+
+    const onSubmit = async (e) => {
 
         e.preventDefault();
 
-        try{
+        //Extract the data from the three states to submit it without delay
+        let userFormData = { ...userForm };
+        let mainFormData = { ...mainForm };
+        let audioFormData = { ...audioForm };
 
+
+        /* The next two steps are stored into functions and before the rest so we make sure they are only executed if the previous function is done and called them*/
+        
+       
+       const submittingStepTwo = async () => {
+          /*
+        * 
+        *     Submitting step two => contact infos
+        * 
+        */
+
+            try{
+                //Add the new document to the collection and keep trace of the id
+                const { id } = await firestore.collection("contact").add(userFormData);
+
+                //Save Id in larger scope for later
+                mainFormData = { ...mainFormData, contactRef: id}
+
+                //Once it is done, and if there is no error, call the next step function 
+                submittingStepThree();
+
+              } catch(e){
+                console.error(e);
+                alert("Un problème est survenue. Assurez-vous que les données de contact que vous avez fournies sont du bon format.")
+                return; //Stop the process
+              }
+
+        }
+
+        const submittingStepThree = async () => {
+            /*
+          * 
+          *     Submitting step three => main infos
+          * 
+          */
+            try{
+              
+              //Add the main form data to the firestore collection as a new document
+              //Include the new id as a reference
+              await firestore.collection("credit").add(mainFormData)
+              console.log(mainFormData);
+              alert("Félicitations. Les informations ont bien été enregistrées");
+
+
+            } catch(e){
+              console.error(e);
+              return; //Stop the process
+            }
+
+        }
+
+
+        /*
+        * 
+        *     Validation step one => validation of the audio files
+        * 
+        * 
+        */
+
+       try{
+            //Evaluate every audio space in memory to make sure that there is at least one audio file to import
+            let audioFileIncluded = false;    //false by default
+  
+            Object.keys(audioFormData).forEach(key => {
+              if(audioFormData[key]){ audioFileIncluded = true } //then set the variable to true and let the process continue.
+            })
+  
+            if(!audioFileIncluded){ throw new Error(`Il doit y avoir au moins un fichier audio intégré au formulaire.`); }
+  
+          } catch (e){
+              alert("Au moins un fichier audio est nécessaire.");
+              console.error(e);
+              return  //Stop the process
+          }
+       
+        /*
+        * 
+        *     Validation step two => validation of the user form
+        * 
+        * 
+        */
+
+        try{
           //Make sure that every feild in the UserForm is filled with something
-          Object.keys(userForm).forEach(key => {
-            if(!userForm.key){ throw new Error(`Tous les champs de la section personne contact doivent être complétés`); }
+          Object.keys(userFormData).forEach(key => {
+            if(!userFormData[key]){ throw new Error(`Tous les champs de la section personne contact doivent être complétés`); }
           })
 
         } catch(e){
           console.error(e);
-          return; //exit the function
-        }
-        
-
-        //Url of the media to be stored in the database
-        let fileUrl = undefined;
-
-        try {
-            const file = e.target.audio.files[0];
-            const storageRef = storage.ref(); 
-            const fileRef = storageRef.child(file.name);
-            await fileRef.put(file);
-            fileUrl = await fileRef.getDownloadURL();
-        } catch(error){
-            alert('un problème est survenu avec vos fichier. Assurez-vous qu\'ils soient du bon type');
+          return; //Stop the process
         }
 
-    
-        const username = e.target.username.value;
+        /*
+        * 
+        *     Submitting step one => audio files
+        * 
+        * 
+        */
 
-        if(!username){ return }
-    
-        try {
-            await firestore.collection("users").doc(username).set({
-                name: username,
-                avatar: fileUrl
+       try{
+          //1. one by one : 
+          //                - try to upload file
+          //                - keep trace of the url in the storage
+          //                - save it into the mainForm dedicated places
+
+          const storageRef = storage.ref(); 
+
+          //Map through the audio spaces
+          await Promise.all(
+            Object.keys(audioFormData).map( async key => {
+
+              const file = audioFormData[key];
+
+              if(file){
+
+                //The audio file isn't empty so, we need to push it
+                const fileRef = storageRef.child(file.name);
+                await fileRef.put(file);
+  
+                //If it worked, get the Url
+                const fileUrl = await fileRef.getDownloadURL();
+  
+                //Add it to the mainFormData in the proper place
+                mainFormData.audioFiles = { 
+                  ...mainFormData.audioFiles, 
+                    [key]: fileUrl
+                }
+
+              }
+
             })
-            alert("Opération réussie");
+          )
+            
+          //Once work with the files is done, if there was no error, call the next function
+          submittingStepTwo();
 
-        } catch (error){
-            alert("Un problème est survenu avec l'enregistrement des données");
+        } catch(e){
+          console.error(e);
+          alert("Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds et soient de format audio.")
+          return; //Stop the process
         }
+
         
+       
 
-      }
-    
-      useEffect(() => {
-        const fetchUsers = async () => {
-          const usersCollection = await firestore.collection('users').get();
-          setUsers(usersCollection.docs.map(doc => {
-            return doc.data();
-          }))
-        }
-        fetchUsers();
-      }, [])
+
+    }
+
 
     return (
-
         <div className={`${styles.pageStyling} maxWidthPageContainer`}>
 
             <h1>Participez vous aussi à la mise en musique des scènes de ce conte...</h1>
-            <button onClick={() => {console.log({...mainForm})}}>Inspecter le user</button>
-
             <form onSubmit={onSubmit} className="col-12">
 
                 {/* Section with all the personnal informations */}
-                <FormContainer>
-                <div className={styles.formCategorie}>
-                  <h3>Personne contact</h3>
-                  <small>Ces informations resteront confidentielles</small>
-                  <label>
-                    Je suis un.e :<br/>
-                    <select name="occupation" value={ userForm.occupation } onChange={(e) => setUserForm({ ...userForm, occupation: e.target.value})} required>
-                        <option value="">-</option>
-                        <option value="eleve">Élève</option>
-                        <option value="enseignant">Enseignant.e</option>
-                        <option value="parent">Parent</option>
-                        <option>Autre</option>
-                    </select>
-                  </label>
-
-                  <input type="text" name="name" placeholder="Nom" required onChange={(e) => setUserForm({ ...userForm, name: e.target.value})} />
-                  <input type="text" name="firstname" placeholder="Prénom" required onChange={(e) => setUserForm({ ...userForm, firstname: e.target.value})} />
-                  <input type="email" name="email" placeholder="Courriel" required  onChange={(e) => setUserForm({ ...userForm, email: e.target.value})}/>
-                </div>
+                <FormContainer 
+                    title="Personne contact"
+                    subTitle="Ces informations resteront confidentielles" 
+                >
+                    {/* Import the contact form component. This one must receive the state constant as props */}
+                    <ContactForm data={userForm} setData={setUserForm} />
                 </FormContainer>
 
                 {/* Section with credits */}
-                <div className={styles.formCategorie}>
-                  <h3>Crédits</h3>
-                  <small>Les informations suivantes apparaîtront dans l'application</small>
-                  <label>
-                    Nom d'artiste ou de groupe<br/>
-                    <input type="text" name="groupName" onChange={(e) => setMainForm({ ...mainForm, groupName: e.target.value})} />
-                  </label>
-                  <label>
-                    Nom du ou des jeunes qui ont participé à la bande sonore<br/>
-                    <textarea type="text" name="artistesName" onChange={(e) => setMainForm({ ...mainForm, artistesName: e.target.value})} />
-                  </label>
-                  <label>
-                    École<br/>
-                    <input type="text" name="school" onChange={(e) => setMainForm({ ...mainForm, school: e.target.value})} />
-                  </label>
-                  <label>
-                    Âge<br/>
-                    <select name="age" onChange={(e) => setMainForm({ ...mainForm, age: parseInt(e.target.value)})}>
-                      <option value=""></option>
-                      {Array.from(Array(100).keys()).map(option => {
-                        return <option key={`age-${option}`} value={option}>{option}</option>
-                      })}
-                    </select>
-                  </label>
-                  <label>
-                    Municipalité<br/>
-                    <input type="text" name="city" onChange={(e) => setMainForm({ ...mainForm, city: e.target.value})} />
-                  </label>
-                  <label>
-                    Pays<br/>
-                    <input type="text" name="country" onChange={(e) => setMainForm({ ...mainForm, country: e.target.value})} />
-                  </label>
+                <FormContainer 
+                    title="Crédits"
+                    subTitle="Les informations suivantes apparaîtront dans l'application" 
+                >
 
-                </div>
+                  <CreditForm data={mainForm} setData={setMainForm} />
+
+                </FormContainer>
 
                 {/* Section with audio files */}
-                <div className={styles.formCategorie}>
-                  
-                  <label>
-                    Fichier audio - Scène 1<br/>
-                    <input type="file" name="audio_scene1"/>
-                  </label>
-                  <label>
-                    Fichier audio - Scène 2<br/>
-                    <input type="file" name="audio_scene2"/>
-                  </label>
-                  <label>
-                    Fichier audio - Scène 3<br/>
-                    <input type="file" name="audio_scene3"/>
-                  </label>
-                  <label>
-                    Fichier audio - Scène 4<br/>
-                    <input type="file" name="audio_scene4"/>
-                  </label>
-                  <label>
-                    Fichier audio - Scène 5<br/>
-                    <input type="file" name="audio_scene5"/>
-                  </label>
+                <FormContainer 
+                    title="Extraits audio"
+                    subTitle="Assurez-vous de bien mettre les bon extraits avec les bonnes scènes." 
+                >
 
+                  <AudioScenesForm data={audioForm} setData={setAudioForm} />
+                  </FormContainer>
 
-                </div>
-                <button>Submit</button>
+                <button>Soumettre</button>
             </form>
 
 
-{/*
-            <ul>
-                {users.map(user => {
-                return <li key={user.name}><img width="100" height="100" src={user.avatar} alt={user.name}/><p>{user.name}</p></li>
-                })}
-            </ul>   
-*/}
         </div>
     );
 }

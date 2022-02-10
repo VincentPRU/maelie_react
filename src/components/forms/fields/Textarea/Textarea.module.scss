@@ -1,0 +1,18 @@
+/*
+*
+*
+*      Textarea component styling
+*
+*
+*/
+
+.textareaComponent{
+    margin: 0.5rem 0px;
+
+    position: relative; /* Needed for the asterix */
+
+    textarea {
+        width: 100%;
+        resize: vertical;
+    }
+}

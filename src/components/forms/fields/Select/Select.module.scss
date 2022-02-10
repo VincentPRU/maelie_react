@@ -1,0 +1,18 @@
+/*
+*
+*
+*      Select component styling
+*
+*
+*/
+
+.selectComponent{
+    margin: 0.5rem 0px;
+    width: 100%;
+
+    position: relative; /* Needed for the asterix */
+
+    select {
+        width: 100%;
+    }
+}

@@ -6,10 +6,46 @@ service cloud.firestore {
   	allow read, write: if false;
 
     match /users/{document=**}{
+      allow read: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+      allow create: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+      allow update: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+      allow delete: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+    }
+
+    match /choral/{document=**}{
       allow read;
       allow create;
       allow update: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
       allow delete: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+    }
+
+    match /credit/{document=**}{
+      allow read;
+      allow create;
+      allow update: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+      allow delete: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+    }
+
+    match /contact/{document=**}{
+      allow read: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+      allow create;
+      allow update: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+      allow delete: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+    }
+
+    match /country/{document=**}{
+      allow read;
+      allow write: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+    }
+
+    match /city/{document=**}{
+      allow read;
+      allow write: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
+    }
+
+    match /schools/{document=**}{
+      allow read;
+      allow write: if request.auth != null && request.auth.token.email.matches('.*@smcq[.]qc.ca');
     }
   }
 }

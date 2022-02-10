@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './Textarea.module.scss';
+import styles from './File.module.scss';
 
 /*
 *
@@ -13,20 +13,21 @@ import styles from './Textarea.module.scss';
 *
 */
 
-const Textarea = ({data, setData, name, isRequired, prefilled, children}) => {
+const File = ({data, setData, name, isRequired, children}) => {
 
     //Define if the element is required and add the property in the JSX
     const requirement = {};
     if(isRequired){ requirement['required'] = 'required' }
 
     //Update the state
-    const eventHandler = (e) => {
-        setData({...data, [name]: e.target.value})
+    const eventHandler = (event) => {
+        const file = event.target.files[0];
+        setData({...data, [name]: file})
     }
 
     return(
         
-        <label className={styles.textareaComponent}>
+        <label className={styles.fileForm}>
 
             <div className="col-12">
                 {isRequired && <div className="asterisk">&#x2724;</div>}
@@ -35,11 +36,9 @@ const Textarea = ({data, setData, name, isRequired, prefilled, children}) => {
 
             <br/>
 
-            <textarea 
-                type="text"
+            <input 
+                type="file" 
                 name={name}
-                placeholder={prefilled}
-                rows={5}
                 { ...requirement }
                 onChange={eventHandler}
             />
@@ -49,4 +48,4 @@ const Textarea = ({data, setData, name, isRequired, prefilled, children}) => {
     );
 }
 
-export default Textarea;
+export default File;

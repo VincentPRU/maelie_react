@@ -224,12 +224,20 @@ button {
 input {
 
   /* variable to set equally the padding */
-  --inputPadding: 0.75em;
+  --inputPadding: 0.5rem;
 
   background-color: unset;
-  /*border: unset;*/
+  border: unset;
   color: unset;
-  padding: var(--inputPadding) 0px;
+  padding: var(--inputPadding);
+
+  /* To modify
+  **
+  *
+  *
+  *
+  */
+  background-color: white;
 
   /* submit buttons */
   &[type='submit']{ 
@@ -252,9 +260,19 @@ input:not([type='submit']), textarea{
 }
 
 input:focus, textarea:focus, select:focus{
- /* outline: none;  */
+  outline: none;  
 }
 
+
+/*
+*      Asterix forrequired fields
+*       Always positioned inside the label element
+*/
+.asterisk {
+  color: rgb(167, 31, 31);
+  float: left;
+  font-size: 0.7rem;
+}
 
 /*
 *
