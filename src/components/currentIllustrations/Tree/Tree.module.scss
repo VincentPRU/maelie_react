@@ -1,0 +1,53 @@
+/*
+
+
+    Tree element
+
+
+*/
+
+.treeComponent {
+    
+    --mirror: 1;
+
+    width: auto;
+    position: absolute;
+    transform: translate(-50%, -100%) scaleX(var(--mirror));
+    -webkit-transform: translate(-50%, -100%) scaleX(var(--mirror)); /* Safari & Chrome */
+    -moz-transform: translate(-50%, -100%) scaleX(var(--mirror)); /* Firefox */
+    -ms-transform: translate(-50%, -100%) scaleX(var(--mirror)); /* Internet Explorer */
+    -o-transform: translate(-50%, -100%) scaleX(var(--mirror)); /* Opera */
+
+    -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0);
+    filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838ce);
+
+    &.background {
+        -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) saturate(0.8);
+        filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) saturate(0.8);
+        z-index: -1;
+
+        &.reverse {
+            -webkit-filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) saturate(0.8);
+            filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) saturate(0.8);
+        }
+    }
+
+    &.blurBackground {
+        z-index: -1;
+        -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) blur(0.06rem) saturate(0.8);
+        filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) blur(0.06rem) saturate(0.8);
+
+        &.reverse {
+            -webkit-filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) blur(0.06rem) saturate(0.8);
+            filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) blur(0.06rem) saturate(0.8);
+        }
+    }
+
+    &.reverse {
+        --mirror: -1;
+        -webkit-filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0);
+        filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838ce);
+    }
+
+
+}

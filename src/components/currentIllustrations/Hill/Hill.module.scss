@@ -1,0 +1,41 @@
+/*
+
+        Hill component
+
+
+*/
+
+.hillComponent {
+
+    /* Default variables values */
+    --scaleX: 1;
+
+    position: absolute;
+    transform: translate(-50%, 0%);
+    -webkit-transform: translate(-50%, 0%) scaleX(var(--scaleX)); /* Safari & Chrome */
+    -moz-transform: translate(-50%, 0%) scaleX(var(--scaleX)); /* Firefox */
+    -ms-transform: translate(-50%, 0%) scaleX(var(--scaleX)); /* Internet Explorer */
+    -o-transform: translate(-50%, 0%) scaleX(var(--scaleX)); /* Opera */
+
+    /*  scale(1.5) translateZ(var(--translateZ))    */
+
+    &.reverse {
+        --scaleX: -1;
+    }
+
+    &.groundVisual::before {
+        content: "";
+      height: 20vh;
+      width: 20%;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: red;
+  }
+
+
+
+    -webkit-filter: drop-shadow(0.5rem -0.5rem 0.2rem #383838d0);
+    filter: drop-shadow(0.5rem -0.5rem 0.2rem #383838ce);
+
+}

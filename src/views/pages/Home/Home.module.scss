@@ -1,0 +1,176 @@
+/*
+
+    Home page styling
+
+*/
+
+.homePage {
+
+    
+        width: 100vw;
+        float: left;
+        min-height: 100vh;
+        max-width: 100%;
+        position: relative;
+        overflow: hidden;
+
+    /* Background color */
+    .skyBackgroundGradient{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+
+        display: flex; 
+        flex-direction: column;
+
+        > * { width: 100%; }
+
+        > :first-of-type {
+            height: 100vh;
+            background: rgba(235,239,255,1);
+            background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(235,239,255,1) 0%, rgba(255,252,245,0.7628093473717612) 35%, rgba(255,222,161,0.6) 100%);
+        }
+
+        > :last-of-type {
+            flex:1;
+            background: rgba(235,239,255,1);
+            background: linear-gradient(180deg, rgba(255,222,161,0.6) 0%, rgba(255,222,161,0.6) 100%);
+        }
+
+    }
+
+    /* General styling for the section container */
+    .sectionContainer {
+        width: 100%;
+        overflow: visible;
+        position: relative;
+    }
+
+    /* General styling for the section content */
+    .sectionContent {
+        /*min-height: 100vh;*/
+        position: relative;
+
+        .posterContainer {
+            padding-bottom: 5vh;
+            padding-bottom: max(5vh, 5rem); 
+        }
+
+        .multiPosterContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            align-items: flex-start;
+
+        }
+    }
+
+    
+
+    /*  First section */
+    > .sectionContainer {
+
+        > article {
+
+            header {
+
+                padding: 2rem;
+                padding: min(2rem, 5vw);
+
+                > :first-of-type {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    flex-direction: row;
+
+                    > :first-of-type {
+
+                        svg{
+                            height: 5rem;
+                            height: clamp(1.5rem, 2.5rem, 5vh);
+                            fill: rgb(var(--red));
+                        }
+
+                    }
+                }
+
+                .titleContainer {
+                    padding-top: 15vh;
+
+                    h1 { 
+                        margin: 0px;
+                        text-shadow: 2px 2px 2px rgb(var(--dark));
+                    }
+
+                    h3 {
+                        margin-top: 1rem;
+                    }
+                }
+                
+            }
+        }
+
+    }
+
+}
+
+
+
+/*
+*
+*
+*     Media queries for responsive design
+*
+*
+*
+*/
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .homePage {
+
+        /*  First section */
+        > .sectionContainer {
+
+            > article {
+
+                header {
+
+                    .titleContainer {
+                        padding: 20vh;
+                        padding-top: 25vh;
+                    }
+
+                }
+
+            }
+            
+        }
+
+        /* General styling for the section content */
+    .sectionContent {
+
+        .multiPosterContainer > :first-of-type { margin-top: 5rem; }
+        
+    }
+
+    }
+
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    
+}
+
+/* Extra large devices (large laptops and desktops, 1500px and up) */
+@media only screen and (min-width: 1500px) {
+    
+}

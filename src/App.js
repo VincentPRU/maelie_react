@@ -4,8 +4,9 @@ import Layout from './views/Layout';
 import { AuthProvider } from './contexts/AuthContext'
 
 //Global SCSS files
-import './styles/normalize.scss'
 import './styles/globals.scss'
+import './styles/fadeIntro.scss'
+import './styles/normalize.scss'
 
 /***********************************
  * 

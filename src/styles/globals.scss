@@ -11,27 +11,30 @@
 
 @font-face {
   font-family: Wigrum;
-  src: local("Wigrum"), url("../fonts/_Wigrum-Regular.otf") format("truetype");
-  font-weight: normal;
+  font-weight: 400;
+  font-style: normal;
+  src: url("../fonts/_Wigrum-Regular.otf") format("opentype");
 }
 
 @font-face {
   font-family: Wigrum;
-  src: local("Wigrum"), url("../fonts/_Wigrum-Bold.otf") format("truetype");
-  font-weight: bold;
+  font-weight: 700;
+  font-style: normal;
+  src: url("../fonts/_Wigrum-Bold.otf") format("opentype");
 }
 
 @font-face {
   font-family: Wigrum;
-  src: local("Wigrum"), url("../fonts/_Wigrum-Medium.otf") format("truetype");
   font-weight: 600;
+  font-style: normal;
+  src: url("../fonts/_Wigrum-Medium.otf") format("opentype");
 }
 
 @font-face {
   font-family: Wigrum;
-  src: local("Wigrum"), url("../fonts/_Wigrum-Italic.otf") format("truetype");
-  font-weight: normal;
   font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/_Wigrum-Italic.otf") format("opentype");
 }
 
 /*
@@ -45,25 +48,25 @@
   --max-width-page-content: 85rem;
 
   /* Header's height.  */
-  --headersHeight : 5em;
+  --headersHeight : 5rem;
 
-  /* Main color of the web site (blue) */
-  --mainBlue: rgb(69, 90, 230);
-
-  /* Secondary colors */
-  --altBlue: rgb(77, 100, 255);
-  --grey: rgb(187, 191, 215);
+  /* Main colors */
+  --red: 207, 68, 58;
+  --pink: 234, 140, 114;
+  --blue: 85, 91, 120;
+  --beige: 255, 254, 246;
 
   /* Dark color for the text and background-colors */
-  --dark: rgb(33, 33, 33);
+  --dark: 33, 33, 33;
 
   /* Main font */
-  --generalFont: 'Wigrum', sans-serif;
-  --titleFont: 'Wigrum';
+  --generalFont: 'Wigrum', Helvetica, sans-serif;
+  --titleFont: 'Wigrum', Helvetica, sans-serif;
 
   /* Common border radius through the website */
   --commonRadius: 1.5em;
-  
+
+
 }
 
 html,
@@ -79,7 +82,9 @@ body {
   line-height: 1.4;
 
   /* Default color */
-  color: var(--dark);
+  color: rgb(var(--dark));
+
+  /*scroll-behavior: smooth;*/
 }
 
 main {
@@ -89,6 +94,7 @@ main {
 * {
   box-sizing: border-box;
 }
+
 
 /*
 *
@@ -108,13 +114,18 @@ h4, h5, h6 {
 
 
 h1 { 
-  font-size: 4rem; /* For older browsers */
-  font-size: min(10vw, 4rem); }
+  font-size: 3rem; /* For older browsers */
+  font-size: clamp(3rem, 6rem, 10vw);
+  font-weight: bold; 
+}
 h2 { 
   font-size: 2.5rem;  /* For older browsers */
   font-size: min(2.5rem, 8vw); 
 }
-h3 { font-size: 1.75rem; }
+h3 { 
+  font-size: 1.75rem; 
+  font-size: clamp(1.5rem, 2rem, 6vw);
+}
 h4 { font-size: 1.1rem; }
 h5 { font-size: 1rem; }
 h6 { font-size: 0.8rem; }
@@ -128,23 +139,27 @@ h6 { font-size: 0.8rem; }
 */
 
 /* blue color */
-.blue { color: var(--mainBlue); }
-.blue_BG { background-color: var(--mainBlue); }
+.blue { color: rgb(var(--blue)); }
+.blue_BG { background-color: rgb(var(--blue)); }
 
-/* Secondary color */
-.sec-color { color: var(--altBlue);}
-.sec-color_BG { background-color: var(--altBlue); }
+/* Pink color */
+.pink { color: rgb(var(--pink));}
+.pink_BG { background-color: rgb(var(--pink)); }
 
-/* grey */
-.grey { color: var(--grey);}
-.grey_BG { background-color: var(--grey); }
+/* red */
+.red { color: rgb(var(--red));}
+.red_BG { background-color: rgb(var(--red)); }
+
+/* Beige */
+.beige { color: rgb(var(--beige)); }
+.beige_BG { background-color: rgb(var(--beige)); }
 
 /* White color */
 .white { color: white; }
 
 /* Dark color */
-.dark { color: var(--dark); }
-.dark_BG { background-color: var(--dark); }
+.dark { color: rgb(var(--dark)); }
+.dark_BG { background-color: rgb(var(--dark)); }
 
 .cursorPointer { cursor: pointer; }
 .commonRadius { border-radius: var(--commonRadius); }
@@ -170,10 +185,22 @@ ul {padding: 0px;}
 */
 
 .maxWidthPageContainer {
-  max-width: var(--max-width-page-content);
+  /*max-width: var(--max-width-page-content);*/
+  max-width: min(95%, 120rem);
   margin: auto;
   padding: 0px 3rem; /* in case the browser do not support min() */
   padding: 0px min(3rem, 4vw);
+}
+
+/*
+    Reverse an image
+*/
+.reverse {
+  -webkit-transform: scaleX(-1); /* Safari & Chrome */
+  -moz-transform: scaleX(-1);/* Firefox */
+  -ms-transform: scaleX(-1); /* Internet Explorer */
+  -o-transform: scaleX(-1); /* Opera */
+  transform: scaleX(-1);
 }
 
 
@@ -196,16 +223,6 @@ ul {padding: 0px;}
 .col-11,
 .col-12 {width: 100%; float: left;}
 
-/*
-  Line class for the design lines added to pages
-*/
-.line{
-  height: 0.4rem;
-  float: left;
-  margin: 0.15rem 0.7rem 0.15rem 0rem;
-  border-radius: 0.2rem;
-  /* Every line will have a width and color precised to it */
-}
 
 /*
   Remove some default styling of the button element
@@ -216,6 +233,57 @@ button {
   cursor: pointer;
   padding: 0px;
 }
+
+.button {
+
+  --buttonColor: var(--red);
+
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  background-color: rgba(var(--buttonColor), 0.8);
+  border-radius: 0.5rem;
+  border-width: 0px; 
+  border-color: rgb(var(--buttonColor));
+  border-style: solid;
+  color: white;
+
+  -webkit-transition: 0.4s ease-out;
+  -moz-transition: 0.4s ease-out;
+  -o-transition: 0.4s ease-out;
+  transition: 0.4s ease-out;
+
+
+  &.button--reverse {
+    border-width: 3px;
+    background-color: rgb(var(--beige));
+    color: rgb(var(--buttonColor));
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &.button--pink{ --buttonColor: var(--pink);}
+  &.button--blue{ --buttonColor: var(--blue);}
+
+  &:hover{
+    background-color: rgba(var(--buttonColor), 1);
+  }
+
+  &:active{
+    -webkit-transition: 0s;
+    -moz-transition: 0s;
+    -o-transition: 0s;
+    transition: 0s;
+    border-color: rgba(var(--buttonColor), 0.4);
+    background-color: rgba(var(--buttonColor), 0.4);
+  }
+
+}
+
+
+
+
 
 /*
  Override some default styling of the input element 
@@ -274,6 +342,46 @@ input:focus, textarea:focus, select:focus{
   font-size: 0.7rem;
 }
 
+
+/*
+*
+*
+*     Custom scroll bar    
+*
+*
+*/
+
+::-webkit-scrollbar {
+  width: 0.65rem;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #caccd4;
+  /*margin-block: 0.5rem;
+  border-radius: 0.5rem;*/
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555b78b4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555B78;
+}
+
+@supports (scrollbar-color: #caccd4 #555B78) {
+  * {
+    scrollbar-color:#caccd4 #555B78;
+    scrollbar-width: thin;
+  }
+}
+
+
+
+
+
+
 /*
 *
 *
@@ -316,3 +424,6 @@ input:focus, textarea:focus, select:focus{
 @media only screen and (min-width: 1500px) {
      
 }
+
+
+

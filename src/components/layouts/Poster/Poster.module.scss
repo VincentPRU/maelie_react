@@ -1,0 +1,100 @@
+/*
+
+        Poster styling 
+
+*/
+
+.posterComponent{
+    border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr;
+    position: relative;
+    overflow: hidden;
+    margin: 2vw;
+    margin: min(1rem, 2vw);
+
+  //  margin-top: 50vh;  /* default value */
+
+    width: 100%;
+
+    -webkit-filter: drop-shadow(0.5rem 0.5rem 0.3rem #363636d0);
+    filter: drop-shadow(0.3rem 0.5rem 0.3rem #424242d0);
+
+    &.floatRight{ float: right;}
+
+    > section {
+        padding: 2rem;
+        padding: min(2rem, 5%);
+        z-index: 1;
+        
+
+        h1, h2, p { margin: 0px;}
+        h1, h2 { 
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        button, a {
+            margin-top: 0.5rem;
+        }
+      
+    }
+
+    > div {
+        position: relative;        
+        padding: 2rem;
+
+        
+        > figure {
+            position: absolute;
+            margin: 0px;
+            top: -0.5rem;
+            bottom: -1rem;
+            right: -1rem;
+            left: 0px;
+
+            > img {
+                float: right;
+                height: 100%;
+            }
+        }
+    }
+
+
+
+
+}
+
+
+
+/*
+*
+*
+*     Media queries for responsive design
+*
+*
+*
+*/
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .posterComponent{
+        width: clamp(35rem, 40vw, 40rem);
+    }
+
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    
+}
+
+/* Extra large devices (large laptops and desktops, 1500px and up) */
+@media only screen and (min-width: 1500px) {
+    
+}
+  
