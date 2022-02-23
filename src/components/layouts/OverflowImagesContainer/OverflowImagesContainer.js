@@ -29,8 +29,7 @@ const OverflowImagesContainer = ({ left, width, yTransformFactor, top, noBlurEff
     useEffect(() => {
         
         if(componentRef.current && initialTopValue.current === 0){
-                window.scrollTo(0, 0);
-            
+            window.scrollTo(0, 0);
             initialTopValue.current = componentRef.current.getBoundingClientRect().top;
         }
 

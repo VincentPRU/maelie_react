@@ -5,6 +5,7 @@
 */
 
 .posterComponent{
+
     border-radius: 1rem;
     display: grid;
     grid-template-columns: 4fr 1fr;
@@ -13,6 +14,9 @@
     overflow: hidden;
     margin: 2vw;
     margin: min(1rem, 2vw);
+    opacity: 0;
+
+
 
   //  margin-top: 50vh;  /* default value */
 
@@ -29,8 +33,8 @@
         z-index: 1;
         
 
-        h1, h2, p { margin: 0px;}
-        h1, h2 { 
+        h2, h3, p { margin: 0px;}
+        h2, h3 { 
             margin-bottom: 1rem;
             font-weight: bold;
         }
@@ -55,8 +59,29 @@
             left: 0px;
 
             > img {
+
+                --xOverflow: 0;
+
                 float: right;
                 height: 100%;
+
+                -webkit-transform: translateX(var(--xOverflow)); /* Safari & Chrome */
+                -moz-transform: translateX(var(--xOverflow)); /* Firefox */
+                -ms-transform: translateX(var(--xOverflow)); /* Internet Explorer */
+                -o-transform: translateX(var(--xOverflow)); /* Opera */
+                transform: translateX(var(--xOverflow));
+
+                
+                /*  
+                    Differentes classes for overflowing the img
+                    Meant to save space in the js file
+                */
+
+                &.xOverFlow_10 { --xOverflow: 10%; }
+                &.xOverFlow_20 { --xOverflow: 20%; }
+                &.xOverFlow_30 { --xOverflow: 30%; }
+                &.xOverFlow_40 { --xOverflow: 40%; }
+                &.xOverFlow_50 { --xOverflow: 50%; }
             }
         }
     }

@@ -23,18 +23,6 @@
         --scaleX: -1;
     }
 
-    &.groundVisual::before {
-        content: "";
-      height: 20vh;
-      width: 20%;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      background-color: red;
-  }
-
-
-
     -webkit-filter: drop-shadow(0.5rem -0.5rem 0.2rem #383838d0);
     filter: drop-shadow(0.5rem -0.5rem 0.2rem #383838ce);
 

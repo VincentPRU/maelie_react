@@ -16,6 +16,11 @@
 .fade-Intro {
 
     opacity: 0; 
+
+    -webkit-transition-duration: 1s; /* Safari 4+ */
+    -moz-transition-duration:    1s; /* Fx 5+ */
+    -o-transition-duration:      1s; /* Opera 12+ */
+    transition-duration:         1s; /* IE 10+, Fx 29+ */
   
   
   /*

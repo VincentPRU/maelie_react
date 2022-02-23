@@ -10,6 +10,7 @@ import OverflowImagesContainer from '../../../components/layouts/OverflowImagesC
 import Tree from '../../../components/currentIllustrations/Tree/Tree'
 import Hill from '../../../components/currentIllustrations/Hill/Hill'
 import House from '../../../components/currentIllustrations/House/House'
+import Dragon from '../../../components/currentIllustrations/Dragon/Dragon'
 
 //Scene component
 import Scene from '../../../components/layouts/Scene/Scene'
@@ -21,18 +22,12 @@ import Poster from '../../../components/layouts/Poster/Poster'
 import Button from '../../../components/Button/Button'
 
 //Illustrations import to save space below
-import castle from '../../../images/illustrations/chateau.png'
-import knight from '../../../images/illustrations/chevalier.png'
-import hill1 from '../../../images/illustrations/colline1.png'
+
 import hill2 from '../../../images/illustrations/colline2.png'
-import angryDragon from '../../../images/illustrations/dragon_fache.png'
-import hypDragon from '../../../images/illustrations/dragon_hyp.png'
-import flame from '../../../images/illustrations/flamme.png'
-import fork from '../../../images/illustrations/fourche.png'
-import maelieSinging from '../../../images/illustrations/Maelie_chant.png'
 import maelie from '../../../images/illustrations/Maelie.png'
 import house200px from '../../../images/illustrations/maison_200.png'
-import house400px from '../../../images/illustrations/maison_400.png'
+import notes from '../../../images/illustrations/notes.png'
+import tree from '../../../images/illustrations/arbre.png'
 
 //import context for the scroll event
 import { ScrollEventProvider } from '../../../contexts/ScrollEvent'
@@ -43,7 +38,6 @@ const Home = () => {
 
     const sceneSection = useRef({});
 
-    
 
     return (
         <ScrollEventProvider>
@@ -134,6 +128,7 @@ const Home = () => {
 
                             {/* Visuals */}
                             <OverflowImagesContainer left="50%" width="100%" yTransformFactor="0.2">
+                                <Dragon left="28%" top="0.285" width="43%" fadeIn={true} />
                                 <Hill img={ hill2 } left="60%" reverse={true} width="185%" />
 
                                 <Tree top="0.31" left="30%" height="13vh" minHeight="5" reverse/>
@@ -146,8 +141,9 @@ const Home = () => {
                                     <div className="maxWidthPageContainer">
                                     <Poster
                                         top={50}
-                                        img={maelie}
-                                        alt="Illustration de Maelie, personnage principal du conte."
+                                        img={ notes }
+                                        imgRightOverflow = {30}
+                                        alt="Illustration de notes de musique"
                                         header2="Vous aimeriez participer à la bande sonore ?"
                                         paragraph="Les deux choix affichiés ci-dessous s'offrent à vous :"
                                     />
@@ -182,18 +178,25 @@ const Home = () => {
                                                 <Poster
                                                     top={65}
                                                     bottom={20}
-                                                    img={maelie}
-                                                    alt="Illustration de Maelie, personnage principal du conte."
-                                                    header2="L'origine du conte"
+                                                    img={ house200px }
+                                                    imgRightOverflow = {40}
+                                                    alt="Illustration d'une maison"
+                                                    header3='2. Chorale "Le chant de Maelie"'
                                                     paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur congue tellus eu ante sodales tempus. Proin ex lectus, aliquet at arcu ut, gravida facilisis quam. Ut erat sem, imperdiet rhoncus."
+                                                    buttonText="Visiter la page"
+                                                    buttonAction="/chant-de-la-fin"
                                                 />
                                                 <Poster
                                                     top={40}
-                                                    img={house200px}
-                                                    alt="Illustration de Maelie, personnage principal du conte."
-                                                    header2="L'origine du conte"
+                                                    img={ tree }
+                                                    imgRightOverflow = {20}
+                                                    alt="Illustration d'un arbre"
+                                                    header3="1. Sonoriser l'histoire"
                                                     paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur congue tellus eu ante sodales tempus. Proin ex lectus, aliquet at arcu ut, gravida facilisis quam. Ut erat sem, imperdiet rhoncus."
                                                     floatRight={true}
+                                                    buttonText="Visiter la page"
+                                                    buttonAction="/participer-aux-scenes"
+
                                                 />
                                          </section>
                                         </div>
