@@ -10,23 +10,42 @@
 
    
     --translatex: 70VW;
+    --duration: 2s;
+    --timingFunction: cubic-bezier(.26,0,.45,.99);
+
+
 
     position: absolute;
 
-    -webkit-transition-duration: 1s;  /* Safari & Chrome */
-    -moz-transition-duration: 1s;  /* Firefox */
-    -ms-transition-duration: 1s;  /* Internet Explorer */
-    -o-transition-duration: 1s; /* Opera */
-    transition-duration: 1s;
+    -webkit-transition-duration: var(--duration);  /* Safari & Chrome */
+    -moz-transition-duration: var(--duration);  /* Firefox */
+    -ms-transition-duration: var(--duration);  /* Internet Explorer */
+    -o-transition-duration: var(--duration);
+     /* Opera */
+    transition-duration: var(--duration);
 
-    -webkit-transition-timing-function: cubic-bezier(.21,.63,.04,.99);  /* Safari & Chrome */
-    -moz-transition-timing-function: cubic-bezier(.21,.63,.04,.99);  /* Firefox */
-    -ms-transition-timing-function: cubic-bezier(.21,.63,.04,.99);  /* Internet Explorer */
-    -o-transition-timing-function: cubic-bezier(.21,.63,.04,.99);/* Opera */
-    transition-timing-function: cubic-bezier(.21,.63,.04,.99);
+    -webkit-transition-timing-function: var(--timingFunction);  /* Safari & Chrome */
+    -moz-transition-timing-function: var(--timingFunction);   /* Firefox */
+    -ms-transition-timing-function: var(--timingFunction);   /* Internet Explorer */
+    -o-transition-timing-function: var(--timingFunction); /* Opera */
+    transition-timing-function: var(--timingFunction); 
 
-    transform: translateX(var(--translatex));
+    webkit-transform: translate3d(var(--translatex), 0, 0);
+    transform: translate3d(var(--translatex), 0, 0);
 
+    &.rightPosition{ 
+        
+        --translatex: -60VW; 
+     
+    }
+
+    &.duration0500 { --duration: 0.5s; }
+    &.duration0750 { --duration: 0.75s; }
+    &.duration1000 { --duration: 1s; }
+    &.duration1500 { --duration: 1.5s; }
+    &.duration2000 { --duration: 2s; }
+    &.duration2500 { --duration: 2.5s; }
+    &.duration3000 { --duration: 3s; }
 
 
     &.xAxis00 { --translatex: 0vw; }
@@ -42,8 +61,9 @@
     &.xAxis50 { --translatex: 50vw; }
     &.xAxis55 { --translatex: 55vw; }
     &.xAxis60 { --translatex: 60vw; }
-    &.xAxis65 { --translatex: 65vw; }
+
 
     
 }
+
 

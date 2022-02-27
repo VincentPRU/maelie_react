@@ -3,24 +3,73 @@
 
 
     {   
-        "Maelie" : {
-         
-            "XAxis": "",
-            "YAxis": "",
-            "YPercentage": ""                
-        
-        }
-
+        "Maelie" : {},
+        "Dragon" : {},
+        "Knight" : {}
     },
 
 
     {
         "Maelie" : {
-         
+            "duration": "duration0750",
             "XAxis": "xAxis05",
-            "YAxis": "translateY-50",
-            "YPercentage": "regAnim50"  
+            "YAxis": "translateY-10",
+            "YPercentage": "regAnim10",
+            "smallMotion": true  
+        },
+        "Dragon" : {},
+        "Knight" : {}
+    },
 
+    {
+        "Maelie" : {},
+        "Dragon" : {
+            "duration": "duration1000",
+            "XAxis": "xAxis55",
+            "YAxis": "translateY-75",
+            "YPercentage": "regAnim0",
+            "smallMotion": true
+        },
+        "Knight" : {}
+
+    },
+
+    {
+        "Maelie" : {},
+        "Dragon" : {
+            "duration": "duration1000",
+            "XAxis": "xAxis55",
+            "YAxis": "translateY-75",
+            "YPercentage": "regAnim0",
+            "smallMotion": true
+        },
+        "Knight" : {
+            "duration": "duration1000",
+            "XAxis": "xAxis15",
+            "YAxis": "translateY-10",
+            "YPercentage": "regAnim10",
+            "fightingMode": true                
+        }
+    },
+
+    {
+        "Maelie" : {},
+        "Dragon" : {
+            "duration": "duration1000",
+            "XAxis": "xAxis55",
+            "YAxis": "translateY-75",
+            "YPercentage": "regAnim0",
+            "smallMotion": true,
+            "attack": true
+        },
+
+        "Knight" : {
+            "duration": "duration1000",
+            "XAxis": "xAxis15",
+            "YAxis": "translateY-10",
+            "YPercentage": "regAnim10",
+            "fightingMode": true,
+            "dyingMode": true            
         }
     }
 

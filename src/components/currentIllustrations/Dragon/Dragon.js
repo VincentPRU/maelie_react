@@ -6,9 +6,10 @@ import { ScrollContext } from '../../../contexts/ScrollEvent'
 
 import dragonFache from '../../../images/illustrations/dragon_fache.png'
 import dragonHyp from '../../../images/illustrations/dragon_hyp.png'
+import flames from '../../../images/illustrations/flamme.png'
 
 
-const Dragon = ( {dragonHypnotized, top, width, left, height, background, parentwidth, minHeight, fadeIn} ) => {
+const Dragon = ( {dragonHypnotized, top, width, left, height, background, parentwidth, minHeight, fadeIn, leftAlign, throwFlames, attack} ) => {
 
     //Reference to the image for the animation
     const ref = useRef();
@@ -36,32 +37,53 @@ const Dragon = ( {dragonHypnotized, top, width, left, height, background, parent
     const dragon = dragonHypnotized ? dragonHyp : dragonFache;
 
     //Top position is going to be relative to the parent element width
-    const topPos = (parseFloat(top) * parentwidth) + 'px';
+    const topPos = top ? (parseFloat(top) * parentwidth) + 'px': "";
 
     //Min height, if declared, to prevent objects from been to smalls
     //**IMP** The unit is rem
-    const minimumHeight = minHeight ? (parseFloat(minHeight) + "rem") : "4rem";
+    const minimumHeight = minHeight ? (parseFloat(minHeight) + "rem") : "10rem";
 
     const dispayClass = fadeIn && display ? "fade-Intro--In" : "";
-
     
     const style = {
         top: topPos,
         left: left,
+        width: width
+    }
+
+    const dragonWidth = width ? "100%" : "";
+
+    const dragonStyle = {
         height: height,
-        width: width,
+        width: dragonWidth,
         minHeight: minimumHeight
     }
 
+    const attackingClass = attack ? styles.attacking : "";
+
     return (
-        <>
-            <img 
-                ref= { ref }
-                style={style} 
-                className={`${styles.dragonComponent} ${background ? styles.background : ""} ${fadeIn && "fade-Intro"} ${dispayClass}`} 
-                alt="Illustration de dragon" 
-                src={ dragon } />
-        </>
+        <div 
+            ref= { ref }
+            style={style} 
+            className={`${styles.dragonComponent} ${background ? styles.background : ""} ${fadeIn && "fade-Intro"} ${dispayClass} ${attackingClass} ${leftAlign ? styles.leftSelfOverflowing : ""}`} 
+        >
+            <div>
+                <img 
+                    style={ dragonStyle }
+                    className={`${styles.dragon}`}
+                    alt="Illustration de dragon" 
+                    src={ dragon } />
+                {
+                    throwFlames &&
+                    <img 
+                        src={ flames }
+                        alt="Illustrations de flammes crachées par un dragon"
+                        className={ styles.fire }
+                    />
+                }
+            </div>
+           
+        </div>
     );
 
 }

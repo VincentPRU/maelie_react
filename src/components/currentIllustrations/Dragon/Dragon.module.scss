@@ -7,17 +7,218 @@
 
 .dragonComponent {
 
-    width: auto;  /*  Default value  */
-    height: auto; /*  Default value  */
+    --attackAnimDuration: 6s;
+
+    --translateDragon:  translate(-50%, -100%);
+    --translateFire : translate(0%, -100%);
+
+    --fireRotation: 30deg;
+
+    -webkit-transform: var(--translateDragon); /* Safari & Chrome */
+    -moz-transform: var(--translateDragon); /* Firefox */
+    -ms-transform: var(--translateDragon); /* Internet Explorer */
+    -o-transform: var(--translateDragon); /* Opera */
+    transform: var(--translateDragon);
+
     position: absolute;
-    transform: translate(-50%, -100%);
-    -webkit-transform: translate(-50%, -100%); /* Safari & Chrome */
-    -moz-transform: translate(-50%, -100%); /* Firefox */
-    -ms-transform: translate(-50%, -100%); /* Internet Explorer */
-    -o-transform: translate(-50%, -100%); /* Opera */
 
     -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0);
     filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838ce);
 
+    &.leftSelfOverflowing {
+        --translateDragon: translate(-100%, -100%);
+        --translateFire : translate(-10%, -100%);
+    }
 
+
+    &.attacking {
+
+        > div {
+
+            -webkit-transform-origin: center;
+            -moz-transform-origin: center;
+            -ms-transform-origin: center;
+            -o-transform-origin: center;
+            transform-origin: center;
+
+
+            -webkit-animation: getUp var(--attackAnimDuration) forwards;            /* Safari & Chrome */
+            -moz-animation: getUp var(--attackAnimDuration) forwards;                 /* Firefox */
+            -ms-animation: getUp var(--attackAnimDuration) forwards;                 /* Internet Explorer */
+            -o-animation: getUp var(--attackAnimDuration) forwards;  
+            animation: getUp var(--attackAnimDuration) forwards; 
+
+
+        }
+
+
+        .fire {
+
+
+            -webkit-animation: throwFire var(--attackAnimDuration) forwards;            /* Safari & Chrome */
+            -moz-animation: throwFire var(--attackAnimDuration) forwards;                 /* Firefox */
+            -ms-animation: throwFire var(--attackAnimDuration) forwards;                 /* Internet Explorer */
+            -o-animation: throwFire var(--attackAnimDuration) forwards;  
+            animation: throwFire var(--attackAnimDuration) forwards; 
+
+        }
+    }
+
+    .dragon {
+        position: relative;
+
+        
+
+        
+    }
+
+
+    .fire {
+        position: absolute;
+        left: 92%;
+        top: 59%;
+        width: 60%;
+        z-index: 3000;
+
+        opacity: 0;
+
+        -webkit-transform-origin: top left;
+        -moz-transform-origin: top left;
+        -ms-transform-origin: top left;
+        -o-transform-origin: top left;
+        transform-origin: top left;
+
+        -webkit-transform: rotate(var(--fireRotation)); /* Safari & Chrome */
+        -moz-transform: rotate(var(--fireRotation)); /* Firefox */
+        -ms-transform: rotate(var(--fireRotation)); /* Internet Explorer */
+        -o-transform: rotate(var(--fireRotation)); /* Opera */
+        transform: rotate(var(--fireRotation));
+
+
+       
+    }
 }
+
+
+
+/*
+     Dragon gets on its legs
+*/
+
+//Animation at 50% => peak at 50%
+@keyframes getUp {
+    10%  {
+        webkit-transform: rotate(-45deg);
+               transform: rotate(-45deg);
+    }
+
+    90%  {
+        webkit-transform: rotate(-45deg);
+               transform: rotate(-45deg);
+    }
+}
+
+@-webkit-keyframes getUp {
+    10%  {
+        webkit-transform: rotate(-45deg);
+               transform: rotate(-45deg);
+    }
+
+    90%  {
+        webkit-transform: rotate(-45deg);
+               transform: rotate(-45deg);
+    }
+}
+
+/*
+     Dragon throw fire
+*/
+
+//Animation at 50% => peak at 50%
+@keyframes throwFire {
+    0% {
+        opacity: 0;
+        webkit-transform: scale(0.5) rotate(var(--fireRotation));
+               transform: scale(0.5) rotate(var(--fireRotation));
+    }
+
+    15%  {
+        opacity: 0;
+        webkit-transform: scale(0.5) rotate(var(--fireRotation));
+               transform: scale(0.5) rotate(var(--fireRotation));
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    30% {
+        webkit-transform: scale(1) rotate(var(--fireRotation));
+               transform: scale(1) rotate(var(--fireRotation));
+    }
+
+    55% {
+        webkit-transform: scale(1.2) rotate(var(--fireRotation));
+               transform: scale(1.2) rotate(var(--fireRotation));
+    }
+    70% {
+        webkit-transform: scale(1) rotate(var(--fireRotation));
+               transform: scale(1) rotate(var(--fireRotation));
+    }
+    80% {
+        webkit-transform: scale(1.1) rotate(var(--fireRotation));
+               transform: scale(1.1) rotate(var(--fireRotation));
+               opacity: 1;
+    }
+
+    90%  {
+        webkit-transform: scale(0.4) rotate(var(--fireRotation));
+               transform: scale(0.4) rotate(var(--fireRotation));
+               opacity: 0;
+    }
+}
+
+@-webkit-keyframes throwFire {
+    0% {
+        opacity: 0;
+        webkit-transform: scale(0.5) rotate(var(--fireRotation));
+               transform: scale(0.5) rotate(var(--fireRotation));
+    }
+
+    15%  {
+        opacity: 0;
+        webkit-transform: scale(0.5) rotate(var(--fireRotation));
+               transform: scale(0.5) rotate(var(--fireRotation));
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    50% {
+        webkit-transform: scale(1) rotate(var(--fireRotation));
+               transform: scale(1) rotate(var(--fireRotation));
+    }
+
+    60% {
+        webkit-transform: scale(1.2) rotate(var(--fireRotation));
+               transform: scale(1.2) rotate(var(--fireRotation));
+    }
+    70% {
+        webkit-transform: scale(1) rotate(var(--fireRotation));
+               transform: scale(1) rotate(var(--fireRotation));
+    }
+    80% {
+        webkit-transform: scale(1.1) rotate(var(--fireRotation));
+               transform: scale(1.1) rotate(var(--fireRotation));
+               opacity: 1;
+    }
+
+    90%  {
+        webkit-transform: scale(0.4) rotate(var(--fireRotation));
+               transform: scale(0.4) rotate(var(--fireRotation));
+               opacity: 0;
+    }
+}
+
+

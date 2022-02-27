@@ -50,11 +50,11 @@ const OverflowImagesContainer = ({ left, width, yTransformFactor, top, noBlurEff
         left: left, 
         width: width,
         top: topValue,
-        WebkitTransform: `translate(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px)`,
-        MozTransform: `translate(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px)`,
-        MsTransform: `translate(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px)`,
-        OTransform: `translate(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px)`,
-        transform: `translate(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px)`,
+        WebkitTransform: `translate3d(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px, 0)`,
+        MozTransform: `translate3d(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px, 0)`,
+        MsTransform: `translate3d(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px, 0)`,
+        OTransform: `translate3d(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px, 0)`,
+        transform: `translate3d(-50%, ${parseInt(yTransformFactor * calculatedScroll)}px, 0)`,
         filter: `blur(${blurStyle}px)`
     }
 

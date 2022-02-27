@@ -8,8 +8,50 @@
 
 .IllustrationAnim {
 
+    
+    --duration: 2s;
+
+    //Small motion
+    --smallMotion: 1vh;
+
+
     position: absolute;
     bottom: 20vh;
+
+    &.duration0500 { --duration: 0.5s; }
+    &.duration0750 { --duration: 0.75s; }
+    &.duration1000 { --duration: 1s; }
+    &.duration1500 { --duration: 1.5s; }
+    &.duration2000 { --duration: 2s; }
+    &.duration2500 { --duration: 2.5s; }
+    &.duration3000 { --duration: 3s; }
+
+    &.smallMotion {
+        -webkit-animation: constantMotion 8s ease-in-out var(--duration) alternate infinite;            /* Safari & Chrome */
+        -moz-animation: constantMotion 8s ease-in-out var(--duration) alternate infinite;                 /* Firefox */
+        -ms-animation: constantMotion 8s ease-in-out var(--duration) alternate infinite;                 /* Internet Explorer */
+        -o-animation: constantMotion 8s ease-in-out var(--duration) alternate infinite;  
+        animation: constantMotion 8s ease-in-out var(--duration) alternate infinite; 
+    }
     
     
 }
+
+/*
+     Small motion of the elements to give an impression of movement
+*/
+//Animation at 50% => peak at 50%
+@keyframes constantMotion {
+    50%  {
+        webkit-transform: translate3d(0, var(--smallMotion), 0);
+               transform: translate3d(0, var(--smallMotion), 0);
+    }
+}
+
+@-webkit-keyframes constantMotion {
+    50%  {
+        webkit-transform: translate3d(0, var(--smallMotion), 0);
+               transform: translate3d(0, var(--smallMotion), 0);
+    }
+}
+

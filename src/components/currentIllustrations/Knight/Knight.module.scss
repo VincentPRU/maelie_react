@@ -1,0 +1,120 @@
+/*
+
+
+    Knight component styling
+
+
+*/
+
+.knightComponent {
+
+    --translate: translate(-50%, -100%);
+
+    --animationDelay: 1s;
+
+    --rotateNegative: -25deg;
+    --rotatePositive: 5deg;
+    --animationDirection: alternate;
+    --animationIterations: infinite;
+
+    
+
+    width: auto;  /*  Default value  */
+    height: auto; /*  Default value  */
+    position: absolute;
+    transform: var(--translate);
+    -webkit-transform: var(--translate); /* Safari & Chrome */
+    -moz-transform: var(--translate); /* Firefox */
+    -ms-transform: var(--translate); /* Internet Explorer */
+    -o-transform: var(--translate); /* Opera */
+
+    -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0);
+    filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838ce);
+
+    &.duration0500 { --animationDelay: 0.5s; }
+    &.duration0750 { --animationDelay: 0.75s; }
+    &.duration1000 { --animationDelay: 1s; }
+    &.duration1500 { --animationDelay: 1.5s; }
+    &.duration2000 { --animationDelay: 2s; }
+    &.duration2500 { --animationDelay: 2.5s; }
+    &.duration3000 { --animationDelay: 3s; }
+
+    &.rightSelfOverflowing {
+        --translate: translate(0%, -100%);
+    }
+
+    &.fightingMode {
+        -webkit-animation: constantMotion 6s  var(--animationDelay) var(--animationDirection) var(--animationIterations);            /* Safari & Chrome */
+        -moz-animation: constantMotion 6s var(--animationDelay) var(--animationDirection) var(--animationIterations);                 /* Firefox */
+        -ms-animation: constantMotion 6s  var(--animationDelay) var(--animationDirection) var(--animationIterations);                 /* Internet Explorer */
+        -o-animation: constantMotion 6s  var(--animationDelay) var(--animationDirection) var(--animationIterations);  
+        animation: constantMotion 6s var(--animationDelay) var(--animationDirection) var(--animationIterations); 
+
+    }
+
+    &.dyingKnight{
+        -webkit-animation: dying 6s forwards;            /* Safari & Chrome */
+        -moz-animation: dying 6s forwards;                /* Firefox */
+        -ms-animation: dying 6s forwards;                /* Internet Explorer */
+        -o-animation: dying 6s forwards;  
+        animation: dying 6s forwards;
+    }
+
+}
+
+/*
+     Small motion of the elements to give an impression of movement
+*/
+//Animation at 50% => peak at 50%
+@keyframes constantMotion {
+    25%  {
+        webkit-transform: var(--translate) rotate(var(--rotateNegative));
+               transform: var(--translate) rotate(var(--rotateNegative));
+    }
+
+    75%  {
+        webkit-transform: var(--translate) rotate(var(--rotatePositive));
+               transform: var(--translate) rotate(var(--rotatePositive));
+    }
+}
+
+@-webkit-keyframes constantMotion {
+    25%  {
+        webkit-transform: var(--translate) rotate(var(--rotateNegative));
+               transform: var(--translate) rotate(var(--rotateNegative));
+    }
+
+    75%  {
+        webkit-transform: var(--translate) rotate(var(--rotatePositive));
+               transform: var(--translate) rotate(var(--rotatePositive));
+    }
+}
+
+/*
+     Small motion of the elements to give an impression of movement
+*/
+//Animation at 50% => peak at 50%
+@keyframes dying {
+    25%  {
+        webkit-transform: var(--translate) rotate(80deg);
+               transform: var(--translate) rotate(80deg);
+    }
+
+    100%  {
+        webkit-transform: var(--translate) rotate(95deg);
+               transform: var(--translate) rotate(95deg);
+    }
+}
+
+@-webkit-keyframes dying {
+    25%  {
+        webkit-transform: var(--translate) rotate(80deg);
+               transform: var(--translate) rotate(80deg);
+    }
+
+    100%  {
+        webkit-transform: var(--translate) rotate(95deg);
+               transform: var(--translate) rotate(95deg);
+    }
+}
+

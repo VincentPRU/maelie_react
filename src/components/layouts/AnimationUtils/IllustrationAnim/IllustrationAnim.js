@@ -9,13 +9,14 @@ import styles from './IllustrationAnim.module.scss'
 
 
 
-const IllustrationAnim = ({ animation, children }) => {
+const IllustrationAnim = ({ right, animation, children }) => {
 
-
+    const animDurationClass = animation.duration ? styles[animation.duration] : "";
+    const animSmallMotionClass = animation.smallMotion ? styles.smallMotion : "";
 
     return (
-        <div className={ styles.IllustrationAnim } >
-             <XAxisAnimation xAxisAnimation={animation}>
+        <div className={` ${styles.IllustrationAnim} ${ animDurationClass } ${animSmallMotionClass}`} >
+             <XAxisAnimation right={right} animationValues={animation}>
                  <YAxisAnimation animationValues={animation}>
                     { children }
                  </YAxisAnimation>

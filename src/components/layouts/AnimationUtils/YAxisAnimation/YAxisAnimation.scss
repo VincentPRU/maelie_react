@@ -12,11 +12,15 @@
         Value by default
     */
    
-    --translateY: 10vh;
+    --translateY: 0vh;
     --duration: 2s;
     --fillMode: forwards;
-    --timingFunction: cubic-bezier(0,.41,.04,.99);
+    --timingFunction: cubic-bezier(.26,0,.45,.99);
     --animationName: none;
+
+    
+    
+
 
     position: absolute;
     top: 0vh;
@@ -44,17 +48,29 @@
     -ms-animation-name: var(--animationName);                 /* Internet Explorer */
     -o-animation-name:var(--animationName);  
     animation-name: var(--animationName); 
+
+    &.duration0500 { --duration: 0.5s; }
+    &.duration0750 { --duration: 0.75s; }
+    &.duration1000 { --duration: 1s; }
+    &.duration1500 { --duration: 1.5s; }
+    &.duration2000 { --duration: 2s; }
+    &.duration2500 { --duration: 2.5s; }
+    &.duration3000 { --duration: 3s; }
     
+    &.translateY-10 { --translateY: -10vh; }
     &.translateY-25 { --translateY: -25vh; }
     &.translateY-50 { --translateY: -50vh; }
     &.translateY-75 { --translateY: -75vh; }
     &.translateY-100 { --translateY: -100vh; }
 
     &.regAnim0 {--animationName: regAnim0 }
+    &.regAnim10 {--animationName: regAnim10 }
     &.regAnim25 {--animationName: regAnim25 }
     &.regAnim50 {--animationName: regAnim50 }
     &.regAnim75 {--animationName: regAnim75 }
     &.regAnim100 {--animationName: regAnim100 }
+    
+
     
 }
 
@@ -68,75 +84,93 @@
 // Animation at 0 percent => backwards
 @keyframes regAnim0 {
     0%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
+    }
+
+}
+
+@-webkit-keyframes regAnim0 {
+    0%  {
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
-@-webkit-keyframes loading-spinner {
-    0%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+// Animation at 0 percent => backwards
+@keyframes regAnim10 {
+    10%  {
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
+    }
+
+}
+
+@-webkit-keyframes regAnim10 {
+    10%  {
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
 // Animation at 25% => peak at 25%
 @keyframes regAnim25 {
     25%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
-@-webkit-keyframes loading-spinner {
+@-webkit-keyframes regAnim25 {
     25%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
 //Animation at 50% => peak at 50%
 @keyframes regAnim50 {
     50%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
-@-webkit-keyframes loading-spinner {
+@-webkit-keyframes regAnim50 {
     50%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
 //Animation at 75%
 @keyframes regAnim75 {
     75%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
-@-webkit-keyframes loading-spinner {
+@-webkit-keyframes regAnim75 {
     75%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
 //Animation at 100%
 @keyframes regAnim100 {
     100%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
 
-@-webkit-keyframes loading-spinner {
+@-webkit-keyframes regAnim100 {
     100%  {
-        webkit-transform: translateY(var(--translateY));
-               transform: translateY(var(--translateY));
+        webkit-transform: translate3d(0, var(--translateY), 0);
+               transform: translate3d(0, var(--translateY), 0);
     }
 }
+
 

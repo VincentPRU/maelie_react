@@ -3,27 +3,15 @@ import { useState, useEffect } from 'react'
 import './XAxisAnimation.scss'
 
 
-const XAxisAnimation = ({ xAxisAnimation, children, rightBlock }) => {
+const XAxisAnimation = ({ right, animationValues, children }) => {
 
-/*
-    const [animProperties, setAnimProperties] = useState({
-        xAxis: ''
-    })
-
-    useEffect(() => {
-        console.log("Useeffect called")
-        setAnimProperties({
-            xAxis: xAxisAnimation.XAxis
-        })
-
-
-    }, [xAxisAnimation])
-
-    */
-
+    const rightBlock = right ? "rightPosition" : "";
+    const smallMotion = animationValues.smallMotion ? "smallMotion" : "";
+    const xAnimation = animationValues.XAxis ? animationValues.XAxis : "";
+    const animDuration  = animationValues.duration ? animationValues.duration : "";
 
     return (
-        <div className={`XAxisAnimation ${xAxisAnimation.XAxis}`} >
+        <div className={`XAxisAnimation ${xAnimation} ${animDuration} ${rightBlock} ${smallMotion}`} >
             { children }
         </div>
     );
