@@ -1,0 +1,49 @@
+/*
+
+
+        Styling of the X Axis
+
+
+*/
+
+.XAxisAnimation {
+
+   
+    --translatex: 70VW;
+
+    position: absolute;
+
+    -webkit-transition-duration: 1s;  /* Safari & Chrome */
+    -moz-transition-duration: 1s;  /* Firefox */
+    -ms-transition-duration: 1s;  /* Internet Explorer */
+    -o-transition-duration: 1s; /* Opera */
+    transition-duration: 1s;
+
+    -webkit-transition-timing-function: cubic-bezier(.21,.63,.04,.99);  /* Safari & Chrome */
+    -moz-transition-timing-function: cubic-bezier(.21,.63,.04,.99);  /* Firefox */
+    -ms-transition-timing-function: cubic-bezier(.21,.63,.04,.99);  /* Internet Explorer */
+    -o-transition-timing-function: cubic-bezier(.21,.63,.04,.99);/* Opera */
+    transition-timing-function: cubic-bezier(.21,.63,.04,.99);
+
+    transform: translateX(var(--translatex));
+
+
+
+    &.xAxis00 { --translatex: 0vw; }
+    &.xAxis05 { --translatex: 5vw; }
+    &.xAxis10 { --translatex: 10vw; }
+    &.xAxis15 { --translatex: 15vw; }
+    &.xAxis20 { --translatex: 20vw; }
+    &.xAxis25 { --translatex: 25vw; }
+    &.xAxis30 { --translatex: 30vw; }
+    &.xAxis35 { --translatex: 35vw; }
+    &.xAxis40 { --translatex: 40vw; }
+    &.xAxis45 { --translatex: 45vw; }
+    &.xAxis50 { --translatex: 50vw; }
+    &.xAxis55 { --translatex: 55vw; }
+    &.xAxis60 { --translatex: 60vw; }
+    &.xAxis65 { --translatex: 65vw; }
+
+    
+}
+

@@ -1,0 +1,29 @@
+[
+
+
+
+    {   
+        "Maelie" : {
+         
+            "XAxis": "",
+            "YAxis": "",
+            "YPercentage": ""                
+        
+        }
+
+    },
+
+
+    {
+        "Maelie" : {
+         
+            "XAxis": "xAxis05",
+            "YAxis": "translateY-50",
+            "YPercentage": "regAnim50"  
+
+        }
+    }
+
+
+
+]

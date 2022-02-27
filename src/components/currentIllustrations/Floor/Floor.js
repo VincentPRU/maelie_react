@@ -5,10 +5,10 @@ import styles from './Floor.module.scss'
 
 import img from '../../../images/illustrations/Sol.png'
 
-const Floor = ({ left, top, parentwidth, minHeight, height }) => {
+const Floor = ({ left, top, parentwidth, minHeight, height, viewportHeightRelative}) => {
 
     //Top position is going to be relative to the parent element width
-    const topPos = (parseFloat(top) * parentwidth) + 'px';
+    const topPos = viewportHeightRelative ? parseFloat(top) + "vh" : (parseFloat(top) * parentwidth) + 'px';
 
     //Min height, if declared, to prevent objects from been to smalls
     //**IMP** The unit is rem
@@ -16,7 +16,7 @@ const Floor = ({ left, top, parentwidth, minHeight, height }) => {
 
     const style = {
         top: topPos,
-        left: left,
+        left: viewportHeightRelative ? parseFloat(left) + "vh" : left,
         height: height,
         minHeight: minimumHeight
     }

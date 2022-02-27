@@ -1,0 +1,24 @@
+/*
+
+
+    Maelie's illustration styling sheet
+
+
+*/
+
+.maeliesComponent {
+
+    width: auto;
+    position: absolute;
+    transform: translate(-50%, -100%);
+    -webkit-transform: translate(-50%, -100%); /* Safari & Chrome */
+    -moz-transform: translate(-50%, -100%); /* Firefox */
+    -ms-transform: translate(-50%, -100%); /* Internet Explorer */
+    -o-transform: translate(-50%, -100%); /* Opera */
+
+    -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0);
+    filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838ce);
+
+
+
+}

@@ -1,0 +1,26 @@
+/*
+
+    Scene Anmiations styling sheet
+
+
+*/
+
+
+.sceneAnimationsComponent {
+
+    position: relative;
+    width: 100%;
+    height: 100vh; /* must not exceed */
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    /* Left and right section to devise the scene in two and prevent collision of elements that shoudn't touch */
+    > div {
+        position: relative;
+        overflow: visible;
+    }
+    
+
+}

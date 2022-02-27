@@ -5,13 +5,18 @@ import house200 from '../../../images/illustrations/maison_200.png'
 import house400 from '../../../images/illustrations/maison_400.png'
 
 
-const House = ( {fileSize, top, left, height, background, parentwidth, minHeight, reverse} ) => {
+const House = ( {fileSize, top, left, right, height, background, parentwidth, minHeight, reverse, viewportHeightRelative} ) => {
 
     //select the size of the house
     const house = fileSize === 200 ? house200 : house400;
 
     //Top position is going to be relative to the parent element width
-    const topPos = (parseFloat(top) * parentwidth) + 'px';
+    const topPos = viewportHeightRelative ? parseFloat(top) + "vh" : (parseFloat(top) * parentwidth) + 'px';
+
+    //If position is relative to viewport Height, then the left position needs to be too
+    const leftValue = viewportHeightRelative ? parseFloat(left) + "vh" : left;
+    //If position is relative to viewport Height, then the left position needs to be too
+    const rightValue = viewportHeightRelative ? parseFloat(right) + "vh" : right;
 
     //Min height, if declared, to prevent objects from been to smalls
     //**IMP** The unit is rem
@@ -19,7 +24,8 @@ const House = ( {fileSize, top, left, height, background, parentwidth, minHeight
     
     const style = {
         top: topPos,
-        left: left,
+        left: right ? "" : leftValue,
+        right: right ? rightValue : "",
         height: height,
         minHeight: minimumHeight
     }

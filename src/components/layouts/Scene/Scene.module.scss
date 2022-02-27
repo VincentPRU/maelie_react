@@ -11,7 +11,7 @@
 
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 
     .whiteBackground {
         position: absolute;
@@ -19,5 +19,7 @@
         width: 100%;
         background-color:#EFEEE2;
     }
+
+
 
 }

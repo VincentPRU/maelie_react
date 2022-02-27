@@ -1,0 +1,142 @@
+/*
+
+
+        Styling of the X Axis
+
+
+*/
+
+.YAxisAnimation {
+
+    /*
+        Value by default
+    */
+   
+    --translateY: 10vh;
+    --duration: 2s;
+    --fillMode: forwards;
+    --timingFunction: cubic-bezier(0,.41,.04,.99);
+    --animationName: none;
+
+    position: absolute;
+    top: 0vh;
+
+    -webkit-animation-duration: var(--duration);            /* Safari & Chrome */
+    -moz-animation-duration: var(--duration);               /* Firefox */
+    -ms-animation-duration: var(--duration);                /* Internet Explorer */
+    -o-animation-duration: var(--duration);                 /* Opera */
+    animation-duration: var(--duration);
+
+    -webkit-animation-timing-function: var(--timingFunction);   /* Safari & Chrome */
+    -moz-animation-timing-function: var(--timingFunction);      /* Firefox */
+    -ms-animation-timing-function: var(--timingFunction);       /* Internet Explorer */
+    -o-animation-timing-function: var(--timingFunction);        /* Opera */
+    animation-timing-function: var(--timingFunction);
+
+    -webkit-animation-fill-mode: var(--fillMode);           /* Safari & Chrome */
+    -moz-animation-fill-mode: var(--fillMode);              /* Firefox */
+    -ms-animation-fill-mode: var(--fillMode);               /* Internet Explorer */
+    -o-animation-fill-mode: var(--fillMode);                /* Opera */
+    animation-fill-mode: var(--fillMode);
+
+    -webkit-animation-name: var(--animationName);            /* Safari & Chrome */
+    -moz-animation-name:var(--animationName);                 /* Firefox */
+    -ms-animation-name: var(--animationName);                 /* Internet Explorer */
+    -o-animation-name:var(--animationName);  
+    animation-name: var(--animationName); 
+    
+    &.translateY-25 { --translateY: -25vh; }
+    &.translateY-50 { --translateY: -50vh; }
+    &.translateY-75 { --translateY: -75vh; }
+    &.translateY-100 { --translateY: -100vh; }
+
+    &.regAnim0 {--animationName: regAnim0 }
+    &.regAnim25 {--animationName: regAnim25 }
+    &.regAnim50 {--animationName: regAnim50 }
+    &.regAnim75 {--animationName: regAnim75 }
+    &.regAnim100 {--animationName: regAnim100 }
+    
+}
+
+/*
+
+
+        Different animation name in function of the percentage
+
+*/
+
+// Animation at 0 percent => backwards
+@keyframes regAnim0 {
+    0%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+@-webkit-keyframes loading-spinner {
+    0%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+// Animation at 25% => peak at 25%
+@keyframes regAnim25 {
+    25%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+@-webkit-keyframes loading-spinner {
+    25%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+//Animation at 50% => peak at 50%
+@keyframes regAnim50 {
+    50%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+@-webkit-keyframes loading-spinner {
+    50%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+//Animation at 75%
+@keyframes regAnim75 {
+    75%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+@-webkit-keyframes loading-spinner {
+    75%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+//Animation at 100%
+@keyframes regAnim100 {
+    100%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
+@-webkit-keyframes loading-spinner {
+    100%  {
+        webkit-transform: translateY(var(--translateY));
+               transform: translateY(var(--translateY));
+    }
+}
+
