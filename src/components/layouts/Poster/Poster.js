@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect, useState } from 'react'
+import React, { useRef, useContext, useEffect, useState, topWidth } from 'react'
 
 import Button from '../../Button/Button'
 
@@ -16,7 +16,7 @@ const getOverflowClassName = value => {
     return " ";
 }
 
-const Poster = ({ img, alt, header2, header3, paragraph, buttonText, buttonReverse, buttonColor, buttonAction, floatRight, top, bottom, imgRightOverflow }) => {
+const Poster = ({header2, header3, paragraph, buttonText, buttonReverse, buttonColor, buttonAction, floatRight, top, bottom, topWidth }) => {
     
     const {scrollY} = useContext(ScrollContext);
 
@@ -42,12 +42,13 @@ const Poster = ({ img, alt, header2, header3, paragraph, buttonText, buttonRever
         }
     }, [scrollY])
     
-
+    const marginT = top ? `${top}vh` : "";
+    const marginTopFinal = topWidth ? `${topWidth}vw` : marginT;
 
     const floatDirection = floatRight ? styles.floatRight : "";
 
     const style = {
-        marginTop: `${top}vh`,
+        marginTop: marginTopFinal,
         marginBottom: `${bottom}vw`
     }
 
@@ -59,22 +60,18 @@ const Poster = ({ img, alt, header2, header3, paragraph, buttonText, buttonRever
         <article 
             ref={ref} 
             style={style} 
-            className={`beige_BG ${styles.posterComponent} ${floatDirection} ${displayPosterClasses} fade-Intro`}>
+            className={`${styles.posterComponent} ${floatDirection} ${displayPosterClasses} fade-Intro`}>
             <section>
-                { header2 && <h2 className="pink col-12">{ header2 }</h2>}
-                { header3 && <h3 className="blue col-12">{ header3 }</h3>}
-                { paragraph && <p className="col-12">{ paragraph }</p>}
+                { header2 && <h2 className="beige col-12">{ header2 }</h2>}
+                { header3 && <h3 className="beige col-12">{ header3 }</h3>}
+                { paragraph && <p className="col-12 beige">{ paragraph }</p>}
                 { buttonText && 
                     <Button to={buttonAction} color={buttonColor} reverse={buttonReverse} >
                         {buttonText}
                     </Button>
                 }
             </section>
-            <div>
-                <figure>
-                    <img src={ img } alt={ alt } className={ getOverflowClassName(imgRightOverflow) } />
-                </figure>
-            </div>
+
         </article>
     );
 }

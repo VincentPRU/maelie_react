@@ -9,7 +9,7 @@ import dragonHyp from '../../../images/illustrations/dragon_hyp.png'
 import flames from '../../../images/illustrations/flamme.png'
 
 
-const Dragon = ( {dragonHypnotized, top, width, left, height, background, parentwidth, minHeight, fadeIn, leftAlign, throwFlames, attack} ) => {
+const Dragon = ( {dragonHypnotized, hypnotizable, top, width, left, height, background, parentwidth, minHeight, fadeIn, leftAlign, throwFlames, attack, gotHypnotized} ) => {
 
     //Reference to the image for the animation
     const ref = useRef();
@@ -81,6 +81,15 @@ const Dragon = ( {dragonHypnotized, top, width, left, height, background, parent
                         className={ styles.fire }
                     />
                 }
+                {
+                    hypnotizable &&
+                    <img 
+                        src={ dragonHyp }
+                        alt="Illustrations de flammes crachées par un dragon"
+                        className={`${styles.hypnotizable} ${gotHypnotized ? styles.displayHyp: ""}`}
+                    />
+                }
+
             </div>
            
         </div>

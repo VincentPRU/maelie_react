@@ -1,0 +1,23 @@
+
+.panelComponent {
+
+    padding: 2rem;
+    width: 30rem;
+    width: min(95%, 30rem);
+    height: auto;
+    border-radius: 1rem;
+    color: rgb(var(--beige));
+
+    
+    -webkit-filter: drop-shadow(0.5rem 0.5rem 0.3rem #363636d0);
+    filter: drop-shadow(0.3rem 0.5rem 0.3rem #424242d0);
+
+    header {
+        h3{
+             margin-top: 0px;
+             margin-bottom: 0.5rem;
+             font-weight: bold;
+        }
+    }
+
+}

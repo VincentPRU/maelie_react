@@ -1,0 +1,179 @@
+.sceneControlComponent {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    color: var(--beige);
+
+    .controlsSection {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 5rem auto 5rem;
+
+        .topMenuContainer {
+            width: 100%;
+            max-width: min(95%, 75rem);
+            margin: auto;
+            
+
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            align-items: center;
+            z-index: 2;
+
+            /*  First layer of the top menu  */
+            > div:first-of-type {
+
+                width: 100%;
+                display: grid;
+                align-items: center;
+                grid-template-columns: 10rem auto 10rem;
+                grid-template-rows: 1fr;
+
+
+                .timeRef {
+                    text-shadow: 2px 2px 4px #000000;
+                    margin: 0px;
+                    padding: 0.5rem 1rem;
+                    font-size: 1.5rem;
+                    text-align: right;
+                }
+    
+                .timeRef:last-of-type { text-align: left; }
+    
+                .loadingBar {
+                    position: relative;
+                    width: 100%;
+                    height: 1rem;
+                    border: 0.2rem solid rgb(var(--red));
+                    border-radius: 0.3rem;
+                    padding: 0.05rem;
+    
+                    .blackBar {
+                        height: 100%;
+                        width: 0%;
+                        opacity: 0.5;
+                        border-radius: 0.1rem;
+                        background-color: black;
+                        -webkit-transition:  2s; /* Safari & Chrome */
+                        -moz-transition:  2s;/* Firefox */
+                        -ms-transition:  2s; /* Internet Explorer */
+                        -o-transition:  2s;
+                        transition: 2s;
+                    }
+
+                    /*
+                        Marking of the scenes
+                    */
+                    .marking {
+                        position: absolute;
+                        font-size: 2rem;
+                        font-weight: bold;
+                        bottom: -0.5rem;
+                        color: rgb(var(--beige));
+                        opacity: 1;
+                        cursor: pointer;
+                        -webkit-transition: 0.2s; /* Safari & Chrome */
+                        -moz-transition: 0.2s; /* Firefox */
+                        -ms-transition: 0.2s;  /* Internet Explorer */
+                        -o-transition: 0.2s; 
+                        transition: 0.2s;  /* W3C */
+
+                        transform-origin: bottom center;
+                        -webkit-transform-origin: bottom center;
+
+                        &.played { opacity: 1;}
+                        &:hover {
+                            -webkit-transform: scale(1.1); /* Safari & Chrome */
+                            -moz-transform: scale(1.1);/* Firefox */
+                            -ms-transform: scale(1.1); /* Internet Explorer */
+                            -o-transform: scale(1.1); 
+                            transform: scale(1.1); /* W3C */
+
+                        }
+                    }
+    
+                }
+    
+                .menuFunction {
+    
+                    text-shadow: 2px 2px 4px #000000;
+    
+                }
+
+            }
+
+            /*  Second layer of the top menu  */
+            > div:last-of-type {
+
+                display: grid;
+                grid-template-columns: 10rem auto 10rem;
+                grid-template-rows: 1fr;
+
+                button {
+                    text-shadow: 2px 2px 4px #000000;
+                    margin: 0px;
+                    padding: 0.5rem 1rem;
+                    font-size: 2rem;
+                    text-align: right;
+                    cursor: pointer;
+                }
+    
+                button:last-of-type { text-align: left; }
+                .playFunction {}
+                .menuFunction {}
+                
+            }
+            
+        }
+
+        .bottomMenuContainer{
+            color: rgb(var(--beige));
+            z-index: 5;
+
+            width: 100%;
+            max-width: min(95%, 75rem);
+            margin: auto;
+            
+            position: relative;
+            font-size: 2.5rem;
+            display: grid;
+            grid-template-rows: 1fr;
+            align-items: end;          
+            z-index: 2;
+
+            p {
+                text-shadow: 2px 2px 3px #000000;
+                text-align: center;
+                margin: 0px;
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                width: 100%;
+            }
+        }
+        
+    }
+
+
+
+    .panelSection {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}

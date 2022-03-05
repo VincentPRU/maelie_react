@@ -8,13 +8,17 @@
 
     border-radius: 1rem;
     display: grid;
-    grid-template-columns: 4fr 1fr;
-    grid-template-rows: 1fr;
+    
     position: relative;
     overflow: hidden;
     margin: 2vw;
     margin: min(1rem, 2vw);
     opacity: 0;
+
+    border: 0.4rem solid rgb(var(--beige));
+    background-color: rgba(var(--beige), 0.1);
+    backdrop-filter: blur(2px);
+    
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import IllustrationAnim from '../AnimationUtils/IllustrationAnim/IllustrationAnim'
 
@@ -13,15 +13,16 @@ import styles from './SceneAnimations.module.scss'
 import animationData from './ScenesAnimationsDetails.json'
 
 
-const SceneAnimations = () => {
+const SceneAnimations = ({ scene }) => {
 
     const [currentScene, setCurrentScene] = useState(animationData[0]);
 
+    useEffect(() => {
+        if(scene){
+            setCurrentScene(animationData[parseInt(scene)]);
+        }
+    }, [scene])
 
-    const updateScene = (index) => {
-        setCurrentScene(animationData[index]);
-        console.log(index)
-    }
 
     return (
 
@@ -30,35 +31,27 @@ const SceneAnimations = () => {
             {/* Left section */}
             <div>
                 <IllustrationAnim right animation={currentScene.Dragon}>
-                    <Dragon height="75vh" leftAlign throwFlames attack={currentScene.Dragon.attack}  />
+                    <Dragon height="75vh" hypnotizable leftAlign throwFlames attack={currentScene.Dragon.attack} gotHypnotized={currentScene.Dragon.hypnotized} />
                 </IllustrationAnim>
-
-
-
+                <IllustrationAnim right animation={currentScene.VillagersLeft}>
+                    {/* Leftoffset is negative to avoid overlaping */}
+                    <Villager height="45vh" leftOffSet="-20vh" reverse color="blue" notes notesPlaying={currentScene.VillagersLeft.active} noteDelay="noteDelay5000"/>
+                    <Villager height="45vh" leftOffSet="0vh" reverse color="green" notes notesPlaying={currentScene.VillagersLeft.active}  />
+                    <Villager height="45vh" leftOffSet="-12vh" layerPos={1.1} layerTop="7vh" reverse />
+                </IllustrationAnim>
             </div>
 
-            {/* Right section */}
+            {/* Right section  updateScene(1) */}
             <div>
-                <div style={{ position: "absolute", top: "0px", right: "0px"}}>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", cursor: "pointer", zIndex: 100 }} onClick={ () => updateScene(0) }>Scène 1</div>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", marginTop: "0.5rem", cursor: "pointer", zIndex: 100 }} onClick={ () => updateScene(1) }>Scène 2</div>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", marginTop: "0.5rem", cursor: "pointer",zIndex: 100 }} onClick={ () => updateScene(2) }>Scène 3</div>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", marginTop: "0.5rem", cursor: "pointer",zIndex: 100 }} onClick={ () => updateScene(3) }>Scène 4</div>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", marginTop: "0.5rem", cursor: "pointer" ,zIndex: 100}} onClick={ () => updateScene(4) }>ATTAQUE!!</div>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", marginTop: "0.5rem", cursor: "pointer", zIndex: 100 }} onClick={ () => updateScene(5) }>Scène 6</div>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", marginTop: "0.5rem", cursor: "pointer", zIndex: 100 }} onClick={ () => updateScene(6) }>Scène 7</div>
-                <div style={{ position: "relative", backgroundColor: "white", padding: "1rem", marginTop: "0.5rem", cursor: "pointer", zIndex: 100 }} onClick={ () => updateScene(7) }>Scène 8</div>
 
-
-                    </div>
                     <IllustrationAnim animation={currentScene.Maelie}>
-                        <Maelie left="0vh" height="40vh" top="0vh" minHeight="10" />
+                        <Maelie left="0vh" height="40vh" top="0vh" minHeight="10" singing={currentScene.Maelie.singing} higher={currentScene.Maelie.higher} />
                     </IllustrationAnim>
                     <IllustrationAnim animation={currentScene.Knight}>
                         <Knight height="45vh" dyingMode={currentScene.Knight.dyingMode} rightAlign fightingMode={currentScene.Knight.fightingMode} animDelay={currentScene.Knight.duration}/>
                     </IllustrationAnim>
                     <IllustrationAnim animation={currentScene.Villager}>
-                        <Villager height="45vh" spear attack={currentScene.Villager.attack} spearAttacking spearPos="low" active={currentScene.Villager.active} killed={currentScene.Villager.dying}/>
+                        <Villager height="45vh" spear attack={currentScene.Villager.attack}  spearPos="low" active={currentScene.Villager.active} killed={currentScene.Villager.dying}/>
                         <Villager height="45vh" color="green" leftOffSet="13vh"  animationDelay="protestDelay06" active={currentScene.Villager.active} protesting killed={currentScene.Villager.dying} />
                         <Villager height="45vh" color="blue" leftOffSet="25vh" layerTop="-1vh" angry killed={currentScene.Villager.dying} />
                         <Villager height="45vh" color="blue" leftOffSet="42vh"  active={currentScene.Villager.active} protesting angry killed={currentScene.Villager.dying} />
@@ -66,6 +59,11 @@ const SceneAnimations = () => {
                         <Villager height="45vh" color="blue" leftOffSet="6vh" layerPos={1.1} layerTop="4vh" angry killed={currentScene.Villager.dying} />
                         <Villager height="45vh" leftOffSet="38vh" layerPos={1.1} layerTop="5vh" killed={currentScene.Villager.dying} />
                         <Villager height="45vh" color="green" leftOffSet="23vh" layerPos={1.14} layerTop="8vh" killed={currentScene.Villager.dying} />
+                    </IllustrationAnim>
+                    <IllustrationAnim animation={currentScene.VillagersRight}>
+                        <Villager height="45vh" leftOffSet="5vh"/>
+                        <Villager height="45vh" leftOffSet="25vh" color="green" layerPos={1.05} layerTop="3vh" notes notesPlaying={currentScene.VillagersRight.active} noteDelay="noteDelay2500"  />
+                        <Villager height="45vh" leftOffSet="11vh" layerPos={1.15} layerTop="9vh" color="blue" />
                     </IllustrationAnim>
             </div>
 

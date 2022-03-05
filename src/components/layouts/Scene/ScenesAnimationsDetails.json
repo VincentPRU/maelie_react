@@ -6,7 +6,9 @@
         "Maelie" : {},
         "Dragon" : {},
         "Knight" : {},
-        "Villager": {}
+        "Villager": {},
+        "VillagersRight": {},
+        "VillagersLeft": {}
     },
 
 
@@ -16,11 +18,14 @@
             "XAxis": "xAxis05",
             "YAxis": "translateY-10",
             "YPercentage": "regAnim10",
-            "smallMotion": true  
+            "smallMotion": true,
+            "singing": true  
         },
         "Dragon" : {},
         "Knight" : {},
-        "Villager": {}
+        "Villager": {},
+        "VillagersRight": {},
+        "VillagersLeft": {}
     },
 
     {
@@ -33,7 +38,9 @@
             "smallMotion": true
         },
         "Knight" : {},
-        "Villager": {}
+        "Villager": {},
+        "VillagersRight": {},
+        "VillagersLeft": {}
 
     },
 
@@ -53,7 +60,9 @@
             "YPercentage": "regAnim10",
             "fightingMode": true                
         },
-        "Villager": {}
+        "Villager": {},
+        "VillagersRight": {},
+        "VillagersLeft": {}
     },
 
     {
@@ -76,7 +85,9 @@
             "dyingMode": true,
             "smallMotion": true            
         },
-        "Villager": {}
+        "Villager": {},
+        "VillagersRight": {},
+        "VillagersLeft": {}
     },
 
     {
@@ -104,7 +115,9 @@
             "YPercentage": "regAnim10",
             "active": true,
             "attack": true
-        }
+        },
+        "VillagersRight": {},
+        "VillagersLeft": {}
     },
     {
         "Maelie" : {},
@@ -132,7 +145,9 @@
             "active": true,
             "dying": true,
             "smallMotion": true
-        }
+        },
+        "VillagersRight": {},
+        "VillagersLeft": {}
     },
     {
         "Maelie" : {
@@ -151,8 +166,63 @@
             "attack": false
         },
         "Knight" : {},
-        "Villager": {}
+        "Villager": {},
+        "VillagersRight": {},
+        "VillagersLeft": {}
+    },
+    {
+        "Maelie" : {
+            "duration": "duration1500",
+            "XAxis": "xAxis15",
+            "YAxis": "translateY-10",
+            "YPercentage": "regAnim10",
+            "smallMotion": true,
+            "singing": true 
+        },
+        "Dragon" : {
+            "duration": "duration1000",
+            "XAxis": "xAxis55",
+            "YAxis": "translateY-75",
+            "YPercentage": "regAnim0",
+            "smallMotion": true,
+            "attack": false,
+            "hypnotized": true
+        },
+        "Knight" : {},
+        "Villager": {},
+        "VillagersRight": {},
+        "VillagersLeft": {}
+    },
+    {
+        "Maelie" : {
+            "duration": "duration1500",
+            "XAxis": "xAxis00",
+            "YAxis": "translateY-10",
+            "YPercentage": "regAnim10",
+            "smallMotion": true,
+            "higher": true 
+        },
+        "Dragon" : {},
+        "Knight" : {},
+        "Villager": {},
+        "VillagersLeft": {
+            "duration": "duration1500",
+            "XAxis": "xAxis35",
+            "YAxis": "translateY-00",
+            "YPercentage": "regAnim10",
+            "smallMotion": true,
+            "active": true
+        },
+        "VillagersRight": {
+            "duration": "duration1000",
+            "XAxis": "xAxis15",
+            "YAxis": "translateY-10",
+            "YPercentage": "regAnim10",
+            "smallMotion": true,
+            "active": true
+        }
     }
+
 
 
 

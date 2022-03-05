@@ -226,8 +226,11 @@ ul {padding: 0px;}
 
 
 /*
+
   Remove some default styling of the button element
+
 */
+
 button {
   background: unset;
   border: unset;
@@ -248,10 +251,10 @@ button {
   border-style: solid;
   color: white;
 
-  -webkit-transition: 0.4s ease-out;
-  -moz-transition: 0.4s ease-out;
-  -o-transition: 0.4s ease-out;
-  transition: 0.4s ease-out;
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
 
 
   &.button--reverse {
@@ -260,7 +263,7 @@ button {
     color: rgb(var(--buttonColor));
 
     &:hover {
-      color: white;
+      background-color: rgb(221, 221, 221);
     }
   }
 
@@ -279,7 +282,6 @@ button {
     border-color: rgba(var(--buttonColor), 0.4);
     background-color: rgba(var(--buttonColor), 0.4);
   }
-
 }
 
 

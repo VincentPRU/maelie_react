@@ -5,8 +5,9 @@ import styles from './Maelie.module.scss'
 
 import maelie from '../../../images/illustrations/Maelie.png'
 import maelieChant from '../../../images/illustrations/Maelie_chant.png'
+import notes from '../../../images/illustrations/notes.png'
 
-const Maelie = ({ left, top, minHeight, height }) => {
+const Maelie = ({ left, top, minHeight, height, singing, higher }) => {
     
 
     //Min height, if declared, to prevent objects from been to smalls
@@ -23,14 +24,31 @@ const Maelie = ({ left, top, minHeight, height }) => {
     }
 
     return (
-        <>
+        <div className={`${styles.maeliesComponent} ${higher && styles.further}`}>
             <img 
                 style={style} 
-                className={`${styles.maeliesComponent}`} 
+                className={``} 
                 alt="Illustration de Maelie, personnage principal du conte" 
                 src={ maelie } 
             />
-        </>
+            <div className={`${styles.singing} ${singing ? styles.visible : ""}`} >
+                <img 
+                    className={`${styles.singingMaelie}`} 
+                    alt="Illustration de Maelie, personnage principal du conte" 
+                    src={ maelieChant } 
+                />
+                <img 
+                    className={`${styles.notes} ${styles.notes1}`}
+                    alt="Illustration de notes de musique"
+                    src={ notes }
+                />
+                <img 
+                    className={`${styles.notes} ${styles.notes2}`}
+                    alt="Illustration de notes de musique"
+                    src={ notes }
+                />
+            </div>
+        </div>
     );
 }
 

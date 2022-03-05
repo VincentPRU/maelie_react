@@ -11,12 +11,17 @@
     --duration: 2s;
     --animationDelay:0s;
     --spearPosition: scale(-1, 1) rotate(30deg) translate3d(60%, -20%, 0);
+    --leftShift: -50%;
 
-    -webkit-transform: translate(-50%, -100%); /* Safari & Chrome */
-    -moz-transform: translate(-50%, -100%); /* Firefox */
-    -ms-transform: translate(-50%, -100%); /* Internet Explorer */
-    -o-transform: translate(-50%, -100%); /* Opera */
-    transform: translate(-50%, -100%);
+    --notesAnimDelay: 1s;
+
+    -webkit-transform: translate(var(--leftShift), -100%); /* Safari & Chrome */
+    -moz-transform: translate(var(--leftShift), -100%); /* Firefox */
+    -ms-transform: translate(var(--leftShift), -100%); /* Internet Explorer */
+    -o-transform: translate(var(--leftShift), -100%); /* Opera */
+    transform: translate(var(--leftShift), -100%);
+
+    &.shiftLeft {--leftShift: -100%}
 
     position: absolute;
 
@@ -57,6 +62,40 @@
                 animation: dying 3s 1.5s forwards;
             }
 
+            &.reverseVillager {
+                -webkit-transform: scaleX(-1); /* Safari & Chrome */
+                -moz-transform: scaleX(-1); /* Firefox */
+                -ms-transform: scaleX(-1); /* Internet Explorer */
+                -o-transform: scaleX(-1); /* Opera */
+                transform:scaleX(-1);
+            }
+
+        }
+
+        .musicNotes {
+            -webkit-transition: opacity 0.75s 0.75s; /* Safari & Chrome */
+            -moz-transition: opacity 0.75s 0.75s;  /* Firefox */
+            -ms-transition: opacity 0.75s 0.75s;  /* Internet Explorer */
+            -o-transition: opacity 0.75s 0.75s;  /* Opera */
+            transition: opacity 0.75s 0.75s;  
+
+            opacity: 0;
+            position: absolute;
+            left: 0%;
+            top: -35%;
+            height: 35%;
+
+            &.noteDelay2500 {--notesAnimDelay: 3s}
+            &.noteDelay5000 {--notesAnimDelay: 5.5s}
+
+
+            &.notesPlaying {
+                -webkit-animation: animNotes 7s ease-in-out var(--notesAnimDelay) infinite forwards;
+                -moz-animation: animNotes 7s ease-in-out var(--notesAnimDelay) infinite forwards;
+                -ms-animation: animNotes 7s ease-in-out var(--notesAnimDelay) infinite forwards;
+                -o-animation:animNotes 7s ease-in-out var(--notesAnimDelay) infinite forwards;
+                animation: animNotes 7s ease-in-out var(--notesAnimDelay) infinite forwards;
+            }
         }
 
         .spearIllustration {
@@ -189,3 +228,70 @@
         transform: rotate(60deg);;
     }
 }
+
+@-webkit-keyframes animNotes {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0); /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);  /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);   /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);  /* Opera */
+        transform: translate3d(0, 0, 0); 
+    }
+    2% { opacity: 1; }
+    10% { opacity: 1; }
+    20% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -15vh, 0); /* Safari & Chrome */
+        -moz-transform: translate3d(0, -15vh, 0);  /* Firefox */
+        -ms-transform: translate3d(0, -15vh, 0);   /* Internet Explorer */
+        -o-transform: translate3d(0, -15vh, 0);  /* Opera */
+        transform: translate3d(0, -15vh, 0); 
+    }
+    100% { opacity: 0; }
+  }
+
+  @-moz-keyframes animNotes {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0); /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);  /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);   /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);  /* Opera */
+        transform: translate3d(0, 0, 0); 
+    }
+    2% { opacity: 1; }
+    10% { opacity: 1; }
+    20% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -15vh, 0); /* Safari & Chrome */
+        -moz-transform: translate3d(0, -15vh, 0);  /* Firefox */
+        -ms-transform: translate3d(0, -15vh, 0);   /* Internet Explorer */
+        -o-transform: translate3d(0, -15vh, 0);  /* Opera */
+        transform: translate3d(0, -15vh, 0); 
+    }
+    100% { opacity: 0; }
+  }
+
+
+  @keyframes animNotes {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0); /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);  /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);   /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);  /* Opera */
+        transform: translate3d(0, 0, 0); 
+    }
+    2% { opacity: 1; }
+    10% { opacity: 1; }
+    20% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -15vh, 0); /* Safari & Chrome */
+        -moz-transform: translate3d(0, -15vh, 0);  /* Firefox */
+        -ms-transform: translate3d(0, -15vh, 0);   /* Internet Explorer */
+        -o-transform: translate3d(0, -15vh, 0);  /* Opera */
+        transform: translate3d(0, -15vh, 0); 
+    }
+    100% { opacity: 0; }
+  }

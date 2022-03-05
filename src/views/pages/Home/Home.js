@@ -114,7 +114,12 @@ const Home = () => {
                                         img={maelie}
                                         alt="Illustration de Maelie, personnage principal du conte."
                                         header2="L'origine du conte"
-                                        paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur congue tellus eu ante sodales tempus. Proin ex lectus, aliquet at arcu ut, gravida facilisis quam. Ut erat sem, imperdiet rhoncus."
+                                        paragraph="Il était une fois une jeune fille de 9 ans, Marianne Gagnon, qui décida d’écrire le conte de
+                                        « Maélie et le dragon » suite à l’appel de textes de la SMCQ en 2021. Le compositeur Denis
+                                        Gougeon fut profondément touché en lisant ce récit où la musique devient l’arme pacifique
+                                        d’une jeune fille courageuse devant un dragon menaçant. Inspiré, il composa « La chanson de
+                                        Maélie », une douce mélodie pour chœur à deux voix. Et le projet fit boule de neige. La SMCQ a
+                                        créé ce conte interactif et vous invite maintenant à embarquer dans cette aventure !"
                                         floatRight={true}
                                     />
                                 </div>
@@ -140,12 +145,12 @@ const Home = () => {
                                 <section className={`col-12 ${styles.posterContainer}`}>
                                     <div className="maxWidthPageContainer">
                                     <Poster
-                                        top={50}
+                                        top={40}
                                         img={ notes }
                                         imgRightOverflow = {30}
                                         alt="Illustration de notes de musique"
-                                        header2="Vous aimeriez participer à la bande sonore ?"
-                                        paragraph="Les deux choix affichiés ci-dessous s'offrent à vous :"
+                                        header2="Tu veux participer à la bande sonore ?"
+                                        paragraph="Deux choix s&#39;offrent à toi :"
                                     />
                                     </div>
                                 </section>
@@ -171,33 +176,33 @@ const Home = () => {
                                 </OverflowImagesContainer>
 
                                 {/* Main content of the section */}
-                                <article className={`${styles.sectionContent} col-12`}>
+                                <article style={{padding: "15vh 0vh 20vh 0vh"}} className={`${styles.sectionContent} col-12`}>
                                     <section className={`col-12 ${styles.posterContainer}`}>
                                         <div className="maxWidthPageContainer">
                                             <section className={`col-12 ${styles.multiPosterContainer}`}>
-                                                <Poster
-                                                    top={65}
-                                                    bottom={20}
-                                                    img={ house200px }
-                                                    imgRightOverflow = {40}
-                                                    alt="Illustration d'une maison"
-                                                    header3='2. Chorale "Le chant de Maelie"'
-                                                    paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur congue tellus eu ante sodales tempus. Proin ex lectus, aliquet at arcu ut, gravida facilisis quam. Ut erat sem, imperdiet rhoncus."
-                                                    buttonText="Visiter la page"
-                                                    buttonAction="/chant-de-la-fin"
-                                                />
-                                                <Poster
-                                                    top={40}
-                                                    img={ tree }
-                                                    imgRightOverflow = {20}
-                                                    alt="Illustration d'un arbre"
-                                                    header3="1. Sonoriser l'histoire"
-                                                    paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur congue tellus eu ante sodales tempus. Proin ex lectus, aliquet at arcu ut, gravida facilisis quam. Ut erat sem, imperdiet rhoncus."
+                                            <Poster
+                                                    top={0}
+                                                    topWidth={15}
+                                                    header3="1. Sonoriser une scène"
+                                                    paragraph="Regarde le conte ci-dessous et choisis une scène. Quels sons peuplent l’environnement sonore à
+                                                    ce moment de l’histoire ? Si c’était un film, quelle musique pourrait-on entendre ? Invente une
+                                                    bande sonore pour ta scène et partage-la avec nous !"
                                                     floatRight={true}
-                                                    buttonText="Visiter la page"
+                                                    buttonText="Remplir le formulaire"
                                                     buttonAction="/participer-aux-scenes"
 
                                                 />
+                                                <Poster
+                                                    top={10}
+                                                    bottom={0}
+                                                    header3='2. Chanter Le Chant de Maélie"'
+                                                    paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprend cette
+                                                    chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
+                                                    karaokés d’apprentissage sont proposés sur la plateforme éducative."
+                                                    buttonText="Remplir le formulaire"
+                                                    buttonAction="/chant-de-la-fin"
+                                                />
+                                                
                                          </section>
                                         </div>
 

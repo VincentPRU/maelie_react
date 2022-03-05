@@ -20,7 +20,7 @@ const Footer = () => {
 
               
                 <section className="col-4">
-
+                  <h4>Menu</h4>
                   <ul>
                       <li><Link to="/">Accueil</Link></li>
                       <li><Link to="/participer-aux-scenes">Participer aux scènes</Link></li>
@@ -36,7 +36,7 @@ const Footer = () => {
                 <section className="col-4">
 
                   
-                  <button onClick={ currentUser ? logout : login }>
+                  <button className="beige" onClick={ currentUser ? logout : login }>
                     {currentUser ? "Déconnexion" : "Se connecter"}
                   </button>
 

@@ -11,6 +11,7 @@
     
     padding: 3rem;
     background-color: grey;
+    color: white;
     position: relative;
 
     /* Correspond to the maxWidthPageContainer */
@@ -18,7 +19,20 @@
         display: flex;
 
         > section {
-             
+             display: flex;
+             flex-direction: column;
+
+             ul {
+                 display: flex;
+                 flex-direction: column;
+
+                 li {
+                    font-weight: normal;
+                    &:hover{
+                        color: #c8a67e;
+                    }
+                 }
+             }
         }
     }
 

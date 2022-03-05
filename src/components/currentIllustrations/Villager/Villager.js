@@ -11,8 +11,10 @@ import angryVillagerRed from '../../../images/illustrations/villageois_rouge_fou
 
 import spearIllustration from '../../../images/illustrations/fourche.png'
 
+import note from '../../../images/illustrations/notes.png'
 
-const Villager = ({ color, angry, height, leftOffSet, protesting, active, spear, topSpear, spearAttacking, spearPos, attack, layerPos, layerTop, animationDelay, killed  }) => {
+
+const Villager = ({ color, angry, height, leftOffSet, protesting, active, spear, topSpear, spearAttacking, spearPos, attack, layerPos, layerTop, animationDelay, killed, reverse, notes, notesPlaying, noteDelay }) => {
 
     //Store the proper img in a constant
     
@@ -50,7 +52,7 @@ const Villager = ({ color, angry, height, leftOffSet, protesting, active, spear,
  
     return (
 
-        <div className={`${styles.villagerComponent} ${spearPosition} ${animationDelayClass} `}>
+        <div className={`${styles.villagerComponent} ${spearPosition} ${animationDelayClass} ${reverse && styles.shiftLeft}`}>
 
             <div className={``}>
                 {
@@ -62,9 +64,18 @@ const Villager = ({ color, angry, height, leftOffSet, protesting, active, spear,
                         className={`${styles.spearIllustration} ${spearAttackValue} ${killedClass}`}
                     />
                 }
+                {
+                    notes &&
+                    <img 
+                        src={ note }
+                        style={{ left: leftOffSet ? leftOffSet : ""}}
+                        alt="Illustration de notes de musique"
+                        className={`${styles.musicNotes} ${notesPlaying && styles.notesPlaying} ${noteDelay && styles[noteDelay]}`}
+                    />
+                }
                 <img 
                     style={ style }
-                    className={`${styles.villagerIllustration} ${protestingClass} ${killedClass}`}
+                    className={`${styles.villagerIllustration} ${protestingClass} ${killedClass} ${reverse && styles.reverseVillager}`}
                     src={ img() }  
                     alt={ `Illustration d'un villageois ${angry && "en colère"}`}
                 />
