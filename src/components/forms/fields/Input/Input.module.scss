@@ -10,12 +10,17 @@
     margin: 0.5rem 0px;
 
     position: relative; /* Needed for the asterix */
+    width: 100%; 
 
-
+    input {
+        width: min(25rem, 100%);
+    }
 
     .choicesContaier{
 
         padding: 0.5rem 0rem;
+        width: 100%;
+
         
 
         > * {
@@ -28,6 +33,7 @@
             cursor: pointer;
             box-shadow: 2px 2px 2px grey;
             transition: 0.3s;
+
 
             &:hover{
                 background-color: rgb(235, 173, 173);

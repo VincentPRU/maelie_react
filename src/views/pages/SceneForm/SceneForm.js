@@ -9,7 +9,8 @@ import AudioScenesForm from '../../../components/forms/form/ScencesForm/AudioSce
 import styles from './SceneForm.module.scss'
 
 
-
+import Hill from '../../../images/illustrations/colline1.png'
+import tree from '../../../images/illustrations/arbre.png'
 
 const SceneForm = () => {
 
@@ -205,9 +206,11 @@ const SceneForm = () => {
 
 
     return (
-        <div className={`${styles.pageStyling} maxWidthPageContainer`}>
-
-            <h1>Participez vous aussi à la mise en musique des scènes de ce conte...</h1>
+        <section className={`${styles.pageStyling}`}>
+          <div className={`maxWidthPageContainer`}>
+            <header>
+              <h1 className="red">Participez vous aussi à la mise en musique des scènes de ce conte...</h1>
+            </header>
             <form onSubmit={onSubmit} className="col-12">
 
                 {/* Section with all the personnal informations */}
@@ -242,7 +245,28 @@ const SceneForm = () => {
             </form>
 
 
+            </div>
+
+            <div className={styles.formPageBackground}>
+          <div className={styles.skyBackgroundGradient}>
+            <div></div>
+            <div></div>
+          </div>
+
+          <div className={styles.hillIllustrationContainer}>
+            <img alt="Illustration de coline" src={Hill}/>
+
+          </div>
+
+          <div className={styles.treeIllustrationContainer}>
+            <img src={ tree } alt="Illustration de chateau" />
+            <img src={ tree } alt="Illustration de chateau" />
+
+          </div>
+
         </div>
+
+        </section>
     );
 }
 

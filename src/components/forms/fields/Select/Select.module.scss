@@ -8,11 +8,12 @@
 
 .selectComponent{
     margin: 0.5rem 0px;
-    width: 100%;
+    width: min(25rem, 100%);
 
     position: relative; /* Needed for the asterix */
 
     select {
         width: 100%;
+        border: none;
     }
 }

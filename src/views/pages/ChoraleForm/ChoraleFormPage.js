@@ -8,6 +8,9 @@ import ChoralForm from '../../../components/forms/form/ChoralForm/ChoralForm';
 import ChoralAudioForm from '../../../components/forms/form/ChoralAudioForm/ChoralAudioForm';
 
 import styles from './ChoraleFormPage.module.scss';
+import Hill from '../../../images/illustrations/colline1.png'
+import castle from '../../../images/illustrations/chateau.png'
+
 
 
 const ChoraleFormPage = () => {
@@ -177,42 +180,66 @@ const ChoraleFormPage = () => {
     }
 
     return (
-      <div className={`${styles.choraleFormPage} maxWidthPageContainer`}>
-          <h1>Participer à la chorale de la fin</h1>
-          <form onSubmit={onSubmit} className="col-12">
 
-                {/* Section with all the personnal informations */}
-                <FormContainer 
-                    title="Personne contact"
-                    subTitle="Ces informations resteront confidentielles" 
-                >
-                    {/* Import the contact form component. This one must receive the state constant as props */}
-                    <ContactForm data={userForm} setData={setUserForm} />
-                </FormContainer>
+      <section className={`${styles.choraleFormPage}`}>
+        <div className={`maxWidthPageContainer`}>
+            <header>
+              <h1 className="red">Participer à la chorale de la fin</h1>
 
-                {/* Section with all the credits informations */}
-                <FormContainer 
-                    title="Crédits du projet"
-                    subTitle="Les informations suivantes apparaîtront dans l'application" 
-                >
-                    {/* Import the choral form component. This one must receive the state constant as props */}
-                    <ChoralForm data={mainForm} setData={setMainForm} />
-                </FormContainer>
+            </header>
+            <form onSubmit={onSubmit} className="col-12">
 
-                {/* Section with the input for the choral */}
-                <FormContainer 
-                    title="Intégrer votre enregistrement du chant final"
-                    subTitle="Informations supplémentaire à définir..." 
-                >
-                    {/* Import the choral form component. This one must receive the state constant as props */}
-                    <ChoralAudioForm data={audioForm} setData={setAudioForm} />
-                </FormContainer>
+                  {/* Section with all the personnal informations */}
+                  <FormContainer 
+                      title="Personne contact"
+                      subTitle="Ces informations resteront confidentielles" 
+                  >
+                      {/* Import the contact form component. This one must receive the state constant as props */}
+                      <ContactForm data={userForm} setData={setUserForm} />
+                  </FormContainer>
 
-                <button>Soumettre</button>
+                  {/* Section with all the credits informations */}
+                  <FormContainer 
+                      title="Crédits du projet"
+                      subTitle="Les informations suivantes apparaîtront dans l'application" 
+                  >
+                      {/* Import the choral form component. This one must receive the state constant as props */}
+                      <ChoralForm data={mainForm} setData={setMainForm} />
+                  </FormContainer>
 
-          </form>
+                  {/* Section with the input for the choral */}
+                  <FormContainer 
+                      title="Intégrer votre enregistrement du chant final"
+                      subTitle="Informations supplémentaire à définir..." 
+                  >
+                      {/* Import the choral form component. This one must receive the state constant as props */}
+                      <ChoralAudioForm data={audioForm} setData={setAudioForm} />
+                  </FormContainer>
 
-      </div>
+                  <button>Soumettre</button>
+
+            </form>
+
+          
+
+        </div>
+        <div className={styles.formPageBackground}>
+          <div className={styles.skyBackgroundGradient}>
+            <div></div>
+            <div></div>
+          </div>
+
+          <div className={styles.hillIllustrationContainer}>
+            <img alt="Illustration de coline" src={Hill}/>
+
+          </div>
+
+          <div className={styles.castleIllustrationContainer}>
+            <img src={ castle } alt="Illustration de chateau" />
+          </div>
+
+        </div>
+      </section>
     );
 
 }
