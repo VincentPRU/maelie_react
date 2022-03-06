@@ -1,0 +1,50 @@
+.creditsComponent{
+
+    img {
+        height: 8rem;
+        float: left;
+        margin-right: 5rem;
+    }
+
+    > div {
+
+
+        > header {
+            
+            h1 {
+                margin: 15vh 0px;
+                font-size: clamp(3rem, 6rem, 5vw);
+              }
+        }
+        > div {
+
+            padding-bottom: 15vh;
+
+            h4 {
+                margin-bottom: 0rem;
+                margin-top: 2rem;
+            }
+
+            p {
+                
+                
+            }
+            a {
+                display: inline;
+            }
+
+            ul {
+                line-height: 1.5;
+                padding-left: 2rem;
+                margin-top: 1rem;
+
+
+                li {
+                    list-style-type: disc;
+                    float: left;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

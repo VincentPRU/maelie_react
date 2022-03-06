@@ -24,8 +24,8 @@ const Footer = () => {
                   <ul>
                       <li><Link to="/">Accueil</Link></li>
                       <li><Link to="/participer-aux-scenes">Participer aux scènes</Link></li>
-                      <li><Link to="/credits">Crédits du projet</Link></li>
-                      <li><Link to="/chant-de-la-fin">Chant final</Link></li>
+                      <li><Link to="/chant-de-la-fin">Participer au chant final</Link></li>
+                      <li><Link to="/credits">Détails du projet</Link></li>
                       { currentUser ? <li><Link to="/administration">Administration</Link></li> : ""}
                   </ul>
 

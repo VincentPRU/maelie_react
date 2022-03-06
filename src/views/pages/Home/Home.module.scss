@@ -66,6 +66,14 @@
             flex-wrap: wrap;
             align-items: flex-start;
         }
+
+        .singlePorterContainer{
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            padding: 0px 2vw;
+        }
+
     }
 
     
@@ -110,12 +118,9 @@
                         margin-top: 1rem;
                     }
                 }
-                
             }
         }
-
     }
-
 }
 
 
@@ -159,6 +164,20 @@
         .multiPosterContainer > :first-of-type { margin-top: 5rem; }
         
     }
+
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 1042px) {
+
+    .homePage {
+
+        /* General styling for the section content */
+    .sectionContent .singlePorterContainer{ grid-template-columns: 1fr 1fr; }
+        
+    
 
     }
 

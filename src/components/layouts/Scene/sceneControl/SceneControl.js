@@ -137,9 +137,15 @@ const setTextPerTime = (time, totalTime, currentText, setCurrentText) => {
     };
 }
 
+const scrollToElement = element => {
+    window.scrollTo(
+        {top: parseInt(element.current.getBoundingClientRect().top + (window.pageYOffset || 0)),
+         left: 0,
+         behavior: 'smooth'
+        })
+}
 
-
-const SceneControl = ({setAnimation, currentAnimation}) => {
+const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
 
     const [animationPlaying, setAnimationPlaying] = useState(false);
     const [menuSectionState, setMenuSectionState] = useState(true);
@@ -147,7 +153,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
     const [currentText, setCurrentText] = useState("");
 
-    const textRef = useRef("")
+    const controlSection = useRef();
 
     const loadingBarRef = useRef();
     const totalTime = 80;
@@ -225,16 +231,15 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
     return (
 
-        <section className={styles.sceneControlComponent}>
+        <section className={styles.sceneControlComponent} ref={ controlSection }>
 
             { constrolSectionState &&
           
-            <div className={styles.controlsSection}>
+            <div className={`${styles.controlsSection}`} >
 
-                <div className={styles.topMenuContainer}>
+                <div className={`${styles.topMenuContainer} ${constrolSectionState && styles.setVisible}`}>
 
                     <div>
-                        <div ref={ timeRef }className={`${styles.timeRef} beige`}>00:00</div>
                         <div className={`${styles.loadingBar}`}>
                             <div ref={loadingBarRef} className={`${styles.blackBar}`}></div>
                             <div onClick={() => { timeJump(0) }} style={{left: "0%"}} className={`${styles.marking}`}>1</div>
@@ -246,17 +251,44 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
 
                         </div>
-                        <div className={`${styles.timeRef} beige`}>01.20</div>
                     </div>
                     <div>
 
-                        <button onClick={() => { playButton() }} className={`${styles.playFunction} beige `}>
-                            { animationPlaying ? "Pause" : "Jouer" }
-                        </button>
-                        <div></div>
-                        <button onClick={reverseMenuStates} className={`${styles.menuFunction} beige`}>Menu</button>
+                        <div ref={ timeRef }className={`${styles.timeRef} beige`}>00:00</div>
+                            <div className={styles.buttonsContainer}>
+                                <button onClick={() => { playButton() }}>
+                                    <div className={styles.svgContainer}>
+                                        { animationPlaying ? 
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.5 17"><line x1="10" y1="15.5" x2="10" y2="1.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="4"/><line x1="1.5" y1="15.5" x2="1.5" y2="1.5" fill="none"  strokeLinecap="round" strokeMiterlimit="10" strokeWidth="4"/></svg>: 
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 17"><path d="M6,2.8V15.2c0,.67,1,1,1.62.63l10-6.2a.7.7,0,0,0,0-1.26l-10-6.2C7,1.76,6,2.13,6,2.8Z" transform="translate(-4.5 -0.5)" fill="none"  strokeMiterlimit="10" strokeWidth="3"/></svg> 
+                                        }
+                                    </div>
+                                    <div className={styles.textContainer}>
+                                        { animationPlaying ? "Pause" : "Jouer" }
+                                    </div>
+                                </button>
+                                <button onClick={ () => { scrollToElement(controlSection)
+                                    }}>
+                                    <div className={styles.svgContainer}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 17"><path d="M20.68,10.94v3.81a1.22,1.22,0,0,1-1.32,1.1H13.77" transform="translate(-0.18 -0.35)" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><path d="M13.77,1.85h5.59a1.22,1.22,0,0,1,1.32,1.09V6.77" transform="translate(-0.18 -0.35)" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><path d="M1.68,10.94v3.81A1.23,1.23,0,0,0,3,15.85H8.59" transform="translate(-0.18 -0.35)" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><path d="M8.59,1.85H3A1.23,1.23,0,0,0,1.68,2.94V6.77" transform="translate(-0.18 -0.35)" fill="none"  strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/></svg>
+                                    </div>
+                                    <div className={styles.textContainer}>
+                                        Centrer
+                                    </div>
+                                </button>
+                                <button onClick={reverseMenuStates}>
+                                    <div className={styles.svgContainer}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 15"><line x1="1.5" y1="1.5" x2="19.5" y2="1.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><line x1="1.5" y1="7.5" x2="19.5" y2="7.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><line x1="1.5" y1="13.5" x2="19.5" y2="13.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/></svg>
+                                    </div>
+                                    <div className={styles.textContainer}>
+                                        Menu
+                                    </div>
+                                </button>
+                            </div>
+                        <div className={`${styles.timeRef} beige`}>01.20</div>
 
                     </div>
+
                 </div>
                 <div></div>
                 <div className={styles.bottomMenuContainer}>
@@ -265,7 +297,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
             </div>
             }
             {menuSectionState &&
-            <div className={styles.panelSection}>
+            <div className={`${styles.panelSection} ${menuSectionState && styles.setVisible}`}>
                 <Panel 
                     title="Conte musical" 
                     p1="Nous recueillons présentement les extraits musicaux dédiés à bâtir différentes trames sonores pour ce compte. Sous peu, celles-ci accompagneront l'histoire présentée ici-même."

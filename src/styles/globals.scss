@@ -45,7 +45,7 @@
 
 :root {
   /* Maximum width the content of the page can take */
-  --max-width-page-content: 85rem;
+  --max-width-page-content: 35rem;
 
   /* Header's height.  */
   --headersHeight : 5rem;
@@ -187,7 +187,7 @@ ul {padding: 0px;}
 
 .maxWidthPageContainer {
   /*max-width: var(--max-width-page-content);*/
-  max-width: min(95%, 120rem);
+  max-width: min(95%, 80rem);
   margin: auto;
   padding: 0px 3rem; /* in case the browser do not support min() */
   padding: 0px min(3rem, 4vw);

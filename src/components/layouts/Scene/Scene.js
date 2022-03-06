@@ -19,8 +19,7 @@ import Floor from '../../currentIllustrations/Floor/Floor'
 import SceneAnimations from './SceneAnimations'
 
 //import IllustrationAnim from '../AnimationUtils/IllustrationAnim/IllustrationAnim'
-
-const Scene = () => {
+const Scene = ({sceneSection}) => {
 
     const [currentAnimation, setCurrentAnimation] = useState(0);
 
@@ -57,7 +56,7 @@ const Scene = () => {
             </OverflowImagesContainer>
           
             <SceneAnimations scene={currentAnimation}/>
-            <SceneControl currentAnimation={currentAnimation} setAnimation={setCurrentAnimation} />
+            <SceneControl  sceneSection={sceneSection} currentAnimation={currentAnimation} setAnimation={setCurrentAnimation} />
 
             
 

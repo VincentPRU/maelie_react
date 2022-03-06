@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 import SceneForm from './pages/SceneForm/SceneForm';
 import ChoraleFormPage from './pages/ChoraleForm/ChoraleFormPage';
-import Credits from './pages/Credits';
+import Credits from './pages/Credits/Credits';
 import Home from './pages/Home/Home';
 import AdminPage from './pages/AdminPage';
 import Error404 from './pages/Errror/404/Error404';
@@ -28,8 +28,8 @@ const Layout = () => {
                         <Routes>
                             <Route path="/" element={<Home />}/>
                             <Route path="/participer-aux-scenes" element={<SceneForm />}/>
-                            <Route path="/credits" element={<Credits />}/>
                             <Route path="/chant-de-la-fin" element={<ChoraleFormPage />}/>
+                            <Route path="/details" element={<Credits />}/>
                             <Route path="/administration" element={currentUser ? <AdminPage /> : <Navigate to="/" /> } />
                             <Route path="*" element={<Error404/>} />
                         </Routes>

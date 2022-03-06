@@ -27,12 +27,18 @@ import hill2 from '../../../images/illustrations/colline2.png'
 import maelie from '../../../images/illustrations/Maelie.png'
 import house200px from '../../../images/illustrations/maison_200.png'
 import notes from '../../../images/illustrations/notes.png'
-import tree from '../../../images/illustrations/arbre.png'
 
 //import context for the scroll event
 import { ScrollEventProvider } from '../../../contexts/ScrollEvent'
 
-
+const scrollToElement = element => {
+    console.log("called")
+    window.scrollTo(
+        {top: parseInt(element.current.getBoundingClientRect().top),
+         left: 0,
+         behavior: 'smooth'
+        })
+}
 
 const Home = () => {
 
@@ -108,7 +114,8 @@ const Home = () => {
                             </header>
 
                             <section className={`col-12 ${styles.posterContainer}`}>
-                                <div className="maxWidthPageContainer">
+                                <section className={`col-12 ${styles.singlePorterContainer}`}>
+                                    <div></div>
                                     <Poster
                                         top={25}
                                         img={maelie}
@@ -122,7 +129,7 @@ const Home = () => {
                                         créé ce conte interactif et vous invite maintenant à embarquer dans cette aventure !"
                                         floatRight={true}
                                     />
-                                </div>
+                                </section>
                             </section>
 
                         </article>
@@ -143,16 +150,18 @@ const Home = () => {
                             {/* Main content of the section */}
                             <article className={`${styles.sectionContent} col-12`}>
                                 <section className={`col-12 ${styles.posterContainer}`}>
-                                    <div className="maxWidthPageContainer">
-                                    <Poster
-                                        top={40}
-                                        img={ notes }
-                                        imgRightOverflow = {30}
-                                        alt="Illustration de notes de musique"
-                                        header2="Tu veux participer à la bande sonore ?"
-                                        paragraph="Deux choix s&#39;offrent à toi :"
-                                    />
-                                    </div>
+                                    <section className={`col-12 ${styles.singlePorterContainer}`}>
+
+                                        <Poster
+                                            top={40}
+                                            img={ notes }
+                                            imgRightOverflow = {30}
+                                            alt="Illustration de notes de musique"
+                                            header2="Tu veux participer à la bande sonore ?"
+                                            paragraph="Deux choix s&#39;offrent à toi :"
+                                        />
+                                        <div></div>
+                                    </section>
                                 </section>
                             </article>
 
@@ -178,7 +187,6 @@ const Home = () => {
                                 {/* Main content of the section */}
                                 <article style={{padding: "15vh 0vh 20vh 0vh"}} className={`${styles.sectionContent} col-12`}>
                                     <section className={`col-12 ${styles.posterContainer}`}>
-                                        <div className="maxWidthPageContainer">
                                             <section className={`col-12 ${styles.multiPosterContainer}`}>
                                             <Poster
                                                     top={0}
@@ -204,14 +212,13 @@ const Home = () => {
                                                 />
                                                 
                                          </section>
-                                        </div>
 
                                     </section>
                                 </article>
                                 {/* New sub-section */}
                                 <section ref={ sceneSection } style={{height: "100vh"}} className={`${styles.sectionContainer} col-12`}>
 
-                                    <Scene/>
+                                    <Scene sceneSection={sceneSection} />
 
                                 </section>
                             </section>
