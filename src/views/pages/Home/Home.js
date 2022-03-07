@@ -196,18 +196,18 @@ const Home = () => {
                                                     ce moment de l’histoire ? Si c’était un film, quelle musique pourrait-on entendre ? Invente une
                                                     bande sonore pour ta scène et partage-la avec nous !"
                                                     floatRight={true}
-                                                    buttonText="Remplir le formulaire"
+                                                    buttonText="Participer"
                                                     buttonAction="/participer-aux-scenes"
 
                                                 />
                                                 <Poster
                                                     top={10}
                                                     bottom={0}
-                                                    header3='2. Chanter Le Chant de Maélie"'
+                                                    header3='2. Chanter "Le Chant de Maélie"'
                                                     paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprend cette
                                                     chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
                                                     karaokés d’apprentissage sont proposés sur la plateforme éducative."
-                                                    buttonText="Remplir le formulaire"
+                                                    buttonText="Participer"
                                                     buttonAction="/chant-de-la-fin"
                                                 />
                                                 

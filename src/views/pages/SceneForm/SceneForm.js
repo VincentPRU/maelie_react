@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { firestore, storage } from '../../../firebase';
 import FormContainer from '../../../components/forms/container/FormContainer';
@@ -13,6 +13,10 @@ import Hill from '../../../images/illustrations/colline1.png'
 import tree from '../../../images/illustrations/arbre.png'
 
 const SceneForm = () => {
+
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
 
     const [userForm, setUserForm] = useState({
       occupation: '',
@@ -209,7 +213,9 @@ const SceneForm = () => {
         <section className={`${styles.pageStyling}`}>
           <div className={`maxWidthPageContainer`}>
             <header>
-              <h1 className="red">Participez vous aussi à la mise en musique des scènes de ce conte...</h1>
+              <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer à la bande sonore du conte.</h1>
+              <h4 className="blue">Rappel : Les enregistrements doivent durer entre 5 et 90 secondes chacun.</h4>
+
             </header>
             <form onSubmit={onSubmit} className="col-12">
 
@@ -235,13 +241,13 @@ const SceneForm = () => {
                 {/* Section with audio files */}
                 <FormContainer 
                     title="Extraits audio"
-                    subTitle="Assurez-vous de bien mettre les bon extraits avec les bonnes scènes." 
+                    subTitle="Assure-toi de mettre le bon fichier audio avec la scène correspondante." 
                 >
 
                   <AudioScenesForm data={audioForm} setData={setAudioForm} />
                   </FormContainer>
 
-                <button>Soumettre</button>
+                <button>Envoyer</button>
             </form>
 
 

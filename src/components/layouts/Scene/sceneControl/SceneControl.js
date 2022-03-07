@@ -300,8 +300,10 @@ const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
             <div className={`${styles.panelSection} ${menuSectionState && styles.setVisible}`}>
                 <Panel 
                     title="Conte musical" 
-                    p1="Nous recueillons présentement les extraits musicaux dédiés à bâtir différentes trames sonores pour ce compte. Sous peu, celles-ci accompagneront l'histoire présentée ici-même."
-                    p2="Jetez-y un coup d'œil et laisser-vous inspirer pour prendre part vous aussi à la bande sonore!"
+                    p1={`Clique ci-dessous pour visionner le conte de "Maélie et le dragon". Tu remarqueras qu'il manque un élément essentiel : la trame sonore !"`}
+                    p2="C'est normal, nous recueillons actuellement les fichiers audio envoyés par tous ceux qui veulent contribuer à sonoriser l'histoire.
+                    Participe au projet et, sous peu, tu pourras entendre ta bande sonore ainsi que celle de tes amis qui accompagneront le conte présenté ici-même."
+                    p3="D'ici-là, jette en coup d'œil aux scènes et laisse-toi inspirer !"
                     action={reverseMenuStates}
                     buttonText="Visualiser le conte"
                 />

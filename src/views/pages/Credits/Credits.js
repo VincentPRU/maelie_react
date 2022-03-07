@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 
 import styles from './Credits.module.scss'
 
@@ -8,6 +8,10 @@ import house from '../../../images/illustrations/maison_200.png'
 
 
 const Credits = () => {
+
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
 
 
     return (

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { firestore, storage } from '../../../firebase';
 
@@ -15,6 +15,10 @@ import castle from '../../../images/illustrations/chateau.png'
 
 const ChoraleFormPage = () => {
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const [userForm, setUserForm] = useState({
     occupation: '',
     name: '',
@@ -30,12 +34,14 @@ const ChoraleFormPage = () => {
     country: '',
     contactRef: null,
     audioFiles: {
-      audio1: null
+      audio1: null,
+      audio2: null
     }
   })
 
   const [audioForm, setAudioForm] = useState({
-    audio1: null
+    audio1: null,
+    audio2: null
   })
 
     const onSubmit = async (e) => {
@@ -102,7 +108,7 @@ const ChoraleFormPage = () => {
         * 
         */
 
-       if(!audioFormData.audio1){
+       if(!audioFormData.audio1 && !audioFormData.audio2){
          alert("Vous devez inclure un fichier audio avec ce formulaire");
          return;
        }
@@ -184,8 +190,8 @@ const ChoraleFormPage = () => {
       <section className={`${styles.choraleFormPage}`}>
         <div className={`maxWidthPageContainer`}>
             <header>
-              <h1 className="red">Participer à la chorale de la fin</h1>
-
+              <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer au chant final de la "Chanson de Maélie"</h1>
+              <h4 className="blue">Rappel : Il est important de t'enregistrer en écoutant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes.</h4>
             </header>
             <form onSubmit={onSubmit} className="col-12">
 
@@ -209,14 +215,14 @@ const ChoraleFormPage = () => {
 
                   {/* Section with the input for the choral */}
                   <FormContainer 
-                      title="Intégrer votre enregistrement du chant final"
-                      subTitle="Informations supplémentaire à définir..." 
+                      title="Extraits audio"
+                      subTitle="" 
                   >
                       {/* Import the choral form component. This one must receive the state constant as props */}
                       <ChoralAudioForm data={audioForm} setData={setAudioForm} />
                   </FormContainer>
 
-                  <button>Soumettre</button>
+                  <button>Envoyer</button>
 
             </form>
 

@@ -11,7 +11,9 @@ const ChoralAudioForm = ({ data, setData }) => {
     return(
         <div className={styles.choralAudioForm }>
     
-            <File data={data} setData={setData} name="audio1" isRequired={false}>Votre version du chant de la fin</File>
+            <File data={data} setData={setData} name="audio1" isRequired={false}>Voix 1</File>
+            <File data={data} setData={setData} name="audio2" isRequired={false}>Voix 2</File>
+
 
         </div>
     );

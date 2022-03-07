@@ -28,8 +28,8 @@ const Layout = () => {
                         <Routes>
                             <Route path="/" element={<Home />}/>
                             <Route path="/participer-aux-scenes" element={<SceneForm />}/>
-                            <Route path="/chant-de-la-fin" element={<ChoraleFormPage />}/>
-                            <Route path="/details" element={<Credits />}/>
+                            <Route path="/chant-de-maelie" element={<ChoraleFormPage />}/>
+                            <Route path="/informations" element={<Credits />}/>
                             <Route path="/administration" element={currentUser ? <AdminPage /> : <Navigate to="/" /> } />
                             <Route path="*" element={<Error404/>} />
                         </Routes>

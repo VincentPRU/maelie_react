@@ -3,7 +3,7 @@ import styles from './Panel.module.scss'
 import Button from '../../Button/Button'
 
 
-const Panel = ({title, p1, p2, buttonText, action}) => {
+const Panel = ({title, p1, p2, p3, buttonText, action}) => {
 
 
     return (
@@ -21,6 +21,10 @@ const Panel = ({title, p1, p2, buttonText, action}) => {
 
             {p2 && 
                 <p> { p2 } </p>
+            }
+
+            {p3 && 
+                <p> { p3 } </p>
             }
             <Button onClick={action} reverse={true}>
                 {buttonText}

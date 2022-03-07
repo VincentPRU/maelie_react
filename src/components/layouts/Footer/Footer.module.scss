@@ -16,11 +16,11 @@
 
     /* Correspond to the maxWidthPageContainer */
     > div {
-        display: flex;
 
         > section {
-             display: flex;
-             flex-direction: column;
+             
+
+             h4 { margin-top: 0px;}
 
              ul {
                  display: flex;
@@ -28,8 +28,31 @@
 
                  li {
                     font-weight: normal;
+                    font-size: 1rem;
+                    line-height: 1.4;
+                    transition: 0.3s;
+
                     &:hover{
-                        color: #c8a67e;
+                        color: #ff9898;
+                    }
+                 }
+
+                 
+             }
+
+             &.adminSection {
+                 
+                > * {
+                    text-align: right;
+                    width: 100%;
+                }
+
+                button {
+                    font-weight: normal;
+                    font-size: 1rem;
+                    line-height: 1.4;
+                    &:hover{
+                        color: #ff9898;
                     }
                  }
              }

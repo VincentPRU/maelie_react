@@ -19,27 +19,25 @@ const Footer = () => {
             <div className="maxWidthPageContainer">
 
               
-                <section className="col-4">
+                <section className="col-6">
                   <h4>Menu</h4>
                   <ul>
                       <li><Link to="/">Accueil</Link></li>
                       <li><Link to="/participer-aux-scenes">Participer aux scènes</Link></li>
-                      <li><Link to="/chant-de-la-fin">Participer au chant final</Link></li>
-                      <li><Link to="/credits">Détails du projet</Link></li>
-                      { currentUser ? <li><Link to="/administration">Administration</Link></li> : ""}
+                      <li><Link to="/chant-de-maelie">Participer au "Chant de Maélie"</Link></li>
+                      <li><Link to="/informations">Informations</Link></li>
                   </ul>
 
                 </section>
-                <section className="col-4">
-
-                </section>
-                <section className="col-4">
-
-                  
+                <section className={`${styles.adminSection} col-6`}>
+                  <h4>Administration</h4>
                   <button className="beige" onClick={ currentUser ? logout : login }>
                     {currentUser ? "Déconnexion" : "Se connecter"}
                   </button>
-
+                  <ul>
+                      { currentUser ? <li><Link to="/administration">Administration</Link></li> : ""}
+                  </ul>
+            
                 </section>
               </div>
               
