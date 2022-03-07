@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 
 import { firestore, storage } from '../../../firebase';
 
+import Message from '../../../components/layouts/message/Message'
+
 import FormContainer from '../../../components/forms/container/FormContainer';
 import ContactForm from '../../../components/forms/form/contactForm/ContactForm';
 import ChoralForm from '../../../components/forms/form/ChoralForm/ChoralForm';
@@ -11,9 +13,14 @@ import styles from './ChoraleFormPage.module.scss';
 import Hill from '../../../images/illustrations/colline1.png'
 import castle from '../../../images/illustrations/chateau.png'
 
-
-
 const ChoraleFormPage = () => {
+
+  const [formSent, setFormSent] = useState(false);
+
+  const [message, setMessage] = useState({
+    message: "",
+    positive: false
+  })
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -73,8 +80,10 @@ const ChoraleFormPage = () => {
               submittingStepThree();
 
             } catch(e){
-              console.error(e);
-              alert("Un problème est survenue. Assurez-vous que les données de contact que vous avez fournies sont du bon format.")
+              setMessage({
+                message: "Un problème est survenu. Assurez-vous que les données de contact que vous avez fournies sont du bon format.",
+                positive: false
+              })
               return; //Stop the process
             }
       }
@@ -90,12 +99,20 @@ const ChoraleFormPage = () => {
               //Add the main form data to the firestore collection as a new document
               //Include the new id as a reference
               await firestore.collection("choral").add(mainFormData)
-              console.log(mainFormData);
-              alert("Félicitations. Les informations ont bien été enregistrées");
+              
+              setMessage({
+                message: "Félicitations. Les informations ont bien été enregistrées",
+                positive: true
+              })
+              //Change form state
+              setFormSent(true);
 
 
             } catch(e){
-              console.error(e);
+              setMessage({
+                message: "Un problème est survenu. N'hésitez pas à nous contacter pour nous faire part du problème.",
+                positive: false
+              })
               return; //Stop the process
             }
       }
@@ -109,7 +126,11 @@ const ChoraleFormPage = () => {
         */
 
        if(!audioFormData.audio1 && !audioFormData.audio2){
-         alert("Vous devez inclure un fichier audio avec ce formulaire");
+          setMessage({
+            message: "Vous devez inclure un fichier audio avec ce formulaire",
+            positive: false
+          })
+      
          return;
        }
 
@@ -127,7 +148,10 @@ const ChoraleFormPage = () => {
           })
 
         } catch(e){
-          console.error(e);
+          setMessage({
+            message: "Tous les champs de la section contact doivent être complétés",
+            positive: false
+          })
           return; //Stop the process
         }
 
@@ -166,9 +190,7 @@ const ChoraleFormPage = () => {
                     ...mainFormData.audioFiles, 
                       [key]: fileUrl
                   }
-
                 }
-
               })
             )
               
@@ -176,8 +198,11 @@ const ChoraleFormPage = () => {
             submittingStepTwo();
 
           } catch(e){
-            console.error(e);
-            alert("Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds et soient de format audio.")
+            setMessage({
+              message: "Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds et soient de format audio.",
+              positive: false
+            })
+
             return; //Stop the process
           }
 
@@ -193,8 +218,17 @@ const ChoraleFormPage = () => {
               <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer au chant final de la "Chanson de Maélie"</h1>
               <h4 className="blue">Rappel : Il est important de t'enregistrer en écoutant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes.</h4>
             </header>
-            <form onSubmit={onSubmit} className="col-12">
+            { message.message && 
+                <Message>{ message.message }</Message>
+            }
 
+            { message.message && message.positive &&
+                <Message positiveReview>{ message.message }</Message>
+            }
+
+            <form onSubmit={onSubmit} className="col-12">
+                { !formSent &&
+                <>
                   {/* Section with all the personnal informations */}
                   <FormContainer 
                       title="Personne contact"
@@ -223,10 +257,24 @@ const ChoraleFormPage = () => {
                   </FormContainer>
 
                   <button>Envoyer</button>
+                  </>
+
+                }
+
+                { formSent &&
+
+                  <FormContainer 
+                      title="Félicitations !"
+                      subTitle='Ton formulaire a bien été envoyé. Merci pour ta participation à la "Chanson de Maélie" !' 
+                  >
+                      
+                  </FormContainer>
+
+                }
 
             </form>
-
           
+      
 
         </div>
         <div className={styles.formPageBackground}>

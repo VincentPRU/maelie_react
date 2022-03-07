@@ -23,7 +23,7 @@ import Button from '../../../components/Button/Button'
 
 //Illustrations import to save space below
 
-import hill2 from '../../../images/illustrations/colline2.png'
+import hill2 from '../../../images/illustrations/lightBigHill.png'
 import maelie from '../../../images/illustrations/Maelie.png'
 import house200px from '../../../images/illustrations/maison_200.png'
 import notes from '../../../images/illustrations/notes.png'
@@ -208,7 +208,7 @@ const Home = () => {
                                                     chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
                                                     karaokés d’apprentissage sont proposés sur la plateforme éducative."
                                                     buttonText="Participer"
-                                                    buttonAction="/chant-de-la-fin"
+                                                    buttonAction="/chant-de-maelie"
                                                 />
                                                 
                                          </section>

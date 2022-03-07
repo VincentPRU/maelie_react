@@ -8,11 +8,19 @@ import AudioScenesForm from '../../../components/forms/form/ScencesForm/AudioSce
 
 import styles from './SceneForm.module.scss'
 
+import Message from '../../../components/layouts/message/Message'
 
 import Hill from '../../../images/illustrations/colline1.png'
 import tree from '../../../images/illustrations/arbre.png'
 
 const SceneForm = () => {
+
+    const [formSent, setFormSent] = useState(false);
+
+    const [message, setMessage] = useState({
+      message: "",
+      positive: false
+    })
 
     useEffect(() => {
       window.scrollTo(0, 0)
@@ -81,8 +89,12 @@ const SceneForm = () => {
                 submittingStepThree();
 
               } catch(e){
-                console.error(e);
-                alert("Un problème est survenue. Assurez-vous que les données de contact que vous avez fournies sont du bon format.")
+
+                setMessage({
+                  message: "Un problème est survenu. Assurez-vous que les données de contact que vous avez fournies sont du bon format.",
+                  positive: false
+                })
+      
                 return; //Stop the process
               }
 
@@ -99,12 +111,21 @@ const SceneForm = () => {
               //Add the main form data to the firestore collection as a new document
               //Include the new id as a reference
               await firestore.collection("credit").add(mainFormData)
-              console.log(mainFormData);
-              alert("Félicitations. Les informations ont bien été enregistrées");
+
+              setMessage({
+                message: "Félicitations. Les informations ont bien été enregistrées",
+                positive: true
+              })
+
+              //Change form state
+              setFormSent(true);
 
 
             } catch(e){
-              console.error(e);
+              setMessage({
+                message: "Un problème est survenu. N'hésitez pas à nous contacter pour nous faire part du problème.",
+                positive: false
+              })
               return; //Stop the process
             }
 
@@ -129,8 +150,11 @@ const SceneForm = () => {
             if(!audioFileIncluded){ throw new Error(`Il doit y avoir au moins un fichier audio intégré au formulaire.`); }
   
           } catch (e){
-              alert("Au moins un fichier audio est nécessaire.");
-              console.error(e);
+
+              setMessage({
+                message: "Au moins un fichier audio est requis pour soumettre le formulaire",
+                positive: false
+              })
               return  //Stop the process
           }
        
@@ -148,7 +172,10 @@ const SceneForm = () => {
           })
 
         } catch(e){
-          console.error(e);
+          setMessage({
+            message: "Tous les champs de la section contact doivent être complétés",
+            positive: false
+          })
           return; //Stop the process
         }
 
@@ -197,8 +224,10 @@ const SceneForm = () => {
           submittingStepTwo();
 
         } catch(e){
-          console.error(e);
-          alert("Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds et soient de format audio.")
+          setMessage({
+            message: "Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds et soient de format audio.",
+            positive: false
+          })
           return; //Stop the process
         }
 
@@ -217,6 +246,15 @@ const SceneForm = () => {
               <h4 className="blue">Rappel : Les enregistrements doivent durer entre 5 et 90 secondes chacun.</h4>
 
             </header>
+
+            { message.message && 
+                <Message>{ message.message }</Message>
+            }
+
+            { message.message && message.positive &&
+                <Message positiveReview>{ message.message }</Message>
+            }
+            { !formSent &&
             <form onSubmit={onSubmit} className="col-12">
 
                 {/* Section with all the personnal informations */}
@@ -249,8 +287,17 @@ const SceneForm = () => {
 
                 <button>Envoyer</button>
             </form>
+            }
+            { formSent &&
+            <div className={styles.confirmationMessage}>
+                <FormContainer 
+                        title="Félicitations !"
+                        subTitle={`Ton formulaire a bien été soumis. Merci d'avoir participé à la bande sonore de "Maélie et le dragon".`}
+                    >
 
-
+                  </FormContainer>
+            </div>
+            } 
             </div>
 
             <div className={styles.formPageBackground}>

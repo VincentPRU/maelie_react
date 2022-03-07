@@ -6,7 +6,7 @@ import OverflowImagesContainer from '../OverflowImagesContainer/OverflowImagesCo
 import SceneControl from './sceneControl/SceneControl'
 
 //Illustrations png 
-import hill1 from '../../../images/illustrations/colline1.png'
+import hill1 from '../../../images/illustrations/lightSmallHill.png'
 
 
 //Illustrations components

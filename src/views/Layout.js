@@ -1,18 +1,19 @@
-import React from 'react';
+import React, {Suspense, lazy} from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 
-
-import SceneForm from './pages/SceneForm/SceneForm';
-import ChoraleFormPage from './pages/ChoraleForm/ChoraleFormPage';
-import Credits from './pages/Credits/Credits';
-import Home from './pages/Home/Home';
-import AdminPage from './pages/AdminPage';
-import Error404 from './pages/Errror/404/Error404';
-
 /* Layouts */
 import Footer from '../components/layouts/Footer/Footer';
+
+const SceneForm = lazy(() => import('./pages/SceneForm/SceneForm'));
+const Credits = lazy(() => import('./pages/Credits/Credits'));
+const ChoraleFormPage = lazy(() => import('./pages/ChoraleForm/ChoraleFormPage'));
+const Home = lazy(() => import('./pages/Home/Home'));
+const Error404 = lazy(() => import('./pages/Errror/404/Error404'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
+
+
 
 
 const Layout = () => {
@@ -25,6 +26,7 @@ const Layout = () => {
         <>
             <Router>
                 <main> 
+                    <Suspense fallback={<h2>Loading...</h2>}>
                         <Routes>
                             <Route path="/" element={<Home />}/>
                             <Route path="/participer-aux-scenes" element={<SceneForm />}/>
@@ -33,6 +35,7 @@ const Layout = () => {
                             <Route path="/administration" element={currentUser ? <AdminPage /> : <Navigate to="/" /> } />
                             <Route path="*" element={<Error404/>} />
                         </Routes>
+                    </Suspense>
                 </main>
                 <Footer />
             </Router>

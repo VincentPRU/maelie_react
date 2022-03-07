@@ -8,6 +8,30 @@
   width: 100%;
   float: left;
 
+  .confirmationMessage{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      background-color: rgb(235, 235, 235);
+      margin: 5vh 0px;
+      border-radius: 1rem;
+      max-width: 95%;
+      width: 40rem;
+      width: min(40rem, 95%);
+
+      h3 { 
+        font-weight: bold;
+        color: rgb(var(--blue));
+      }
+
+      > * {
+        width: 100%;
+
+      }
+
+    }
+
   > div {
 
     display: flex;
