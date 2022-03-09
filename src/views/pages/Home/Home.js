@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import ReactGA from 'react-ga'
 
 
 //page styling
@@ -25,24 +26,20 @@ import Button from '../../../components/Button/Button'
 
 import hill2 from '../../../images/illustrations/lightBigHill.png'
 import maelie from '../../../images/illustrations/Maelie.png'
-import house200px from '../../../images/illustrations/maison_200.png'
 import notes from '../../../images/illustrations/notes.png'
 
 //import context for the scroll event
 import { ScrollEventProvider } from '../../../contexts/ScrollEvent'
 
-const scrollToElement = element => {
-    console.log("called")
-    window.scrollTo(
-        {top: parseInt(element.current.getBoundingClientRect().top),
-         left: 0,
-         behavior: 'smooth'
-        })
-}
+
 
 const Home = () => {
 
     const sceneSection = useRef({});
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname);
+    }, [])
 
 
     return (
@@ -76,7 +73,7 @@ const Home = () => {
 
                             {/* Right section */}
                             <House fileSize={200} top="0.3" left="25%" height="14vh" minHeight="4"/>
-                            <Tree top="0.315" left="16%" height="13vh" minHeight="5" blurBackground/>
+                            <Tree top="0.315" left="16%" height="13vh" minHeight="5" background/>
                             <House fileSize={200} top="0.299" left="20%" height="11vh" minHeight="4" background/>
                             <Tree top="0.293" left="31%" height="16vh" minHeight="5"  reverse/>
                             <Tree top="0.37" left="12%" height="17vh" minHeight="5" reverse/>
@@ -105,10 +102,10 @@ const Home = () => {
                                             <path d="M61.81,3.49H51v0h0L44.35,22.14,35.54,3.49H27.08l2.16,4.62v17.5c-1.39,3-2,4.28-3.71,7.41h4.86V10.59L41.05,33.4h.51L42.77,30h0L51.11,6.62V33h8.54V8.09c1-2.09,1.27-2.73,2.16-4.6" transform="translate(-1.93 -3.02)" />
                                         </svg>
                                     </div>
-                                    <Button color="blue" scrollTo={sceneSection}>Visualiser le conte</Button>
+                                    <Button color="blue" reverse scrollTo={sceneSection}>Visualiser le conte</Button>
                                 </div>
                                 <div className={`${styles.titleContainer}`}>
-                                    <h1 className={`red col-12 fade-Intro fade-Intro--In-Up  fade-Intro--delay-250`}>Maelie et le dragon</h1>
+                                    <h1 className={`red col-12 fade-Intro fade-Intro--In-Up  fade-Intro--delay-250`}>Maélie et le dragon</h1>
                                     <h3 className={`blue col-12 fade-Intro fade-Intro--In-Up  fade-Intro--delay-500`}>Un conte musical collaboratif</h3>
                                 </div>
                             </header>
@@ -121,8 +118,9 @@ const Home = () => {
                                         img={maelie}
                                         alt="Illustration de Maelie, personnage principal du conte."
                                         header2="L'origine du conte"
-                                        paragraph="Il était une fois une jeune fille de 9 ans, Marianne Gagnon, qui décida d’écrire le conte de
-                                        « Maélie et le dragon » suite à l’appel de textes de la SMCQ en 2021. Le compositeur Denis
+                                        paragraph="Il était une fois une jeune fille de 9 ans, Marianne Gagnon, de l'École Massé de 
+                                        la Commission scolaires des Draveurs. Un jour, Marianne décida d’écrire le conte de « Maélie et 
+                                        le dragon » suite à l’appel de textes de la SMCQ et de la CSD. Le compositeur Denis
                                         Gougeon fut profondément touché en lisant ce récit où la musique devient l’arme pacifique
                                         d’une jeune fille courageuse devant un dragon menaçant. Inspiré, il composa « La chanson de
                                         Maélie », une douce mélodie pour chœur à deux voix. Et le projet fit boule de neige. La SMCQ a
@@ -158,7 +156,7 @@ const Home = () => {
                                             imgRightOverflow = {30}
                                             alt="Illustration de notes de musique"
                                             header2="Tu veux participer à la bande sonore ?"
-                                            paragraph="Deux choix s&#39;offrent à toi :"
+                                            paragraph="Invente la trame sonore d'une scène de l'histoire et/ou participe au chant final."
                                         />
                                         <div></div>
                                     </section>
@@ -175,7 +173,7 @@ const Home = () => {
                                     {/* Top of the hill (third one) */}
                                     <House fileSize={200} top="0.017" left="79%" height="13vh" minHeight="5"/>
                                     <House fileSize={200} top="0.04" left="73%" height="15vh" minHeight="5"/>
-                                    <Tree top="0.06" left="67%" height="15vh" minHeight="4" reverse blurBackground/>
+                                    <Tree top="0.06" left="67%" height="15vh" minHeight="4" reverse background/>
                                     <Tree top="0.037" left="82.5%" height="14vh" minHeight="5" reverse />
                                     <Tree top="0.075" left="88.5%" height="17vh" minHeight="5" />
 

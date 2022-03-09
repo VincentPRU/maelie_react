@@ -259,16 +259,29 @@ button {
 
   &.button--reverse {
     border-width: 3px;
-    background-color: rgb(var(--beige));
+    background-color: rgba(var(--beige), 0);
     color: rgb(var(--buttonColor));
 
+    &.button--white {
+      color: rgb(var(--buttonColor));
+    }
+
     &:hover {
-      background-color: rgb(221, 221, 221);
+      background-color: rgba(var(--buttonColor), 1);
+      color: white;
+
+      &.button--white {
+        color: rgb(var(--blue))
+      }
     }
   }
 
   &.button--pink{ --buttonColor: var(--pink);}
   &.button--blue{ --buttonColor: var(--blue);}
+  &.button--white{ 
+    --buttonColor: var(--beige);
+    color: rgb(var(--red));
+  }
 
   &:hover{
     background-color: rgba(var(--buttonColor), 1);
@@ -285,7 +298,19 @@ button {
 }
 
 
+/*
+    Text highlight
+*/
 
+::-moz-selection { /* Code for Firefox */
+  color: rgb(var(--beige));
+  background: rgb(var(--pink));
+}
+
+::selection {
+  color: rgb(var(--beige));
+  background: rgb(var(--pink));
+}
 
 
 /*

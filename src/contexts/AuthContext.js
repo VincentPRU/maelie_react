@@ -22,7 +22,7 @@ export function AuthProvider( {children} ){
         //When login is called, we launch the mecanism of sign in with google
         signInWithPopup(auth, provider).then((result) => {
 
-            //Only once the user is authenticate, we can then verify he has the right email domain.
+            //Only4 once the user is authenticate, we can then verify he has the right email domain.
             if(result.user.email.split("@")[1] !== "smcq.qc.ca"){
                 //If he doesn't, then we log him out 
                 logout();
@@ -36,11 +36,10 @@ export function AuthProvider( {children} ){
     }
 
     function logout(){
-
         try {
             return auth.signOut()
         } catch(error){
-
+            //Message to create
         }
     }
 

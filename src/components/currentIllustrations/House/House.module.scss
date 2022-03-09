@@ -23,13 +23,13 @@
 
     &.background {
         z-index: -1;
-        -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) blur(0.05rem) saturate(0.7);
-        filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) blur(0.05rem) saturate(0.7);
+        -webkit-filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) saturate(0.7);
+        filter: drop-shadow(0.3rem -0.3rem 0.1rem #383838d0) saturate(0.7);
 
         &.reverse {
             --orientation: -1;
-            -webkit-filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) blur(0.05rem) saturate(0.7);
-            filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) blur(0.05rem) saturate(0.7);
+            -webkit-filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) saturate(0.7);
+            filter: drop-shadow(-0.3rem -0.3rem 0.1rem #383838d0) saturate(0.7);
         }
     }
 

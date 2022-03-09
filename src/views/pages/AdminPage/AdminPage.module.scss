@@ -1,0 +1,25 @@
+/*
+
+        Administration page styling
+
+*/
+
+.adminPage {
+
+    > header {
+        margin: 15vh 0px;
+
+        h1, h3 {
+            font-weight: bold;
+            margin: 0.5rem 0px;
+        }
+    }
+
+    
+
+    .pageContent {
+        border-radius: 2rem;
+        background-color: rgb(214, 214, 214);
+        min-height: 15vh;
+    }
+}

@@ -26,7 +26,7 @@ const Panel = ({title, p1, p2, p3, buttonText, action}) => {
             {p3 && 
                 <p> { p3 } </p>
             }
-            <Button onClick={action} reverse={true}>
+            <Button onClick={action}  color="white">
                 {buttonText}
             </Button>
         </div>

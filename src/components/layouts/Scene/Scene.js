@@ -35,7 +35,7 @@ const Scene = ({sceneSection}) => {
                 <Floor top="54vh" left="118vh" height="8vh" minHeight="4" viewportHeightRelative />
                 <Floor top="96vh" left="100vh" height="33vh" minHeight="4"viewportHeightRelative  />
 
-                <Tree top="-10vh" left="28vh" height="10vh" minHeight="4" viewportHeightRelative reverse blurBackground />
+                <Tree top="-10vh" left="28vh" height="10vh" minHeight="4" viewportHeightRelative reverse background />
                 <Hill img={ hill1 } left="68vh" height="50vh" top="-14vh" />
                 <Tree top="-6vh" left="21vh" height="13vh" minHeight="5" viewportHeightRelative reverse />
                 <House fileSize={200} top="-11vh" left="35vh" height="9vh" minHeight="5" viewportHeightRelative reverse/>

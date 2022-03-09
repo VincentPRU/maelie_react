@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import firebase from 'firebase/compat/app';
 
 import { firestore, storage } from '../../../firebase';
 
 import Message from '../../../components/layouts/message/Message'
+
+import Button from '../../../components/Button/Button'
 
 import FormContainer from '../../../components/forms/container/FormContainer';
 import ContactForm from '../../../components/forms/form/contactForm/ContactForm';
@@ -40,6 +43,8 @@ const ChoraleFormPage = () => {
     city: '',
     country: '',
     contactRef: null,
+    quality: true,
+    createdAt: firebase.firestore.Timestamp.now(),
     audioFiles: {
       audio1: null,
       audio2: null
@@ -216,7 +221,7 @@ const ChoraleFormPage = () => {
         <div className={`maxWidthPageContainer`}>
             <header>
               <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer au chant final de la "Chanson de Maélie"</h1>
-              <h4 className="blue">Rappel : Il est important de t'enregistrer en écoutant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes.</h4>
+              <h4 className="blue">Il est important de t'enregistrer en suivant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> avec un écouteur dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes grâce à la piste audio de référence. Attention ! Assure-toi qu'on entende seulement ta voix dans l'enregistrement, et pas le karaoké.</h4>
             </header>
             { message.message && 
                 <Message>{ message.message }</Message>
@@ -256,7 +261,7 @@ const ChoraleFormPage = () => {
                       <ChoralAudioForm data={audioForm} setData={setAudioForm} />
                   </FormContainer>
 
-                  <button>Envoyer</button>
+                  <Button>Envoyer</Button>
                   </>
 
                 }

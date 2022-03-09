@@ -45,6 +45,11 @@
 
         button, a {
             margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        p {
+            font-size: 1.2rem;
         }
       
     }
@@ -54,40 +59,7 @@
         padding: 2rem;
 
         
-        > figure {
-            position: absolute;
-            margin: 0px;
-            top: -0.5rem;
-            bottom: -1rem;
-            right: -1rem;
-            left: 0px;
-
-            > img {
-
-                --xOverflow: 0;
-
-                float: right;
-                height: 100%;
-
-                -webkit-transform: translateX(var(--xOverflow)); /* Safari & Chrome */
-                -moz-transform: translateX(var(--xOverflow)); /* Firefox */
-                -ms-transform: translateX(var(--xOverflow)); /* Internet Explorer */
-                -o-transform: translateX(var(--xOverflow)); /* Opera */
-                transform: translateX(var(--xOverflow));
-
-                
-                /*  
-                    Differentes classes for overflowing the img
-                    Meant to save space in the js file
-                */
-
-                &.xOverFlow_10 { --xOverflow: 10%; }
-                &.xOverFlow_20 { --xOverflow: 20%; }
-                &.xOverFlow_30 { --xOverflow: 30%; }
-                &.xOverFlow_40 { --xOverflow: 40%; }
-                &.xOverFlow_50 { --xOverflow: 50%; }
-            }
-        }
+   
     }
 
 

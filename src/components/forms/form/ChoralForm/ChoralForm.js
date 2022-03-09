@@ -20,7 +20,7 @@ const ChoralForm = ({ data, setData }) => {
     return(
         <div className={styles.choralForm}>
     
-            <Textarea data={data} setData={setData} name="choristNames" prefilled="" isRequired={true}>Nom du / de la / des choriste.s</Textarea>
+            <Textarea data={data} setData={setData} name="choristNames" prefilled="" isRequired={true}>Nom du / de la / des choriste.s ou du groupe</Textarea>
             <Input data={data} setData={setData} name="school" prefilled="" fetchingInfos="schools" isRequired={false}>École</Input>
             <Select data={data} setData={setData} name="age" prefilled="" isRequired={false} emptyOption={true} otherOption={false} text="Âge :">
                 {ageSelectOptions}

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 
 import styles from './SceneControl.module.scss'
 
-
+import Tooltip from '../../Tooltip/Tooltip'
 import Panel from '../../Panel/Panel'
 
 const convertToTime = ( secs ) => {
@@ -234,7 +234,7 @@ const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
         <section className={styles.sceneControlComponent} ref={ controlSection }>
 
             { constrolSectionState &&
-          
+           
             <div className={`${styles.controlsSection}`} >
 
                 <div className={`${styles.topMenuContainer} ${constrolSectionState && styles.setVisible}`}>
@@ -242,13 +242,24 @@ const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
                     <div>
                         <div className={`${styles.loadingBar}`}>
                             <div ref={loadingBarRef} className={`${styles.blackBar}`}></div>
-                            <div onClick={() => { timeJump(0) }} style={{left: "0%"}} className={`${styles.marking}`}>1</div>
-                            <div onClick={() => { timeJump(0.11) }} style={{left: "10%"}}  className={`${styles.marking}`}>2</div>
-                            <div onClick={() => { timeJump(0.26) }} style={{left: "24%"}}  className={`${styles.marking}`}>3</div>
-                            <div onClick={() => { timeJump(0.48) }} style={{left: "46%"}}  className={`${styles.marking}`}>4</div>
-                            <div onClick={() => { timeJump(0.64) }} style={{left: "63%"}}  className={`${styles.marking}`}>5</div>
-                            <div onClick={() => { timeJump(0.84) }} style={{left: "82%"}}   className={`${styles.marking}`}>6</div>
-
+                            <div onClick={() => { timeJump(0) }} style={{left: "0%"}} className={`${styles.marking}`}>1
+                                <Tooltip color="pink">Scène 1</Tooltip>
+                            </div>
+                            <div onClick={() => { timeJump(0.11) }} style={{left: "10%"}} className={`${styles.marking}`}>2
+                                <Tooltip color="pink">Scène 2</Tooltip>
+                            </div>
+                            <div onClick={() => { timeJump(0.26) }} style={{left: "24%"}} className={`${styles.marking}`}>3
+                                <Tooltip color="pink">Scène 3</Tooltip>
+                            </div>
+                            <div onClick={() => { timeJump(0.48) }} style={{left: "46%"}} className={`${styles.marking}`}>4
+                                <Tooltip color="pink">Scène 4</Tooltip>
+                            </div>
+                            <div onClick={() => { timeJump(0.64) }} style={{left: "63%"}} className={`${styles.marking}`}>5
+                                <Tooltip color="pink">Scène 5</Tooltip>
+                            </div>
+                            <div onClick={() => { timeJump(0.84) }} style={{left: "82%"}} className={`${styles.marking}`}>6
+                                <Tooltip color="pink">Scène 6</Tooltip>
+                            </div>
 
                         </div>
                     </div>
@@ -300,12 +311,11 @@ const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
             <div className={`${styles.panelSection} ${menuSectionState && styles.setVisible}`}>
                 <Panel 
                     title="Conte musical" 
-                    p1={`Clique ci-dessous pour visionner le conte de "Maélie et le dragon". Tu remarqueras qu'il manque un élément essentiel : la trame sonore !"`}
-                    p2="C'est normal, nous recueillons actuellement les fichiers audio envoyés par tous ceux qui veulent contribuer à sonoriser l'histoire.
-                    Participe au projet et, sous peu, tu pourras entendre ta bande sonore ainsi que celle de tes amis qui accompagneront le conte présenté ici-même."
-                    p3="D'ici-là, jette en coup d'œil aux scènes et laisse-toi inspirer !"
+                    p1={`Clique ci-dessous pour visionner le conte de "Maélie et le dragon". Tu remarqueras qu'il manque un élément essentiel : la trame sonore !`}
+                    p2="C'est normal, nous recueillons actuellement les fichiers audio envoyés par tous ceux qui veulent contribuer au projet. Sous peu, il sera possible d'entendre les différentes bandes sonores avec le conte illustré présenté ici-même."
+                    p3="D'ici-là, jette en coup d'œil aux scènes et laisse-toi inspirer pour inventer ta propre bande sonore !"
                     action={reverseMenuStates}
-                    buttonText="Visualiser le conte"
+                    buttonText="Visualiser le conte sans musique"
                 />
             </div>
             }

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import firebase from 'firebase/compat/app';
 
 import { firestore, storage } from '../../../firebase';
 import FormContainer from '../../../components/forms/container/FormContainer';
 import ContactForm from '../../../components/forms/form/contactForm/ContactForm';
 import CreditForm from '../../../components/forms/form/creditForm/CreditForm';
 import AudioScenesForm from '../../../components/forms/form/ScencesForm/AudioScenesForm';
+
+import Button from '../../../components/Button/Button'
 
 import styles from './SceneForm.module.scss'
 
@@ -41,6 +44,8 @@ const SceneForm = () => {
       city: '',
       country: '',
       contactRef: null,
+      quality: true,
+      createdAt: firebase.firestore.Timestamp.now(),
       audioFiles: {
         audio1: null,
         audio2: null,
@@ -224,10 +229,10 @@ const SceneForm = () => {
           submittingStepTwo();
 
         } catch(e){
-          setMessage({
-            message: "Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds et soient de format audio.",
-            positive: false
-          })
+            setMessage({
+              message: "Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds (max. 5 Mo) et soient de format audio.",
+              positive: false
+            })
           return; //Stop the process
         }
 
@@ -285,7 +290,7 @@ const SceneForm = () => {
                   <AudioScenesForm data={audioForm} setData={setAudioForm} />
                   </FormContainer>
 
-                <button>Envoyer</button>
+                <Button>Envoyer</Button>
             </form>
             }
             { formSent &&

@@ -47,9 +47,6 @@
             > div:first-of-type {
 
                 width: 100%;
-           
-
-
                 
                 .loadingBar {
                     position: relative;
@@ -80,9 +77,9 @@
                         font-size: 2.1rem;
                         font-weight: bold;
                         bottom: -0.5rem;
-                        color: rgb(var(--beige));
-                        opacity: 1;
+                        color: rgb(230, 230, 230);
                         cursor: pointer;
+
                         -webkit-transition: 0.2s; /* Safari & Chrome */
                         -moz-transition: 0.2s; /* Firefox */
                         -ms-transition: 0.2s;  /* Internet Explorer */
@@ -94,15 +91,14 @@
 
                         &.played { opacity: 1;}
                         &:hover {
-                            -webkit-transform: scale(1.1); /* Safari & Chrome */
-                            -moz-transform: scale(1.1);/* Firefox */
-                            -ms-transform: scale(1.1); /* Internet Explorer */
-                            -o-transform: scale(1.1); 
-                            transform: scale(1.1); /* W3C */
 
+                            color: rgb(var(--beige));
+
+                            > div {
+                                opacity: 1;
+                            }
                         }
                     }
-    
                 }
     
                 .menuFunction {
