@@ -145,7 +145,7 @@ const scrollToElement = element => {
         })
 }
 
-const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
+const SceneControl = ({setAnimation, currentAnimation}) => {
 
     const [animationPlaying, setAnimationPlaying] = useState(false);
     const [menuSectionState, setMenuSectionState] = useState(true);
@@ -159,8 +159,7 @@ const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
     const totalTime = 80;
     const timeRef = useRef();
 
-    const currentTime = useRef(0);
-    
+    const currentTime = useRef(0);    
 
     useEffect(() => {
         if(animationPlaying){
@@ -303,7 +302,7 @@ const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
                 </div>
                 <div></div>
                 <div className={styles.bottomMenuContainer}>
-                    <p>{ currentText}</p>
+                    <p>{currentText}</p>
                 </div>
             </div>
             }
@@ -313,7 +312,7 @@ const SceneControl = ({setAnimation, currentAnimation, sceneSection}) => {
                     title="Conte musical" 
                     p1={`Clique ci-dessous pour visionner le conte de "Maélie et le dragon". Tu remarqueras qu'il manque un élément essentiel : la trame sonore !`}
                     p2="C'est normal, nous recueillons actuellement les fichiers audio envoyés par tous ceux qui veulent contribuer au projet. Sous peu, il sera possible d'entendre les différentes bandes sonores avec le conte illustré présenté ici-même."
-                    p3="D'ici-là, jette en coup d'œil aux scènes et laisse-toi inspirer pour inventer ta propre bande sonore !"
+                    p3="D'ici-là, jette un coup d'œil aux scènes et laisse-toi inspirer pour inventer ta propre bande sonore !"
                     action={reverseMenuStates}
                     buttonText="Visualiser le conte sans musique"
                 />

@@ -23,8 +23,6 @@ const Scene = ({sceneSection}) => {
 
     const [currentAnimation, setCurrentAnimation] = useState(0);
 
-    console.log(currentAnimation)
-    
     return (
         <div className={styles.sceneComponent}>
             {/* Visual */}
@@ -57,8 +55,6 @@ const Scene = ({sceneSection}) => {
           
             <SceneAnimations scene={currentAnimation}/>
             <SceneControl  sceneSection={sceneSection} currentAnimation={currentAnimation} setAnimation={setCurrentAnimation} />
-
-            
 
         </div>
     );

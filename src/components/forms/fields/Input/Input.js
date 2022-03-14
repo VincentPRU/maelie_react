@@ -114,8 +114,9 @@ const Input = ({data, setData, name, isRequired, prefilled, fetchingInfos, child
             {isRequired && <div className="asterisk">&#x2724;</div>}
             { children }
             </div>
-            <br/>
 
+            { children && <br/> }
+            
             <input
                 type="text"
                 name={name}

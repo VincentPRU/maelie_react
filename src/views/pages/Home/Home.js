@@ -119,7 +119,7 @@ const Home = () => {
                                         alt="Illustration de Maelie, personnage principal du conte."
                                         header2="L'origine du conte"
                                         paragraph="Il était une fois une jeune fille de 9 ans, Marianne Gagnon, de l'École Massé de 
-                                        la Commission scolaires des Draveurs. Un jour, Marianne décida d’écrire le conte de « Maélie et 
+                                        la Commission scolaire des Draveurs. Un jour, Marianne décida d’écrire le conte de « Maélie et 
                                         le dragon » suite à l’appel de textes de la SMCQ et de la CSD. Le compositeur Denis
                                         Gougeon fut profondément touché en lisant ce récit où la musique devient l’arme pacifique
                                         d’une jeune fille courageuse devant un dragon menaçant. Inspiré, il composa « La chanson de
@@ -202,7 +202,7 @@ const Home = () => {
                                                     top={10}
                                                     bottom={0}
                                                     header3='2. Chanter "Le Chant de Maélie"'
-                                                    paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprend cette
+                                                    paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprends cette
                                                     chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
                                                     karaokés d’apprentissage sont proposés sur la plateforme éducative."
                                                     buttonText="Participer"

@@ -27,8 +27,6 @@ const Button = props => {
     }
 
     if (props.scrollTo) {
-
-
         return (
             <button
                 className={`button ${props.reverse && 'button--reverse'} ${buttonColor}`}

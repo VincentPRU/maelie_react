@@ -25,18 +25,19 @@
         height: 100%;
 
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
         grid-template-rows: 20vh auto 10vh;
         align-items: center;
 
         .topMenuContainer {
+            position: relative;
             width: 100%;
             max-width: min(95%, 75rem);
             margin: auto;
             
 
-            display: grid;
-            grid-template-rows: 1fr 1fr;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             z-index: 2;
 
@@ -47,6 +48,7 @@
             > div:first-of-type {
 
                 width: 100%;
+                padding-top: 5vh;
                 
                 .loadingBar {
                     position: relative;
@@ -112,11 +114,13 @@
             /*  Second layer of the top menu  */
             > div:last-of-type {
 
+                width: 100%;
                 display: grid;
                 grid-template-columns: auto auto auto;
-                grid-template-rows: 1fr;
+                grid-template-rows: 100%;
                 align-items: start;
-                justify-content: stretch;
+                justify-content:space-between;
+                margin-top: 0.5rem;
 
                 .timeRef {
                     text-shadow: 2px 2px 4px #000000;
@@ -133,6 +137,9 @@
                     display: flex;
                     justify-content: center;
                     flex-wrap: wrap;
+                    margin: 0rem 0.5rem;
+                    margin-bottom: 1rem;
+
 
                     button {
                         --buttonSize: 4rem;
@@ -165,8 +172,8 @@
                             align-items: center;
 
                             svg {
+                                width: 100%;
                                 max-height: 100%;
-                                max-width: 100%;
                                 stroke: rgb(var(--pink));
                             }
 
@@ -200,25 +207,25 @@
             color: rgb(var(--beige));
             z-index: 5;
 
-            width: 100%;
+            width: 95%;
             max-width: min(95%, 75rem);
-            margin: auto;
+            margin: 0px auto;
+
             
             position: relative;
             font-size: 2.5rem;
-            display: grid;
-            grid-template-rows: 1fr;
-            align-items: end;          
-            z-index: 2;
+         
 
             p {
-                text-shadow: 2px 2px 3px #000000;
-                text-align: center;
-                margin: 0px;
                 position: absolute;
+                margin: 0px;
+                text-align: center;
                 bottom: 0px;
                 left: 0px;
                 width: 100%;
+
+                text-shadow: 2px 2px 3px #000000;
+          
                 font-size: clamp(2rem, 3rem, 4vw);
                 line-height: 1;
             }

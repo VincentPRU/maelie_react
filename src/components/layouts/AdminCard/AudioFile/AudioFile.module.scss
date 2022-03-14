@@ -1,0 +1,25 @@
+/*
+
+        Audio file component
+
+*/
+
+.audio-file {
+
+    width: auto;
+    float: left;
+    padding: 1rem;
+
+    h5 {
+        margin: 0px;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+
+    audio {
+        width: 100%;
+    }
+    
+
+}

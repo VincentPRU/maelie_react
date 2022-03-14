@@ -7,11 +7,13 @@ import tree from '../../../images/illustrations/arbre.png'
 import house from '../../../images/illustrations/maison_200.png'
 
 
+
 const Credits = () => {
 
     useEffect(() => {
       window.scrollTo(0, 0)
     }, [])
+
 
 
     return (

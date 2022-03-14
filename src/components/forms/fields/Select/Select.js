@@ -5,7 +5,7 @@ import styles from './Select.module.scss';
 
 
 
-const Select = ({data, setData, name, isRequired, prefilled, text, emptyOption, otherOption, children}) => {
+const Select = ({data, setData, name, isRequired, prefilled, text, emptyOption, otherOption, children, horizontalAlignment}) => {
 
     //Piece of state dedicated to display or not the input if the user wants to enter a personalised option
     const [ inputState, setInputState] = useState(false);
@@ -48,7 +48,8 @@ const Select = ({data, setData, name, isRequired, prefilled, text, emptyOption, 
             { text }
             </div>
 
-            <br/>
+            { !horizontalAlignment && <br/> }
+
             <select
                 type="text"
                 name={name}

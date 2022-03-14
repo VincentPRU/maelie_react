@@ -55,6 +55,8 @@
   --pink: 234, 140, 114;
   --blue: 85, 91, 120;
   --beige: 255, 254, 246;
+  --yellow: 191, 161, 87;
+  --green: 91, 110, 91;
 
   /* Dark color for the text and background-colors */
   --dark: 33, 33, 33;
@@ -154,6 +156,14 @@ h6 { font-size: 0.8rem; }
 .beige { color: rgb(var(--beige)); }
 .beige_BG { background-color: rgb(var(--beige)); }
 
+/* Yellow */
+.yellow { color: rgb(var(--yellow)); }
+.yellow_BG { background-color: rgb(var(--yellow)); }
+
+/* Green */
+.green { color: rgb(var(--green)); }
+.green_BG { background-color: rgb(var(--green)); }
+
 /* White color */
 .white { color: white; }
 
@@ -246,7 +256,7 @@ button {
   cursor: pointer;
   background-color: rgba(var(--buttonColor), 0.8);
   border-radius: 0.5rem;
-  border-width: 0px; 
+  border-width: 3px; 
   border-color: rgb(var(--buttonColor));
   border-style: solid;
   color: white;
@@ -278,6 +288,8 @@ button {
 
   &.button--pink{ --buttonColor: var(--pink);}
   &.button--blue{ --buttonColor: var(--blue);}
+  &.button--green{ --buttonColor: var(--green);}
+  &.button--yellow{ --buttonColor: var(--yellow);}
   &.button--white{ 
     --buttonColor: var(--beige);
     color: rgb(var(--red));

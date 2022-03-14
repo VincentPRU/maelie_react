@@ -1,8 +1,9 @@
 /* Firebase SDK */
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider} from 'firebase/auth';
 
 const app = firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,15 +18,7 @@ const app = firebase.initializeApp({
 
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
-/*
-export const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-        console.log(result);
-    }).catch((error) => {
-        console.log(error);
-    })
-}
-*/
+
 export const storage = app.storage();  
 export const firestore = app.firestore(); 
 

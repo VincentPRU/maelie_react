@@ -1,0 +1,125 @@
+/*
+        Admin card component styling
+*/
+
+.admin-card {
+
+    --card-color: rgb(191, 161, 87);
+
+    border: 0.2rem solid var(--card-color);
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    background-color: white;
+    float: left;
+    padding: 2vh;
+    color: rgb(77, 77, 77);
+    margin-bottom: 1rem;
+
+    &.admin-card--red {
+        --card-color: rgb(var(--pink));
+    }
+    &.admin-card--green {
+        --card-color: rgb(var(--green));
+    }
+
+    > header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+       
+
+        div {
+
+            h3 { 
+                margin: 0px;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: var(--card-color);
+            }
+            h5 {
+                margin: 0px;
+            }
+        }
+        
+    }
+
+    /*
+        Common styling between the three following sections
+    */
+    .admin-card__sections {
+
+        float: left;
+        width: 100%;
+
+        header {
+
+            h4 {
+                font-size: 1.1rem;
+                text-decoration: underline;
+                float: left;
+            }
+        }
+
+        > div {
+            float: left;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+    }
+
+    /*
+        Relative to the contact form of the person
+    */
+    .admin-card__contact {
+
+
+    }
+
+    /*
+        Relative to the scene form 
+    */
+    .admin-card__scene-form {
+
+    }
+
+    /*
+        Relative to the final song form
+    */
+    .admin-card__final-song-form {
+
+    }
+
+    /*
+        Container of the audio elements
+    */
+    .admin-card__audio-container {
+
+        float: left;
+        width: 100%;
+        display: block;
+
+        > div {
+            float: left;
+            width: 100%;
+            margin-top: 1rem;
+            background-color: rgb(242, 242, 242);
+            border-radius: 0.25rem;
+        }
+
+    }
+
+    /*
+
+        Button container
+
+    */
+    .admin-card__button-container {
+        button {
+            margin: 0.5rem;
+        }
+    }
+}
