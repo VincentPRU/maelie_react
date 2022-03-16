@@ -43,17 +43,18 @@ const ChoraleFormPage = () => {
     city: '',
     country: '',
     contactRef: null,
-    quality: true,
     createdAt: firebase.firestore.Timestamp.now(),
     audioFiles: {
-      audio1: null,
-      audio2: null
+      choraleVirtuelle1: null,
+      choraleVirtuelle2: null,
+      choraleIndependante: null
     }
   })
 
   const [audioForm, setAudioForm] = useState({
-    audio1: null,
-    audio2: null
+    choraleVirtuelle1: null,
+    choraleVirtuelle2: null,
+    choraleIndependante: null
   })
 
     const onSubmit = async (e) => {
@@ -127,10 +128,10 @@ const ChoraleFormPage = () => {
         * 
         *     Validation step one => validation of the audio files
         * 
-        * 
+        *    
         */
 
-       if(!audioFormData.audio1 && !audioFormData.audio2){
+       if(!audioFormData.choraleVirtuelle1 && !audioFormData.choraleVirtuelle2 && !audioFormData.choraleIndependante){
           setMessage({
             message: "Vous devez inclure un fichier audio avec ce formulaire",
             positive: false
@@ -193,7 +194,10 @@ const ChoraleFormPage = () => {
                   //Add it to the mainFormData in the proper place
                   mainFormData.audioFiles = { 
                     ...mainFormData.audioFiles, 
-                      [key]: fileUrl
+                      [key]: {
+                        address: fileUrl,
+                        displayRandom: true
+                      }
                   }
                 }
               })

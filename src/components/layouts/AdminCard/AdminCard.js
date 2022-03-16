@@ -6,7 +6,7 @@ import Button from '../../Button/Button'
 import AudioFile from './AudioFile/AudioFile'
 
 //Component functionnalities
-import { validateForm } from './utils/dbUpdates'
+import { validateForm, deleteSingleCard } from './utils/dbUpdates'
  
 //Db fetching utils
 import { getContactById } from '../../../views/pages/AdminPage/utils/dbQueries'
@@ -44,7 +44,7 @@ const AdminCard = ({sceneForm, data}) => {
     const dateOption = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
     const currentDate = new Date(createdAt.seconds * 1000).toLocaleDateString("fr-CA", dateOption)
 
-
+    console.log(audioFiles)
     //Value needed for the component buttons to look in the right collection
     const collection = sceneForm ? "credit" : "choral";
 
@@ -156,20 +156,27 @@ const AdminCard = ({sceneForm, data}) => {
                         col-12
                     `}>
                         
-                            <AudioFile objKey={"audio1"} value={audioFiles["audio1"]} />
-                            <AudioFile objKey={"audio2"} value={audioFiles["audio2"]} />
-
                         {sceneForm &&
                             <>
-                                <AudioFile objKey={"audio3"} value={audioFiles["audio3"]} />
-                                <AudioFile objKey={"audio4"} value={audioFiles["audio4"]} />
-                                <AudioFile objKey={"audio5"} value={audioFiles["audio5"]} />
+                                <AudioFile objKey={"audio1"} value={audioFiles["audio1"]} collection={collection} documentId={id}/>
+                                <AudioFile objKey={"audio2"} value={audioFiles["audio2"]} collection={collection} documentId={id}/>
+                                <AudioFile objKey={"audio3"} value={audioFiles["audio3"]} collection={collection} documentId={id}/>
+                                <AudioFile objKey={"audio4"} value={audioFiles["audio4"]} collection={collection} documentId={id}/>
+                                <AudioFile objKey={"audio5"} value={audioFiles["audio5"]} collection={collection} documentId={id}/>
+                            </>
+                        }
+                        {!sceneForm &&
+                            <>
+                                <AudioFile objKey={"choraleVirtuelle1"} value={audioFiles["choraleVirtuelle1"]} collection={collection} documentId={id}/>
+                                <AudioFile objKey={"choraleVirtuelle2"} value={audioFiles["choraleVirtuelle2"]} collection={collection} documentId={id}/>
+                                <AudioFile objKey={"choraleIndependante"} value={audioFiles["choraleIndependante"]} collection={collection} documentId={id}/>
                             </>
                         }
                         
                         
 
                     </div>
+                    
                     <header className="col-12">
                         <h4>Options</h4>
                     </header>
@@ -188,7 +195,7 @@ const AdminCard = ({sceneForm, data}) => {
                             <Button color="yellow" onClick={ () => validateForm(id, collection, "") }>À valider</Button>
                             }
                             {   (status === "refused") && 
-                            <Button color="red">Supprimer</Button>
+                            <Button color="red" onClick={ () => { deleteSingleCard(id, collection, data.contactRef, audioFiles) }} >Supprimer</Button>
                             }
                         </div>
                     </div>

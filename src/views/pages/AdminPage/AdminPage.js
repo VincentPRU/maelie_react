@@ -60,9 +60,9 @@ const AdminPage = () => {
     */
    const userFormDisplay = [
      {value: 0, text: "Tous les champs"},
-     {value: 1, text: "Champs acceptés"},
-     {value: 2, text: "Champs en attente"},
-     {value: 3, text: "Champs refusés"}, 
+     {value: 1, text: "Acceptés"},
+     {value: 2, text: "En attente"},
+     {value: 3, text: "Refusés"}, 
      {value: 4, text: "Masquer la section"} 
     ];
    
@@ -115,7 +115,7 @@ const AdminPage = () => {
             </section>
             <section className={`${styles.pageContent} ${styles['col-4-1rem']}`}>
               {/* Approved elements */}
-              <h4 className="green">En attente d'approbation</h4>
+              <h4 className="green">Formulaires approuvés</h4>
               {
                 sceneFormData && 
                   sceneFormData.map(element => (
@@ -194,7 +194,7 @@ const AdminPage = () => {
                 <h4 className="red">Formulaires refusés</h4>
                 {
                     maelieFormData.map(element => (
-                      displaySongSection.status === 'refused' && <AdminCard data={element} />  
+                      element.status === 'refused' && <AdminCard data={element} />  
                     ))
                 }
               </section>
@@ -209,7 +209,7 @@ const AdminPage = () => {
               </section>
               <section className={`${styles.pageContent} ${styles['col-4-1rem']}`}>
                 {/* Approved elements */}
-                <h4 className="green">En attente d'approbation</h4>
+                <h4 className="green">Formulaires approuvés</h4>
                 {
                     maelieFormData.map(element => (
                       element.status === 'accepted' && <AdminCard data={element} />

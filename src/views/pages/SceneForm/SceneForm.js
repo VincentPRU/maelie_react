@@ -217,7 +217,10 @@ const SceneForm = () => {
                 //Add it to the mainFormData in the proper place
                 mainFormData.audioFiles = { 
                   ...mainFormData.audioFiles, 
-                    [key]: fileUrl
+                    [key]: {
+                      address: fileUrl,
+                      displayRandom: true
+                    }
                 }
 
               }
