@@ -194,4 +194,53 @@
             }
         }
     }
+
+    .audio-file__liberate-space-container {
+        padding: 1rem;
+        padding-top: 0px;
+
+        form {
+            background-color: rgba(var(--pink), 0.5);
+            width: 100%;
+            padding: 1rem;
+            margin-top: 0px;
+            border-radius: 0.25rem;
+            float: left;
+
+            label { 
+                padding: 0px; 
+                margin: 0px;
+            }
+
+            input {
+                width: 100%;
+                margin-top: 0.2rem;
+            } 
+
+            > div {
+
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                button { 
+                    margin-top: 1rem;
+                }
+    
+                .audio-file__edit-link-container__delete-check-box {
+                    display: flex;
+                    align-items: flex-end;
+    
+                    > div {
+                        input {
+                            width: auto;
+                            margin-left: 0.5rem;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
 }

@@ -44,7 +44,6 @@ const AdminCard = ({sceneForm, data}) => {
     const dateOption = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
     const currentDate = new Date(createdAt.seconds * 1000).toLocaleDateString("fr-CA", dateOption)
 
-    console.log(audioFiles)
     //Value needed for the component buttons to look in the right collection
     const collection = sceneForm ? "credit" : "choral";
 

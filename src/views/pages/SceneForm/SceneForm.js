@@ -208,7 +208,7 @@ const SceneForm = () => {
               if(file){
 
                 //The audio file isn't empty so, we need to push it
-                const fileRef = storageRef.child(file.name);
+                const fileRef = storageRef.child((Math.floor(1000 + Math.random() * 9000)) + file.name);
                 await fileRef.put(file);
   
                 //If it worked, get the Url
