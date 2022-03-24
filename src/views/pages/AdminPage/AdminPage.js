@@ -1,8 +1,12 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState, Suspense, lazy } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
 //Database methods
 import { getSceneFormData, getMaelieSongFormData } from './utils/dbQueries'
+
+/* Spinner component for the Suspence element */
+import Spinner from '../../../utils/Spinner/Spinner'
 
 //Import components
 import Select from '../../../components/forms/fields/Select/Select'
@@ -69,7 +73,7 @@ const AdminPage = () => {
 
     return (
       <section className={`${styles.adminPage} maxWidthPageContainer`}>
-
+        <Suspense fallback={<Spinner/>}>
         {/* General page header */}
         <header className="col-12">
           <h3 className="col-12 pink">Ah que coucou SMCQ </h3>
@@ -85,6 +89,7 @@ const AdminPage = () => {
             </Select>
           </form>
         </div>
+        
         {/* Option five : hide element*/}
         { displaySceneSection.displayOptions !== '4' &&
 
@@ -174,6 +179,7 @@ const AdminPage = () => {
             
             
         */}
+
           <div className={`${styles.subHeader} col-12`}>
             <h3>Formulaires du chant de Maelie</h3>
             <form>
@@ -182,7 +188,6 @@ const AdminPage = () => {
               </Select>
             </form>
           </div>
-
           { maelieFormData && displaySongSection.displayOptions !== '4' &&
 
           <>
@@ -254,6 +259,7 @@ const AdminPage = () => {
             </>
 
           }
+          </Suspense>
 
       </section>
     );

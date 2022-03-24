@@ -12,6 +12,7 @@ const ContactForm = ({ data, setData }) => {
         {value: "eleve", text: "Élève"},
         {value: "enseignant", text: "Enseignant.e"},
         {value: "parent", text: "Parent"},
+        {value: "chefdechoeur", text: "Chef de chœur"}
     ];
 
 

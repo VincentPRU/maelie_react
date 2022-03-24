@@ -1,23 +1,219 @@
 
 .panelComponent {
 
-    padding: 2rem;
+    --animationDelay: 0s;
+
+    padding: 1.5rem;
+    padding: min(2vw, 2rem);
     width: 30rem;
     width: min(95%, 30rem);
     height: auto;
     border-radius: 1rem;
     color: rgb(var(--beige));
+    margin: 1ch;
+    float: left;
 
-    
+
     -webkit-filter: drop-shadow(0.5rem 0.5rem 0.3rem #363636d0);
     filter: drop-shadow(0.3rem 0.5rem 0.3rem #424242d0);
 
+    -webkit-animation: display 0.7s ease var(--animationDelay) forwards normal;
+    -moz-animation: display 0.7s ease var(--animationDelay) forwards normal;
+    -o-animation: display 0.7s ease var(--animationDelay) forwards normal;
+    -ms-transition: display 0.7s ease var(--animationDelay) forwards normal;
+
+    animation: display 0.7s ease forwards normal;
+
+    &.wrap-in-row {
+      display: grid; 
+      grid-template-columns: auto 5rem;
+      align-items: center;
+    }
+
     header {
-        h3{
+        h3, h4{
              margin-top: 0px;
              margin-bottom: 0.5rem;
              font-weight: bold;
+             text-align: center;
         }
     }
+
+
+
+
+    //Container
+    > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        svg {
+         
+            height: 100%;   
+            width: auto;
+            opacity: 0.3;
+            padding: 1rem;
+            fill: rgb(var(--beige));
+            max-height: 6rem;
+
+            -webkit-transition: opacity 300ms ease;
+            -moz-transition: opacity 300ms ease;
+            -ms-transition: opacity 300ms ease;
+            -o-transition: opacity 300ms ease;
+            transition: opacity 300ms ease;
+        }
+    }
+
+    &.clickable {
+      cursor: pointer;
+      
+      &:hover{
+
+        > div > svg {
+          opacity: 1;
+        } 
+      }
+    }
+
+}
+
+
+@-webkit-keyframes display{
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -10vh, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, -10vh, 0);       /* Firefox */
+        -ms-transform: translate3d(0, -10vh, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, -10vh, 0);    /* Opera */
+        transform: translate3d(0, -10vh, 0);   
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);       /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);    /* Opera */
+        transform: translate3d(0, 0, 0); 
+      }
+}
+
+@-moz-keyframes display{
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -10vh, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, -10vh, 0);       /* Firefox */
+        -ms-transform: translate3d(0, -10vh, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, -10vh, 0);    /* Opera */
+        transform: translate3d(0, -10vh, 0);   
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);       /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);    /* Opera */
+        transform: translate3d(0, 0, 0); 
+      }
+}
+
+@-o-keyframes display{
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -10vh, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, -10vh, 0);       /* Firefox */
+        -ms-transform: translate3d(0, -10vh, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, -10vh, 0);    /* Opera */
+        transform: translate3d(0, -10vh, 0);   
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);       /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);    /* Opera */
+        transform: translate3d(0, 0, 0); 
+      }
+}
+
+@-ms-keyframes display{
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -10vh, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, -10vh, 0);       /* Firefox */
+        -ms-transform: translate3d(0, -10vh, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, -10vh, 0);    /* Opera */
+        transform: translate3d(0, -10vh, 0);   
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);       /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);    /* Opera */
+        transform: translate3d(0, 0, 0); 
+      }
+}
+
+@keyframes display {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -10vh, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, -10vh, 0);       /* Firefox */
+        -ms-transform: translate3d(0, -10vh, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, -10vh, 0);    /* Opera */
+        transform: translate3d(0, -10vh, 0);   
+      }
+      100% {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);       /* Safari & Chrome */
+        -moz-transform: translate3d(0, 0, 0);       /* Firefox */
+        -ms-transform: translate3d(0, 0, 0);    /* Internet Explorer */
+        -o-transform: translate3d(0, 0, 0);    /* Opera */
+        transform: translate3d(0, 0, 0); 
+      }
+  }
+
+  /*
+*
+*
+*     Media queries for responsive design
+*
+*
+*
+*/
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+  /*
+      Normal width of the col classes 
+  */
+  .panelComponent {
+
+    &.wrap-in-row {
+      display: block; 
+      grid-template-columns: none;
+      align-items: unset;
+    }
+
+    
+
+    //Container
+    > div {
+
+
+
+      svg {
+       
+          height: 100%;   
+ 
+        }
+    }
+  }
+
+
 
 }

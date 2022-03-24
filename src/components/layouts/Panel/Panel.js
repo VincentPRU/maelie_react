@@ -1,17 +1,23 @@
-
 import styles from './Panel.module.scss'
-import Button from '../../Button/Button'
 
 
-const Panel = ({title, p1, p2, p3, buttonText, action}) => {
+
+const Panel = ({title, subTitle, p1, p2, p3, warpHorizontally, onComponentClick, children}) => {
 
 
     return (
 
-        <div className={`${styles.panelComponent} red_BG`}>
+        <div onClick={onComponentClick ? onComponentClick : null} className={`
+            ${styles.panelComponent} 
+            ${warpHorizontally && styles['wrap-in-row']}
+            ${onComponentClick && styles['clickable']}
+            red_BG
+            `}>
 
             <header className="col-12">
-                <h3 className="beige">{title}</h3>
+                {title && <h3 className="beige">{title}</h3>}
+                {subTitle && <h4 className="beige">{subTitle}</h4>}
+
             </header>
             { p1 &&
                 <p className="col-12">
@@ -26,11 +32,12 @@ const Panel = ({title, p1, p2, p3, buttonText, action}) => {
             {p3 && 
                 <p> { p3 } </p>
             }
-            <Button onClick={action}  color="white">
-                {buttonText}
-            </Button>
+            <div className="col-12">
+                { children }
+            </div>
         </div>
     );
 }
 
 export default Panel
+

@@ -1,28 +1,20 @@
 .sceneControlComponent {
     position: absolute;
-    top: 0px;
+    bottom: 0px;
     left: 0px;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     z-index: 1;
     color: var(--beige);
 
-    .setVisible {
 
-        -webkit-animation: display 0.7s ease forwards normal;
-        -moz-animation: display 0.7s ease forwards normal;
-        -o-animation: display 0.7s ease forwards normal;
-        -ms-transition: display 0.7s ease forwards normal;
-
-        animation: display 0.7s ease forwards normal;
-    }
 
     .controlsSection {
         position: absolute;
-        top: 0px;
+        bottom: 0px;
         left: 0px;
         width: 100%;
-        height: 100%;
+        min-height: 100%;
 
         display: grid;
         grid-template-columns: 100%;
@@ -233,17 +225,23 @@
         
     }
 
-
-
     .panelSection {
         position: absolute;
-        top: 0px;
+        bottom: 0px;
         left: 0px;
-        height: 100%;
+        min-height: 100vh;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-wrap: wrap;
+        
+        .multiplePanelsContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
     }
 
 }

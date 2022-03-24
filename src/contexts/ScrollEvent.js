@@ -27,6 +27,7 @@ export function ScrollEventProvider( {children} ){
     let windowResized = useRef(false);      //Turn to true when a resize event is detected
     let yScrollEvent = useRef(false);
 
+
     useEffect(() => {
 
         let animationId = null;
@@ -36,31 +37,45 @@ export function ScrollEventProvider( {children} ){
         /* It is bugging me to have a hugh number */
         if(frame > 10000){ frame = 0 }
 
-
-        //Testing loog 
-        /*
-        const resetFrame = () => {
-            console.log(frame);
-            frame = 0;
-        }
-        setInterval(resetFrame, 1000);
-        */
-
+        //for the animation to wait after the en of the scrolling
+        let lastScrollCount = 0;
+        let waitingToUpDateYScroll = false;
 
         //Recursive loop to control the quantity of event that are going to be analysed
         const onTick = () => {
             frame++;
+            lastScrollCount++;
             
             //Reduce the fps to 4 / seconds
             if(frame % 2 === 0){
 
                 //Update the scroll position if needed
                 if (yScrollEvent.current && (window.pageYOffset || 0) !== _scrollY.current){
-                    setScrollY(window.pageYOffset || 0);
+                    
 
                     //set it back to false once the previous functions are done
                     yScrollEvent.current = false;
+                    setScrollY(window.pageYOffset || 0);
                 } 
+
+/*
+                //Update the scroll position if needed
+                if (yScrollEvent.current && (window.pageYOffset || 0) !== _scrollY.current){
+                    
+
+                    //set it back to false once the previous functions are done
+                    yScrollEvent.current = false;
+                    lastScrollCount = 0;
+                    waitingToUpDateYScroll = true;
+                } else {
+                    if(lastScrollCount > 3 && waitingToUpDateYScroll){
+                        setScrollY(window.pageYOffset || 0);
+                        console.log("inside")
+                        lastScrollCount = 0;
+                        waitingToUpDateYScroll = false;
+                    }
+                }
+       */         
 
                 if(windowResized.current){
                     //Update window's height 
@@ -82,7 +97,8 @@ export function ScrollEventProvider( {children} ){
     
         onTick();
     
-        const onScroll = () => { yScrollEvent.current = true };
+        const onScroll = () => { yScrollEvent.current = true }
+
 
         const onResize = () => { windowResized.current = true }
 

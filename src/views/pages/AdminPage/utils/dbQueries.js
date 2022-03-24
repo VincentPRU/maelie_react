@@ -60,9 +60,10 @@ export const getSceneFormData = async () => {
 export const getMaelieSongFormData = async () => {
 
     try{
-        const collection = firestore.collection("choral").where("choristNames", "!=", "undefined" );;
+        //the search for none undefined chorist name is only to avoid getting the default result
+        const collection = firestore.collection("choral").where("choristNames", "!=", "undefined" );
 
-        //Retrieve a single element
+        //Retrieve all the elements
         const snapShot = await collection.get()
 
         const entries = [];
