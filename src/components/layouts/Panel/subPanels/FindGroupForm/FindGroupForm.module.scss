@@ -1,0 +1,26 @@
+/*
+
+        Styling for the component that is supposed to find a hole group
+
+*/
+
+.find-group-component {
+
+    form {
+        color: rgb(58, 58, 58);
+    }
+
+    .results-section {
+
+        h4 { text-align: left;}
+
+
+        .results-section__scrollable-container {
+            padding-right: 5px;
+            max-height: 30vh;
+            overflow-y: auto;
+
+        }
+    }
+
+}

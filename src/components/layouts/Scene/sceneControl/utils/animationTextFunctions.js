@@ -9,11 +9,15 @@ import animationText from '../sceneText.json'
 
 import sceneInitialValues from './sceneInitialValues.json'
 
-export const setTextPerTime = (time, totalTime, currentText, setCurrentText) => {
+export const setTextPerTime = (time, totalTime, currentText, setCurrentText, animWithMusic, audioManagerData) => {
     const percentage = parseInt((time * 100) / totalTime);
     let condition = true;
 
-    const perc = sceneInitialValues;
+    let perc = sceneInitialValues;
+    
+    if(animWithMusic) perc = audioManagerData
+    
+
 
     //Scene 1
     if(percentage > perc.scene1[0] && percentage < perc.scene1[1] && condition) {

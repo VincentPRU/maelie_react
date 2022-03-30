@@ -1,0 +1,47 @@
+/*
+
+        Single audio list component styling
+
+*/
+
+.audio-list-element {
+
+    height: auto;
+    padding: 0.3em;
+    /*
+        height: 2em;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    */
+    width: 100%;
+
+    &.audio-list-element--single-line{
+        height: 2em;
+        pointer-events: none;
+
+        .audio-list-element__main {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        } 
+    }
+
+    &.audio-list-element--active:not(.audio-list-element--single-line) {
+        background-color: rgba(var(--pink), 0.3);  
+    }
+
+    .audio-list-element__main {
+        font-size: 1em;
+        line-height: 1.2;
+    }
+
+    .audio-list-element__details {
+        font-size: 0.85em;
+        font-weight: bold;
+        color: rgb(102, 102, 102);
+        margin-top: 0.2em;
+    }
+
+}

@@ -417,6 +417,35 @@ input:focus, textarea:focus, select:focus{
   }
 }
 
+.thinDarkScrollBar {
+
+    ::-webkit-scrollbar {
+      width: 0.45rem;
+      height: 0.5rem;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: none;
+      /*margin-block: 0.5rem;
+      border-radius: 0.5rem;*/
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: #373737b4;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2e2e2ed5;
+    }
+
+    @supports (scrollbar-color: #caccd4 #373737b4) {
+      * {
+        scrollbar-color:#caccd4 #373737b4;
+        scrollbar-width: thin;
+      }
+    }
+}
 
 
 

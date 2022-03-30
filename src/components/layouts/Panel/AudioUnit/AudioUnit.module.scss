@@ -1,0 +1,70 @@
+.audio-unit {
+
+    --currentColor : rgb(var(--green));
+
+    color: var(--currentColor);
+    margin-bottom: 0.2rem;
+
+
+    /* Overflow with three dots*/
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+
+    > * {
+        white-space: normal;
+        text-overflow: initial;
+    }
+    
+
+    
+
+    &.audio-unit--red {  --currentColor : rgb(var(--red)); }
+
+    .audio-unit__edit-button {
+        border: 0.2rem solid var(--currentColor);
+        color: var(--currentColor);
+        border-radius: 0.2rem;
+        margin-right: 0.2rem;
+
+        transition: 0.2s;
+        
+        &:hover{
+            background-color: var(--currentColor);
+            color: white;
+        }
+    }
+
+    /* Specific section for the selection of a single audio except */
+    .audio-unit__edit-section {
+        position: absolute;
+        bottom: 0px;
+        min-height: 100%;
+        left: 0px;
+        width: 100%;
+        background-color: rgb(var(--red));
+        border-radius: 0.9rem;
+        padding: 1rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h3 { 
+            opacity: 1;
+            color: rgb(var(--beige));
+            margin-bottom: 1rem;
+        }
+        
+
+        .edit-section__button-container {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            > button {
+                margin-top: 0.5rem;
+            }
+        }
+    }
+
+}

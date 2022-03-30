@@ -15,7 +15,7 @@ const shuffle = array => {
 }
 
 
-//Get The audio files and there informations for the
+//Get The audio files and there informations for the scenes
 export const getAllAudioScene = async ( storedData, setStoredData ) => {
 
     try {
@@ -96,3 +96,124 @@ export const getRandomScenesMap = ( data ) => {
     return map
 
 }
+
+/* 
+
+    Get random file for a specefic scene
+
+*/
+
+export const randomlyFetchSpecificScene = async ( scene,  storedData, setStoredData ) => {
+
+    try {
+
+        let valueToReturn = null
+
+        if(storedData){
+
+            console.log(storedData)
+            const shuffledArray = shuffle(storedData);
+            
+            for(let i = 0; i < shuffledArray.length; i++){
+                if(shuffledArray[i].audioFiles[scene]){
+                    valueToReturn = shuffledArray[i]
+                    i = shuffledArray.length   //stop the loop
+                }
+            }
+
+        } else {
+
+            const collection = firestore.collection( "credit" );
+
+            //Retrieve all the elements
+            const snapShot = await collection.where("status", "==", "accepted").get()
+
+            const entries = [];
+
+            //Fill the new array
+            snapShot.forEach(doc => entries.push( doc.data() ) )
+
+            //store the data in the SceneControl component state to prevent fetching for nothing
+            setStoredData(entries)
+
+            const shuffledArray = shuffle(entries);
+            
+            for(let i = 0; i < shuffledArray.length; i++){
+                if(shuffledArray[i].audioFiles[scene]){
+                    valueToReturn = shuffledArray[i]
+                    i = shuffledArray.length   //stop the loop
+                }
+            }
+        }
+
+        return valueToReturn
+        
+
+    } catch (error){
+        console.log(error)
+    }
+
+}
+
+/*
+    Function to return all the accepted scenes
+*/
+
+export const fetchAllAcceptedScenes = async () => {
+
+    try {
+
+            const collection = firestore.collection( "credit" );
+
+            //Retrieve all the elements
+            const snapShot = await collection.where("status", "==", "accepted").get()
+
+            const entries = [];
+
+            //Fill the new array
+            snapShot.forEach(doc => {
+                const data = doc.data()
+                const dataWithId = {...data, id: doc.id}
+                entries.push( dataWithId ) 
+            })
+
+            return entries
+
+    } catch(err){
+        console.log(err)
+    }
+    
+}
+
+
+
+/*
+    Function to return all the accepted scenes when a specific audio field is filled
+
+
+export const fetchScenesForAudioField = async ( audioField ) => {
+
+    try {
+
+            const collection = firestore.collection( "credit" );
+
+            //Retrieve all the elements
+            const snapShot = await collection.where(`audioFiles.${audioField}`, "!=", "null").get()
+
+            const entries = [];
+
+            //Fill the new array
+            snapShot.forEach(doc => {
+                const data = doc.data()
+                const dataWithId = {...data, id: doc.id}
+                entries.push( dataWithId ) 
+            })
+
+            return entries
+
+    } catch(err){
+        console.log(err)
+    }
+    
+}
+*/

@@ -4,7 +4,7 @@
     --animationDelay: 0s;
 
     padding: 1.5rem;
-    padding: min(2vw, 2rem);
+    padding: max(2vw, 1rem);
     width: 30rem;
     width: min(95%, 30rem);
     height: auto;
@@ -43,7 +43,7 @@
 
 
     //Container
-    > div {
+    > div.panel-content {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -65,6 +65,8 @@
             transition: opacity 300ms ease;
         }
     }
+
+
 
     &.clickable {
       cursor: pointer;

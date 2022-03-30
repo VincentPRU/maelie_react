@@ -15,7 +15,7 @@ const ChoralForm = ({ data, setData }) => {
         ageSelectOptions.push({value: i, text: i});
     }
 
-
+    console.log(data)
 
     return(
         <div className={styles.choralForm}>

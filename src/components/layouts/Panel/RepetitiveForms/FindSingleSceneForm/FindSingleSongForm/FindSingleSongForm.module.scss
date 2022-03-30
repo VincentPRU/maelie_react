@@ -1,0 +1,19 @@
+.single-song-form {
+
+    > form {
+        input {
+            width:100%;
+        }
+    }
+
+    > section {
+        .results-section__scrollable-container {
+            padding-right: 5px;
+            max-height: 30vh;
+            overflow-y: auto;
+            padding: 0.5rem;
+            
+
+        }
+    }
+}

@@ -2,7 +2,8 @@ import styles from './Panel.module.scss'
 
 
 
-const Panel = ({title, subTitle, p1, p2, p3, warpHorizontally, onComponentClick, children}) => {
+
+const Panel = ({title, subTitle, p1, p2, p3, warpHorizontally, onComponentClick, previousButton, children}) => {
 
 
     return (
@@ -32,9 +33,18 @@ const Panel = ({title, subTitle, p1, p2, p3, warpHorizontally, onComponentClick,
             {p3 && 
                 <p> { p3 } </p>
             }
-            <div className="col-12">
+            <div className={`col-12 ${styles['panel-content']}`}>
                 { children }
             </div>
+
+            {/* Return button */}
+            { previousButton &&
+                <div onClick={previousButton} className={`beige_BG red ${styles["panel__previous-link"]}`}>
+                    Retour
+                </div>
+            }
+
+
         </div>
     );
 }

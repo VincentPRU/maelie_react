@@ -16,10 +16,19 @@ const getPromiseFromEvent = (item, event) => {
     })
 }
 
+
 export class AudioManager {
 
-    constructor(scenesMap){
+    constructor(scenesMap, choralElem, listDisplay, updateListDisplay){
+
         this.scenesMap = scenesMap;
+        this.choralElem = choralElem;
+        console.log(this.choralElem)
+
+
+        this.listDisplay = listDisplay
+        this.updateListDisplay = updateListDisplay
+
         this.audioElems = [
             {
                 "audio" : new Audio(scenesMap.audio1.audioFiles.audio1.address),
@@ -52,7 +61,7 @@ export class AudioManager {
                 "addedPercentage": null
             },
             {
-                "audio" : new Audio(scenesMap.audio5.audioFiles.audio5.address),
+                "audio" : new Audio(choralElem.audioFiles.choraleIndependante.address),
                 "duration": 15,
                 "percentage": null,
                 "addedPercentage": null
@@ -64,6 +73,160 @@ export class AudioManager {
 
         this.setAudioEndingListeners()
 
+        this.animationPercentages = []
+
+        this.textPercentages = {
+            "scene1": null,
+            "scene2": null,
+            "scene3": null,
+            "scene3b": null,
+            "scene4": null,
+            "scene5": null,
+            "scene5b": null,
+            "scene6": null
+        }
+
+
+    }
+
+    updateAudioIndex = ( i ) => {
+
+        this.currentAudioIndex = i;
+
+        this.updateListDisplay({
+            ...this.listDisplay,
+            currentAudioIndex: i
+        }) 
+
+    }
+
+    calculateTextPercentages = () => {
+
+        const oneSecPercentage = Math.round(100 / this.totalDuration);
+        const twoSecPercentage = Math.round((100 / this.totalDuration) * 2);
+
+        const percentageToSec = ( percentage ) => {
+            return Math.round((this.totalDuration * percentage) / 100)
+        }
+
+        //scene one
+        this.textPercentages.scene1 = [ 
+            oneSecPercentage < 1 ? 1 : oneSecPercentage, 
+            percentageToSec(this.audioElems[0].percentage) > 5 ? this.audioElems[0].percentage - twoSecPercentage : this.audioElems[0].percentage
+        ]
+
+        //scene two
+        this.textPercentages.scene2 = [ 
+            percentageToSec(this.audioElems[1].percentage) > 5 ?  this.audioElems[1].addedPercentage + twoSecPercentage : this.audioElems[1].addedPercentage,
+            percentageToSec(this.audioElems[1].percentage) > 8 ?  this.audioElems[1].addedPercentage + this.audioElems[1].percentage - twoSecPercentage : this.audioElems[1].addedPercentage + this.audioElems[1].percentage
+        ]
+
+        //scene three
+        this.textPercentages.scene3 = [ 
+            percentageToSec(this.audioElems[2].percentage) > 7 ?  this.audioElems[2].addedPercentage + twoSecPercentage : this.audioElems[2].addedPercentage,
+            Math.floor(this.audioElems[2].percentage / 2) + this.audioElems[2].addedPercentage 
+        ]
+
+        //scene three b
+        this.textPercentages.scene3b = [ 
+            Math.floor(this.audioElems[2].percentage / 2) + this.audioElems[2].addedPercentage, 
+            this.audioElems[2].addedPercentage + this.audioElems[2].percentage
+        ]
+
+        //scene four
+        this.textPercentages.scene4 = [ 
+            this.audioElems[3].addedPercentage,
+            this.audioElems[3].addedPercentage + this.audioElems[3].percentage
+        ]
+
+        //scene five a
+        this.textPercentages.scene5 = [ 
+            this.audioElems[4].addedPercentage,
+            Math.floor((this.audioElems[4].percentage) / 2) + this.audioElems[4].addedPercentage 
+        ]
+
+        //scene five b
+        this.textPercentages.scene5b = [ 
+            Math.floor((this.audioElems[4].percentage) / 2) + this.audioElems[4].addedPercentage,
+            this.audioElems[4].addedPercentage + this.audioElems[4].percentage
+        ]
+
+        //scene six
+        this.textPercentages.scene6 = [ 
+            percentageToSec(this.audioElems[5].percentage) > 7 ? this.audioElems[5].addedPercentage + twoSecPercentage : this.audioElems[5].addedPercentage,
+            99
+        ]
+
+        console.log(this.textPercentages)
+
+    }
+
+    calculateAnimationPercentages = () => {
+
+        const oneSecPercentage = Math.round(100 / this.totalDuration);
+
+        for(let i = 1; i < this.audioElems.length; i++){
+            
+            const audioElem = this.audioElems[i]
+
+            if( i === 3 || i === 4) {
+
+                const arrayToPush = []
+
+                //there are two scenes
+                arrayToPush[0] = audioElem.addedPercentage
+                arrayToPush[1] = audioElem.addedPercentage + Math.floor(audioElem.percentage / 2) + oneSecPercentage 
+
+                this.animationPercentages.push(arrayToPush);
+
+                const secondArrayToPush = []
+
+                secondArrayToPush[0] = arrayToPush[1]
+                secondArrayToPush[1] = audioElem.addedPercentage + audioElem.percentage
+
+                this.animationPercentages.push(secondArrayToPush)
+
+            } else {
+
+                if( i === 2) {
+                    //There is three scenes!
+                    const firstArrayToPush = []
+                    const secondArrayToPush = []
+                    const thirdArrayToPush = []
+
+                    firstArrayToPush[0] = audioElem.addedPercentage + oneSecPercentage ;
+                    firstArrayToPush[1] = audioElem.addedPercentage + Math.floor(audioElem.percentage / 3)
+
+                    this.animationPercentages.push( firstArrayToPush );
+
+                    secondArrayToPush[0] = firstArrayToPush[1]
+                    secondArrayToPush[1] = firstArrayToPush[1] + Math.floor(audioElem.percentage / 3)
+
+                    this.animationPercentages.push( secondArrayToPush );
+
+                    thirdArrayToPush[0] = secondArrayToPush[1]
+                    thirdArrayToPush[1] = audioElem.addedPercentage + audioElem.percentage
+
+                    this.animationPercentages.push( thirdArrayToPush );
+
+
+                } else {
+
+                    //there is only one scene
+
+                    const arrayToPush = []
+
+                    arrayToPush[0] = audioElem.addedPercentage + oneSecPercentage 
+                    arrayToPush[1] = audioElem.addedPercentage + audioElem.percentage
+
+                    this.animationPercentages.push(arrayToPush);
+
+                }
+
+                
+
+            }
+        }
     }
 
     setAudioEndingListeners = () => {
@@ -79,7 +242,7 @@ export class AudioManager {
                 this.audioElems[i].audio.currentTime = 0
 
                 //Increment the active audio element
-                this.currentAudioIndex = i + 1;
+                this.updateAudioIndex( i + 1 );
 
                 // set the new audio element current time to 0 if its not already
                 if(this.audioElems[this.currentAudioIndex].audio.currentTime !== 0) this.audioElems[this.currentAudioIndex].audio.currentTime = 0
@@ -92,42 +255,14 @@ export class AudioManager {
         this.audioElems[this.audioElems.length - 1].audio.addEventListener("ended", () => {
             this.audioElems[this.audioElems.length - 1].audio.pause()
             this.audioElems[this.audioElems.length - 1].audio.currentTime = 0
-            this.currentAudioIndex = 0;
+            this.updateAudioIndex( 0 )
             this.audioElems[0].audio.currentTime = 0;
         })
     }
 
     play = () => {
-
-        console.log("Play called")
         //Start the audio element
         this.audioElems[ this.currentAudioIndex ].audio.play()
-/*
-        //Function to call the next song
-        const playNextSong = () => {
-            console.log("index removed " + this.currentAudioIndex)
-            //remove event listener
-            this.audioElems[ this.currentAudioIndex ].audio.removeEventListener("ended", playNextSong)
-
-            if(this.audioElems[ this.currentAudioIndex + 1 ].audio){
-
-                //set the previous song at zero so it is ready for the next read
-                if(this.audioElems[this.currentAudioIndex].audio.currentTime !== 0) this.audioElems[this.currentAudioIndex].audio.currentTime = 0
-
-                //Increment the active audio element
-                this.currentAudioIndex++
-
-                // set the new audio element current time to 0 if its not already
-                if(this.audioElems[this.currentAudioIndex].audio.currentTime !== 0) this.audioElems[this.currentAudioIndex].audio.currentTime = 0
-
-                this.play()
-            }
-        }
-        console.log("index added " + this.currentAudioIndex)
-
-        //Set an event listener for automatically the next song 
-        this.audioElems[ this.currentAudioIndex ].audio.addEventListener("ended", playNextSong )
-    */
     }
 
     pause = () => {
@@ -161,7 +296,7 @@ export class AudioManager {
         this.audioElems[ this.currentAudioIndex ].audio.pause()
 
         //Second step : update the index
-        this.currentAudioIndex = newIndex
+        this.updateAudioIndex( newIndex )
 
         if( this.audioElems[ this.currentAudioIndex ].audio.currentTime !== 0) this.audioElems[ this.currentAudioIndex ].audio.currentTime = 0
 
@@ -187,6 +322,9 @@ export class AudioManager {
         await getPromiseFromEvent(this.audioElems[4].audio, 'loadedmetadata')
         this.audioElems[4].duration  = this.audioElems[4].audio.duration
 
+        await getPromiseFromEvent(this.audioElems[5].audio, 'loadedmetadata')
+        this.audioElems[5].duration  = this.audioElems[5].audio.duration
+
         //Calculate the total 
         let total = 0;
         this.audioElems.forEach(elem => total += elem.duration)
@@ -203,8 +341,9 @@ export class AudioManager {
             previousAudioPercentage += audio.percentage;
         })
 
-        console.log(this.audioElems)
-
+         //Profite of the occasion to calculate the animation percentages
+        this.calculateAnimationPercentages()
+        this.calculateTextPercentages()
 
         //Return it
         return parseInt( total )
