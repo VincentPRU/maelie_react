@@ -1,17 +1,145 @@
-import { firestore, storage } from '../../../../firebase'
+import firebase, { firestore, storage } from '../../../../firebase'
 
+const sendConfirmationEmail = (action, collection, firstName, email) => {
+
+    if(collection === "credit" && action === "accepted"){
+        /*
+            First option : send a message of acceptation for participation in the scenes
+        */
+       try{
+            const sendEmail = firebase.functions().httpsCallable('sendEmail');
+            sendEmail({
+            subject: 'Acceptation de la bande sonore',
+            email: email,
+            content: `<p>Bonjour ${firstName},</p>
+                        <p>Bonne nouvelle : ta bande sonore pour le conte « Maélie et le dragon » a été approuvée !
+                        Tu peux maintenant aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
+                        <p>Le menu te permettra de trouver ta bande sonore ou celle de tes amis. Tu peux aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
+                        <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                        <p>Maélie et l’équipe de feu<br/>
+                        SMCQ Jeunesse</p>`
+
+            }).then(result => {
+                console.log(result.data);
+                alert("Courriel envoyé avec succès.")
+            })
+
+       } catch (err) {
+           alert("Un problème est survenue lors de l'envoie du courriel de confirmation. Cependant, la modification a bien fonctionné.")
+       }
+
+
+    } else {
+
+        if(collection === "credit" && action === "refused"){
+            /*
+                Second option : send a message to informe the user that its form has been refused 
+            */
+           try{
+                const sendEmail = firebase.functions().httpsCallable('sendEmail');
+                sendEmail({
+                subject: 'Fichier non approuvé',
+                email: email,
+                content: `<p>Bonjour ${firstName},</p>
+                            <p>Malheureusement, ta contribution au conte sonorisé « Maélie et le dragon » n’a pas pu être acceptée pour l’une des raisons suivantes :</p>
+                            <ul>
+                                <li>le fichier envoyé est illisible</li>
+                                <li>la bande sonore n’a pas de lien ou trop peu de lien avec l’histoire</li>
+                            </ul>
+                            <p>N’hésite pas à recommencer le processus en envoyant un fichier dans le bon format (mp3 de 5 à 90 secondes) en lien avec la scène du conte que tu as choisie.</p>
+                            <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                            <p>Maélie et l’équipe de feu<br/>
+                            SMCQ Jeunesse</p>`
+    
+                }).then(result => {
+                    console.log(result.data);
+                    alert("Courriel envoyé avec succès.")
+                })
+    
+           } catch (err) {
+               alert("Un problème est survenue lors de l'envoie du courriel de confirmation. Cependant, la modification a bien fonctionné.")
+           }
+    
+    
+        } else {
+
+            if(collection === "choral" && action === "accepted"){
+                /*
+                    third option : send a message to informe the user that its participation to the choral has been accepted
+                */
+               try{
+                    const sendEmail = firebase.functions().httpsCallable('sendEmail');
+                    sendEmail({
+                    subject: 'Acceptation de fichier pour la chanson de Maélie',
+                    email: email,
+                    content: `<p>Bonjour ${firstName},</p>
+                                <p>Bonne nouvelle : ta contribution au « Chant de Maélie » a été approuvée !
+                                Un courriel sera envoyé à tous les participants lorsque la chorale virtuelle sera disponible dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
+                                <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                                <p>Maélie et l’équipe de feu<br/>
+                                SMCQ Jeunesse</p>`
+        
+                    }).then(result => {
+                        console.log(result.data);
+                        alert("Courriel envoyé avec succès.")
+                    })
+        
+               } catch (err) {
+                   alert("Un problème est survenue lors de l'envoie du courriel de confirmation. Cependant, la modification a bien fonctionné.")
+               }
+        
+        
+            } else {
+
+
+                if(collection === "choral" && action === "refused"){
+                    /*
+                        fourth option : send a message to informe the user that its participation to the chorale has been refused
+                    */
+                   try{
+                        const sendEmail = firebase.functions().httpsCallable('sendEmail');
+                        sendEmail({
+                        subject: 'Fichier non approuvé',
+                        email: email,
+                        content: `<p>Bonjour ${firstName},</p>
+                                    <p>Malheureusement, ta contribution à la « Chanson de Maélie » n’a pas pu être acceptée pour l’une des raisons suivantes :</p>
+                                    <ul>
+                                        <li>le fichier envoyé est illisible ou contient trop de sons parasites</li>
+                                        <li>l’enregistrement ne correspond pas à l’une des deux parties de la chanson</li>
+                                        <li>les deux parties de la chanson ont été enregistrées ensemble</li>
+                                        <li>c’est la bonne chanson, mais elle n’a pas été enregistrée au même tempo que la piste de référence.</li>
+                                    </ul>
+                                    <p>N’hésite pas à recommencer le processus en envoyant un fichier dans le bon format (mp3) enregistré en synchronicité avec la piste de référence du <a href="https://smcqeducation.ca/?artist=lodyssee-contemporaine">karaoké</a>.</p>
+                                    <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                                    <p>Maélie et l’équipe de feu<br/>
+                                    SMCQ Jeunesse</p>`
+            
+                        }).then(result => {
+                            console.log(result.data);
+                            alert("Courriel envoyé avec succès.")
+                        })
+            
+                   } catch (err) {
+                       alert("Un problème est survenue lors de l'envoie du courriel de confirmation. Cependant, la modification a bien fonctionné.")
+                   }
+                }
+            }
+        }
+    }
+}
 /*
     Function to accept or refuse a specific form
 */
-export const validateForm = async ( id, collectionName, action ) => {
+export const validateForm = async ( id, collectionName, action, firstName = null, email = null ) => {
 
     try {
 
         //Prevent an error that would hide some forms
         if(action === "accepted" || action === "refused" || action === ""){
             await firestore.collection( collectionName ).doc( id ).update("status", action)
-    
             alert("Félicitations. Les changements ont bien été effectués. Vous n'avez qu'à recharger la page pour voir les modifications.")
+
+            sendConfirmationEmail(action, collectionName, firstName, email)
         } else {
             throw new Error("Mauvaise valeur d'acceptation entrée"); 
         }

@@ -1,5 +1,7 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
 
+import firebase from '../../../firebase'
+
 import { useNavigate } from 'react-router-dom';
 
 //Database methods
@@ -70,9 +72,16 @@ const AdminPage = () => {
      {value: 4, text: "Masquer la section"} 
     ];
    
+    const sayHelloClick = () => {
+        const sendEmail = firebase.functions().httpsCallable('sendEmail');
+        sendEmail().then(result => {
+          console.log(result.data)
+        })
+    }
 
     return (
       <section className={`${styles.adminPage} maxWidthPageContainer`}>
+
         <Suspense fallback={<Spinner/>}>
         {/* General page header */}
         <header className="col-12">

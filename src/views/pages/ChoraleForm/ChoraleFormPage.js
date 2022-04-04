@@ -113,6 +113,34 @@ const ChoraleFormPage = () => {
               //Change form state
               setFormSent(true);
 
+              //Sending the confirmation email
+              try {
+
+                const sendEmail = firebase.functions().httpsCallable('sendEmail');
+                  sendEmail({
+                    subject: 'Confirmation de réception de la chorale virtuelle !',
+                    email: userFormData.email,
+                    content: `<p>Bonjour ${userFormData.firstname},</p>
+                              <p>Merci pour ta contribution au chant final du conte « Maélie et le dragon » !</p>
+                              <p>Nous vérifions maintenant que tout est conforme et s’il y a un problème, nous te contacterons. Un message te sera envoyé lorsque tu pourras entendre le chœur virtuel dans le module interactif.</p>
+                              <p>N’hésite pas à inviter tes ami.e.s à participer à l’aventure !</p>
+                              <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                              <p>Maélie et l’équipe de feu<br/>
+                              SMCQ Jeunesse</p>`
+
+                  })
+                  
+                  /*.then(result => {
+                    console.log(result.data)
+                  })*/
+
+              } catch (err){
+                console.log("Une erreur est survenue avec l'envoie du courriel.")
+                console.log(err)
+              }
+
+
+
 
             } catch(e){
               setMessage({

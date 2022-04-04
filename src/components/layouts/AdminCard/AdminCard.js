@@ -185,10 +185,10 @@ const AdminCard = ({sceneForm, data}) => {
                     `}>
                         <div>
                             {   (status !== "accepted") && 
-                                <Button color="green" onClick={ () => validateForm(id, collection, "accepted") }>Accepter</Button>
+                                <Button color="green" onClick={ () => validateForm(id, collection, "accepted", contactInfos.firstname, contactInfos.email) }>Accepter</Button>
                             }
                             {   (status !== "refused") && 
-                            <Button color="pink" onClick={ () => validateForm(id, collection, "refused") }>Refuser</Button>
+                            <Button color="pink" onClick={ () => validateForm(id, collection, "refused", contactInfos.firstname, contactInfos.email) }>Refuser</Button>
                             }
                             {   (status === "accepted" || status === "refused") && 
                             <Button color="yellow" onClick={ () => validateForm(id, collection, "") }>À valider</Button>

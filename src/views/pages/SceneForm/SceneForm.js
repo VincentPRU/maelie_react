@@ -125,6 +125,33 @@ const SceneForm = () => {
               //Change form state
               setFormSent(true);
 
+              //Envoie du courriel
+              try {
+
+                const sendEmail = firebase.functions().httpsCallable('sendEmail');
+                  sendEmail({
+                    subject: 'Confirmation de réception de la bande sonore !',
+                    email: userFormData.email,
+                    content: `<p>Bonjour ${userFormData.firstname},</p>
+                              <p>Merci pour ta contribution au conte musical « Maélie et le dragon » !</p>
+                              <p>Nous vérifions maintenant que tout est conforme. Un message te sera envoyé dès que tu
+                              pourras entendre ta bande sonore dans le module interactif.</p>
+                              <p>N’hésite pas à inviter tes ami.e.s à participer à l’aventure !</p>
+                              <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                              <p>Maélie et l’équipe de feu<br/>
+                              SMCQ Jeunesse</p>`
+
+                  })
+                  
+                  /*.then(result => {
+                    console.log(result.data)
+                  })*/
+
+              } catch (err){
+                console.log("Une erreur est survenue avec l'envoie du courriel.")
+                console.log(err)
+              }
+
 
             } catch(e){
               setMessage({
@@ -139,6 +166,7 @@ const SceneForm = () => {
 
         /*
         * 
+        *
         *     Validation step one => validation of the audio files
         * 
         * 
