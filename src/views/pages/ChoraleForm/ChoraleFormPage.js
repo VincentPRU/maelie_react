@@ -251,6 +251,8 @@ const ChoraleFormPage = () => {
 
       <section className={`${styles.choraleFormPage}`}>
         <div className={`maxWidthPageContainer`}>
+          {
+            !formSent &&
             <header>
               <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer au chant final de la "Chanson de Maélie"</h1>
           {/*     <h4 className="blue">Il est important de t'enregistrer en suivant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> avec un écouteur dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes grâce à la piste audio de référence. Attention ! Assure-toi qu'on entende seulement ta voix dans l'enregistrement, et pas le karaoké.</h4>*/}
@@ -269,6 +271,7 @@ const ChoraleFormPage = () => {
                 </li>
               </ul>
             </header>
+             }
             { message.message && 
                 <Message>{ message.message }</Message>
             }

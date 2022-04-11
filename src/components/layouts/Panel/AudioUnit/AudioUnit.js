@@ -3,13 +3,19 @@ import { useState, useEffect } from 'react'
 
 //components
 import FindSingleSceneForm from '../RepetitiveForms/FindSingleSceneForm/FindSingleSceneForm'
+import FindSingleSongForm from '../RepetitiveForms/FindSingleSceneForm/FindSingleSongForm/FindSingleSongForm'
 import Button from '../../../Button/Button'
 import SingleApprobationPanel from '../subPanels/FindGroupForm/SingleApprobationPanel/SingleApprobationPanel'
 
 import styles from './AudioUnit.module.scss'
 
 
-const AudioUnit = ({data, index, dataName, map, setMap}) => {
+const AudioUnit = ({data, index, dataName, map, setMap, editable}) => {
+
+    /*
+        Is the audio specifically for the song of Maélie
+    */
+    const isMaelieSong = dataName === "choraleIndependante" ? true : false
 
     const [audioEditingMode, setAudioEditingMode] = useState(false);
     const [currentValue, setCurrentValue] = useState(data)
@@ -19,8 +25,6 @@ const AudioUnit = ({data, index, dataName, map, setMap}) => {
     useEffect(() => {
 
         if(currentValue && currentValue !== data){
-            console.log("Current value")
-            console.log(currentValue)
             setMap({
                 ...map,
                 [dataName]: currentValue[dataName]
@@ -29,7 +33,6 @@ const AudioUnit = ({data, index, dataName, map, setMap}) => {
 
     }, [currentValue])
 
-    console.log("what out looping")
 
     const callBackFunction = ( returnedData ) => {
 
@@ -41,7 +44,9 @@ const AudioUnit = ({data, index, dataName, map, setMap}) => {
 
 
     return (
-        <li className={`${styles["audio-unit"]} ${styles["no-wrap"]} ${!data && styles["audio-unit--red"]} col-12`}>
+        <li className={`${styles["audio-unit"]} ${styles["no-wrap"]} ${ data && (isMaelieSong ? styles["audio-unit--contains-data-maelies-song"] : styles["audio-unit--contains-data"])} col-12`}>
+
+
             {   
                 selectedForm && 
                 <SingleApprobationPanel 
@@ -52,19 +57,38 @@ const AudioUnit = ({data, index, dataName, map, setMap}) => {
                     noAudioDisplay
                 />
             }
-            {audioEditingMode && 
-                <section className={`${styles["audio-unit__edit-section"]}`}>
-                    <div className="col-12">
-                       <h3 className="col-12">Sélectionner un extrait audio</h3>
-                       <p className="beige col-12">Celui-ci sera appliqué à la scène spécifique que tu as choisi de changer.</p>
-                    </div>
 
-                    {/* Form with searchinput and fields  */} 
-                    <FindSingleSceneForm 
-                        audioField={dataName} 
-                        updateStateWithSearchValue={setSelectedForm}
-                        noAudioDisplay 
-                    />
+
+            {audioEditingMode && !selectedForm && editable &&
+                <section className={`${styles["audio-unit__edit-section"]}`}>
+                    
+                    { isMaelieSong &&
+                        <> 
+                            <div className="col-12">
+                                <h3 className="col-12">Sélectionne un artiste</h3>
+                                <p className="beige col-12">Ce sera sa version du chant de Maélie qui jouera lors de la lecture du conte.</p>
+                            </div>
+                            {/* Form with searchinput and fields specifically  Maélie's song  */} 
+                            <FindSingleSongForm
+                                updateStateWithSearchValue={setSelectedForm}
+                            />
+                        </>
+                    }
+                    { !isMaelieSong &&
+                        <> 
+                            {/* Form with searchinput and fields specifically for scenes  */} 
+                            <div className="col-12">
+                                <h3 className="col-12">Sélectionne un artiste</h3>
+                                <p className="beige col-12">La scène que tu as choisi d'éditer recevra l'extrait audio correspondant de cet artiste.</p>
+                            </div>
+                            <FindSingleSceneForm 
+                                audioField={dataName} 
+                                updateStateWithSearchValue={setSelectedForm}
+                                noAudioDisplay 
+                            />
+                        </>
+                    }
+                    
                     
                     <div className={`${styles["edit-section__button-container"]} col-12`}>
                         <Button color="white" reverse onClick={() => setAudioEditingMode(false)} >Retour</Button>
@@ -72,13 +96,21 @@ const AudioUnit = ({data, index, dataName, map, setMap}) => {
                 </section>
             }
 
-            {!data &&
-
-            <button onClick={() => setAudioEditingMode(true)} className={`${styles["audio-unit__edit-button"]}`}>&#x2710;</button>
             
+            <div className={`${styles["audio-unit__text-container"]}`}>
+                <strong>
+                    { isMaelieSong && 
+                        <>Chant de Maélie : </>
+                    }
+                    { !isMaelieSong &&
+                        <>Scène {index + 1} : </>
+                    }
+                </strong>
+                { data ? (data.artistName ? data.artistName : data.choristNames) : "Espace vide"}
+            </div>
+            {editable &&
+                <button onClick={() => setAudioEditingMode(true)} className={`${styles["audio-unit__edit-button"]}`}>Modifier</button>
             }
-
-            <strong>Scène {index + 1} : </strong>{ data ? "Extrait audio disponible" : "Extrait manquant"}
         </li>
     )
 }

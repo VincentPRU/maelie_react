@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
 exports.sendEmail = functions.https.onCall((data, context) => {
   // Defining our transport object
   const mailOptions = {
-    from: useremail,
+    from: {name: "SMCQ Jeunesse", address: "maelieetledragon@smcq.qc.ca"},
     to: data.email,
     subject: data.subject,
     html: data.content,

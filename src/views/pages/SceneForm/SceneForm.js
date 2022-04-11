@@ -277,11 +277,14 @@ const SceneForm = () => {
     return (
         <section className={`${styles.pageStyling}`}>
           <div className={`maxWidthPageContainer`}>
-            <header>
-              <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer à la bande sonore du conte.</h1>
-              <h4 className="blue">Rappel : Les enregistrements doivent durer entre 5 et 90 secondes chacun.</h4>
 
-            </header>
+            {
+              !formSent &&
+              <header>
+                <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer à la bande sonore du conte.</h1>
+                <h4 className="blue">Rappel : Les enregistrements doivent durer entre 5 et 90 secondes chacun.</h4>
+              </header>
+            }
 
             { message.message && 
                 <Message>{ message.message }</Message>

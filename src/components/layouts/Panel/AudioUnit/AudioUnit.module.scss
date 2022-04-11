@@ -1,32 +1,51 @@
 .audio-unit {
 
-    --currentColor : rgb(var(--green));
+    --currentColor : rgb(var(--pink));
 
     color: var(--currentColor);
-    margin-bottom: 0.2rem;
+
+    display: flex;
+    justify-content: space-between;
 
 
-    /* Overflow with three dots*/
-    text-overflow: ellipsis;
-    overflow: hidden; 
-    white-space: nowrap;
+    padding: 0.25rem 0px;
 
     > * {
         white-space: normal;
         text-overflow: initial;
     }
+
+    &.audio-unit--contains-data {
+        --currentColor : rgb(var(--green));
+        .audio-unit__text-container {
+            color: var(--currentColor);
+        }
+    }
+
+    &.audio-unit--contains-data-maelies-song {
+        --currentColor : rgb(var(--yellow));
+        .audio-unit__text-container {
+            color: var(--currentColor);
+        }
+    }
     
 
-    
 
-    &.audio-unit--red {  --currentColor : rgb(var(--red)); }
+    .audio-unit__text-container {
+        /* Overflow with three dots*/
+        text-overflow: ellipsis;
+        overflow: hidden; 
+        white-space: nowrap;
+        margin-right: 1rem;
+        color: grey;
+    }
+
 
     .audio-unit__edit-button {
-        border: 0.2rem solid var(--currentColor);
+        border: 0.1rem solid var(--currentColor);
+        padding: 0.2rem;
         color: var(--currentColor);
         border-radius: 0.2rem;
-        margin-right: 0.2rem;
-
         transition: 0.2s;
         
         &:hover{
@@ -52,6 +71,7 @@
 
         h3 { 
             opacity: 1;
+            margin-top: 0px;
             color: rgb(var(--beige));
             margin-bottom: 1rem;
         }

@@ -1,0 +1,19 @@
+
+.personalized-selection {
+
+    > ul {
+        background-color: rgb(var(--beige));
+        border-radius: 0.25rem;
+        padding: 0.5rem;
+
+    }
+
+    .personalized-selection__button-container {
+        button {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+
+
+}

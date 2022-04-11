@@ -5,10 +5,9 @@ import styles from './FindSingleSceneForm.module.scss'
 //Components
 import Input from '../../../../forms/fields/Input/Input'
 import SearchResult from '../../SearchResult/SearchResult'
-import SingleApprobationPanel from '../../subPanels/FindGroupForm/SingleApprobationPanel/SingleApprobationPanel'
 
 //Bg utils
-import { fetchScenesForAudioField, fetchAllAcceptedScenes } from '../../../Scene/sceneControl/utils/scenesDbQueries'
+import { fetchAllAcceptedScenes } from '../../../Scene/sceneControl/utils/scenesDbQueries'
 
 /*
 
@@ -17,14 +16,20 @@ import { fetchScenesForAudioField, fetchAllAcceptedScenes } from '../../../Scene
 
 */
 
-const FindSingleSceneForm = ({audioField, noAudioChange, noAudioDisplay, updateStateWithSearchValue}) => {
+const FindSingleSceneForm = ({audioField, updateStateWithSearchValue}) => {
 
     //Audiofield is specified if the form has to look for a specefic field
 
     //first step : receive the options (containing the wanted audio field)
     const options = useRef([]); //going to contain the data
+    const [dataLoaded, setDataLoaded] = useState(false)
 
     const [validPropositions, setValidPropositions] = useState([]);
+
+    //Number of elements to display at the same time
+    const propositionNumberDefault = 10;
+    const [propositionNumber, setPropositionNumber] = useState(propositionNumberDefault);
+
     const [inputData, setInputData] = useState({
         text: ""
     })
@@ -49,9 +54,15 @@ const FindSingleSceneForm = ({audioField, noAudioChange, noAudioDisplay, updateS
                 }
 
                 options.current = tempArray
+                options.current.sort((a, b) => b.createdAt - a.createdAt )
+                //tell the component to rerender because the data is now loaded
+                setDataLoaded(true)
 
             } else {
                 options.current = await fetchAllAcceptedScenes()
+                options.current.sort((a, b) => b.createdAt - a.createdAt )
+                //tell the component to rerender because the data is now loaded
+                setDataLoaded(true)
             }
         }
 
@@ -78,7 +89,7 @@ const FindSingleSceneForm = ({audioField, noAudioChange, noAudioDisplay, updateS
                 const normalizedParticipantsName = option.participantsName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
                 const normalizedSchool = option.school.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
-                if(normalizedCurrentValue.length > 3){
+                if(normalizedCurrentValue.length > 0){
                     
                     if( normalizedArtistName.includes(normalizedCurrentValue) ||
                     normalizedParticipantsName.includes(normalizedCurrentValue) ||
@@ -90,18 +101,23 @@ const FindSingleSceneForm = ({audioField, noAudioChange, noAudioDisplay, updateS
 
                 }
 
+                //If nothing is in the search bar
+                if(normalizedCurrentValue.length === 0){ newValues.push(option) }
+
             
             })
 
             //Once every options are evaluated, we can update the state
             setValidPropositions(newValues);
+
+            //That is my preference but not required. Reduce the number of options displayed to its initial value when searching the input field
+            if(propositionNumberDefault !== propositionNumber) setPropositionNumber(propositionNumberDefault)
         }
 
-    }, [inputData])
+    }, [inputData, dataLoaded])
 
     return (
         <div className={`${styles["single-scene-form"]} col-12 thinDarkScrollBar`}>
-         
             <form className="col-12">
                 <Input 
                     data={inputData} 
@@ -111,18 +127,43 @@ const FindSingleSceneForm = ({audioField, noAudioChange, noAudioDisplay, updateS
                 />
             </form>
             <section>
-                <h4 className="beige">Résultats : </h4>
+                {
+                    validPropositions.length > 0 && dataLoaded &&
+                    <h4 className="beige">Résultats {validPropositions && `(${validPropositions.length})`} : </h4>
+                }
+                {
+                    validPropositions.length === 0 && dataLoaded &&
+                    <div className={`col-12 ${styles["single-entry-form__message-container"]}`}>
+                        <h4>Aucun résultat n'existe pour ta recherche</h4>
+                        <small>N'hésite pas à essayer avec d'autres mots-clés.</small>
+                    </div>
+                }
+                {
+                    !dataLoaded &&
+                    <>
+                        <h4 style={{marginBottom: "0px"}} className="beige">Les données sont en chargement</h4>
+                    </>
+                }
                 <div className={`${styles["results-section__scrollable-container"]}`}>
                         {
-                            validPropositions.map(option => (
-                                <SearchResult 
-                                    key={"search_result" + option.id}
-                                    artistName={option.artistName}
-                                    school={option.school ? option.school : null}
-                                    participantsName={option.participantsName ? option.participantsName : null}
-                                    onClick={() => {updateStateWithSearchValue(option)}}
-                                />
+                            validPropositions.map((option, index) => (
+                                <>
+                                { index < propositionNumber &&
+                                    <SearchResult 
+                                        key={"search_result" + option.id}
+                                        artistName={option.artistName}
+                                        school={option.school ? option.school : null}
+                                        participantsName={option.participantsName ? option.participantsName : null}
+                                        date={option.createdAt}
+                                        onClick={() => {updateStateWithSearchValue(option)}}
+                                    />
+                                }
+                                </>
                             ))
+                        }
+                        {
+                            validPropositions.length > propositionNumber &&
+                            <button onClick={() => {setPropositionNumber(propositionNumber + propositionNumberDefault)}} className="beige col-12">Afficher plus de résultats</button>
                         }
                     </div>
             </section>

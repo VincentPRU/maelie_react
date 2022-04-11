@@ -7,6 +7,7 @@ import { fetchAllAcceptedScenes } from '../../../Scene/sceneControl/utils/scenes
 //components
 import SingleApprobationPanel from './SingleApprobationPanel/SingleApprobationPanel'
 import FindSingleSceneForm from '../../RepetitiveForms/FindSingleSceneForm/FindSingleSceneForm'
+import FindSceneOrSongForm from '../../RepetitiveForms/FindSceneOrSongForm/FindSceneOrSongForm'
 
 import styles from './FindGroupForm.module.scss'
 
@@ -51,12 +52,14 @@ const FindGroupForm = ({ functionCallBack }) => {
 
     return (
         <div className={`${styles["find-group-component"]} col-12`}>
+            {/* Display the result */}
             {   
                 selectedForm &&
                 <SingleApprobationPanel callBackFunction={callBackWithData} {...selectedForm}  form={selectedForm} clear={() => setSelectedForm(null)}/>
             }
+            {/* Search tool */}
             <div className="col-12">
-                <FindSingleSceneForm updateStateWithSearchValue={setSelectedForm} />
+                <FindSceneOrSongForm updateStateWithSearchValue={setSelectedForm} />
             </div>
         
         </div>

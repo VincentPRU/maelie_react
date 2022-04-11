@@ -34,7 +34,7 @@
         color: rgb(var(--pink));
         margin: 0px;
         float: left;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         width: 100%;
     }
 
@@ -59,6 +59,26 @@
     .note{
         font-size: 0.9rem;
     }
+
+    ul {
+        padding-left: 1rem;
+        
+        li {
+            list-style-type: disc;
+        }
+
+    }
+
+    .single-approbation-panel__type-tag-container {
+
+        > div {
+            float: left;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+    }
+ 
 
     .single-approbation-panel__buttons-container {
         float: left;

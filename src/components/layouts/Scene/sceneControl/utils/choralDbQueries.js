@@ -104,7 +104,11 @@ export const getAllChoralGeneral = async () => {
         const entries = [];
 
         //Fill the new array
-        snapShot.forEach(doc => entries.push( doc.data() ) )
+        snapShot.forEach(doc => {
+            const data = doc.data()
+            const dataWithId = {...data, id: doc.id}
+            entries.push( dataWithId ) 
+        })
 
         return entries
 

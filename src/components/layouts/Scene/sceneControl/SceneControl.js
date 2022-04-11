@@ -12,10 +12,11 @@ import ArrowButton from '../../../Button/ArrowButton'
 import SingleAudioList from './components/SingleAudioList'
 import FindGroupForm from '../../Panel/subPanels/FindGroupForm/FindGroupForm'
 import FindMaelieForm from '../../Panel/subPanels/FindGroupForm/FindMaelieForm/FindMaelieForm'
+import PersonalizedSelection from '../../Panel/subPanels/FindGroupForm/PersonalizedSelection/PersonalizedSelection'
 
 //Db queries
 import { getAllAudioScene, getRandomScenesMap, randomlyFetchSpecificScene } from './utils/scenesDbQueries'
-import { getAllAudioChoral, getRandomSingleChoralElem} from './utils/choralDbQueries'
+import { getAllAudioChoral, getRandomSingleChoralElem } from './utils/choralDbQueries'
 
 //Animation functions
 import { setTextPerTime } from './utils/animationTextFunctions'
@@ -313,6 +314,10 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
         const tempAudio3 = controlScenesMap.current.audio3 ? controlScenesMap.current.audio3 : await randomlyFetchSpecificScene("audio3", scenesStoredData, setScenesStoredData)
         const tempAudio4 = controlScenesMap.current.audio4 ? controlScenesMap.current.audio4 : await randomlyFetchSpecificScene("audio4", scenesStoredData, setScenesStoredData)
         const tempAudio5 = controlScenesMap.current.audio5 ? controlScenesMap.current.audio5 : await randomlyFetchSpecificScene("audio5", scenesStoredData, setScenesStoredData)
+        
+        //Chorale data
+        const tempChoralData = await getAllAudioChoral(choralStoredData, setChoralStoredData)
+        const maelieSong = controlScenesMap.current.choraleIndependante ? controlScenesMap.current.choraleIndependante : getRandomSingleChoralElem(tempChoralData)
 
         const newSceneMap = {
             audio1: tempAudio1,
@@ -326,7 +331,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
             Creation of the audio manager
         */
         
-        const innerAudioManager = new AudioManager(newSceneMap, controlScenesMap.current.choraleIndependante, infosListDisplay, setInfosListDisplay);
+        const innerAudioManager = new AudioManager(newSceneMap, maelieSong, infosListDisplay, setInfosListDisplay);
 
         //This element is going to be acces in the state later. 
         //But because it asynchronous, we use it with a constant in the function
@@ -348,15 +353,18 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
     const groupFormScenesCallBack = ( returnedValue ) => {
 
-        controlScenesMap.current = {...controlScenesMap.current, ...returnedValue}            //save values
-        setMenuStateSelectionLevel(3)                                           //go to next window
-
-    }
-
-    const groupFormSongCallBack = ( returnedValue ) => {
-        controlScenesMap.current = {...controlScenesMap.current, ...returnedValue} 
+        controlScenesMap.current = {...controlScenesMap.current, ...returnedValue}              //save values
         displayGroupSelection()
+        
     }
+
+    const individualPickCallBack = ( returnedvalue ) => {
+
+        controlScenesMap.current = returnedvalue;
+        displayGroupSelection()
+
+    }
+
 
     useEffect(() => {
         console.log(controlScenesMap.current)
@@ -499,7 +507,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
                     <>
                     {menuStateSelectionLevel === 0 &&
-               
+
                         <div className={`col-12 ${styles.multiplePanelsContainer}`}>
                             <Panel subTitle={`Visionner sans musique`} warpHorizontally onComponentClick={launchAnimWithoutMusic} >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.88 121.06">
@@ -526,7 +534,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
                             <Panel 
                             subTitle={`Sélection des extraits audio à la pièce`} 
                             warpHorizontally 
-                            onComponentClick={launchAnimWithoutMusic} 
+                            onComponentClick={() => setMenuStateSelectionLevel(3)} 
 
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 511.78">
@@ -555,8 +563,8 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
                     {menuStateSelectionLevel === 2 &&
                         <>
                             <Panel 
-                            title="1. Trouver les scènes" 
-                            p1={`Trouve toutes les oeuvres d'un même artiste en le cherchant par son nom d'artiste`}
+                            title="Trouver un artiste" 
+                            p1={`Cherche un artiste que tu connais en entrant son nom, celui des personnes qui l'ont aidés dans sa création ou même celui de son école.`}
                             >
                                 <FindGroupForm functionCallBack={groupFormScenesCallBack}/>
                             </Panel>
@@ -570,24 +578,28 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
                         </>
                     }
 
-                    {/* From a same origin : maelie */}
+                    {/* Select every audio excerpt individually */}
                     {menuStateSelectionLevel === 3 &&
                         <>
                             <Panel 
-                            title="2. Trouver un chant de Maélie" 
-                            p1={`Trouve une version du chant de Maélie de l'artiste de ton choix.`}
+                            title="Sélection personnalisée" 
+                            p1={`Cherche les extraits audio un par un et assemble une bande sonore unique ! 
+                            Tous les extraits audio que tu ne sélectionneras pas toi-même seront remplis aléatoirement.
+                            `}
                             >
-                                <FindMaelieForm functionCallBack={groupFormSongCallBack}/>
+                                <PersonalizedSelection functionCallBack={individualPickCallBack}/>
                             </Panel>
 
                             <div className={`col-12 ${styles.backwardButton_container}`}>
-                                <div className={styles.backwardButton} onClick={() => setMenuStateSelectionLevel(2)}>
+                                <div className={styles.backwardButton} onClick={() => setMenuStateSelectionLevel(1)}>
                                     Retour au menu précédent
                                 </div>
                             </div>
                             
                         </>
                     }
+
+                  
                     </>
                 }
 
