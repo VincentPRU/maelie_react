@@ -6,6 +6,7 @@ import FormContainer from '../../../components/forms/container/FormContainer';
 import ContactForm from '../../../components/forms/form/contactForm/ContactForm';
 import CreditForm from '../../../components/forms/form/creditForm/CreditForm';
 import AudioScenesForm from '../../../components/forms/form/ScencesForm/AudioScenesForm';
+import Spinner from '../../../utils/Spinner/Spinner'
 
 import Button from '../../../components/Button/Button'
 
@@ -19,6 +20,7 @@ import tree from '../../../images/illustrations/arbre.png'
 const SceneForm = () => {
 
     const [formSent, setFormSent] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const [message, setMessage] = useState({
       message: "",
@@ -27,7 +29,7 @@ const SceneForm = () => {
 
     useEffect(() => {
       window.scrollTo(0, 0)
-    }, [])
+    }, [loading])
 
     const [userForm, setUserForm] = useState({
       occupation: '',
@@ -94,7 +96,7 @@ const SceneForm = () => {
                 submittingStepThree();
 
               } catch(e){
-
+                setLoading(false)
                 setMessage({
                   message: "Un problème est survenu. Assurez-vous que les données de contact que vous avez fournies sont du bon format.",
                   positive: false
@@ -116,6 +118,8 @@ const SceneForm = () => {
               //Add the main form data to the firestore collection as a new document
               //Include the new id as a reference
               await firestore.collection("credit").add(mainFormData)
+
+              setLoading(false)
 
               setMessage({
                 message: "Félicitations. Les informations ont bien été enregistrées",
@@ -154,6 +158,9 @@ const SceneForm = () => {
 
 
             } catch(e){
+
+              setLoading(false)
+
               setMessage({
                 message: "Un problème est survenu. N'hésitez pas à nous contacter pour nous faire part du problème.",
                 positive: false
@@ -220,6 +227,8 @@ const SceneForm = () => {
         */
 
        try{
+
+          setLoading(true)
           //1. one by one : 
           //                - try to upload file
           //                - keep trace of the url in the storage
@@ -260,6 +269,7 @@ const SceneForm = () => {
           submittingStepTwo();
 
         } catch(e){
+            setLoading(false)
             setMessage({
               message: "Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds (max. 5 Mo) et soient de format audio.",
               positive: false
@@ -279,7 +289,7 @@ const SceneForm = () => {
           <div className={`maxWidthPageContainer`}>
 
             {
-              !formSent &&
+              !formSent && !loading &&
               <header>
                 <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer à la bande sonore du conte.</h1>
                 <h4 className="blue">Rappel : Les enregistrements doivent durer entre 5 et 90 secondes chacun.</h4>
@@ -293,7 +303,7 @@ const SceneForm = () => {
             { message.message && message.positive &&
                 <Message positiveReview>{ message.message }</Message>
             }
-            { !formSent &&
+            { !formSent && !loading &&
             <form onSubmit={onSubmit} className="col-12">
 
                 {/* Section with all the personnal informations */}
@@ -327,7 +337,7 @@ const SceneForm = () => {
                 <Button>Envoyer</Button>
             </form>
             }
-            { formSent &&
+            { formSent && !loading &&
             <div className={styles.confirmationMessage}>
                 <FormContainer 
                         title="Félicitations !"
@@ -337,25 +347,29 @@ const SceneForm = () => {
                   </FormContainer>
             </div>
             } 
+            { loading &&
+              <div className={`${styles["spinner-container"]}`}>
+                  <Spinner />
+              </div>
+            }
             </div>
 
             <div className={styles.formPageBackground}>
-          <div className={styles.skyBackgroundGradient}>
-            <div></div>
-            <div></div>
-          </div>
 
-          <div className={styles.hillIllustrationContainer}>
-            <img alt="Illustration de coline" src={Hill}/>
+              <div className={styles.skyBackgroundGradient}>
+                <div></div>
+                <div></div>
+              </div>
 
-          </div>
+              <div className={styles.hillIllustrationContainer}>
+                <img alt="Illustration de coline" src={Hill}/>
+              </div>
 
-          <div className={styles.treeIllustrationContainer}>
-            <img src={ tree } alt="Illustration de chateau" />
-            <img src={ tree } alt="Illustration de chateau" />
-
-          </div>
-
+              <div className={styles.treeIllustrationContainer}>
+                <img src={ tree } alt="Illustration de chateau" />
+                <img src={ tree } alt="Illustration de chateau" />
+              </div>
+          
         </div>
 
         </section>

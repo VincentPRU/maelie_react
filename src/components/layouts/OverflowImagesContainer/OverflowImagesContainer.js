@@ -58,7 +58,7 @@ const OverflowImagesContainer = ({ left, width, yTransformFactor, top, noBlurEff
         filter: `blur(${blurStyle}px)`
     }
 
-
+ 
     return (
 
             <div 

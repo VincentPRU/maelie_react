@@ -6,7 +6,7 @@
 
 .loader {
     color: rgb(var(--pink));
-    font-size: 20px;
+    font-size: 15px;
     margin: 45vh auto;
     width: 1em;
     height: 1em;
@@ -19,6 +19,7 @@
     -ms-transform: translateZ(0);
     transform: translateZ(0);
   }
+
   @-webkit-keyframes load4 {
     0%,
     100% {

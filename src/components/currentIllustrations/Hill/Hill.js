@@ -3,13 +3,23 @@ import React from 'react';
 
 import styles from "./Hill.module.scss";
 
+//Image
+import bigScreenHill from '../../../images/illustrations/lightBigHill.png'
+import smallScreenHill from '../../../images/illustrations/smallScreenBigHill.png'
+
+import bigScreenSmallHill from '../../../images/illustrations/lightSmallHill.png'
+
 //Left represent the alignment of the image. 
 //Perfectly centered would be a value of 50%
 //Width is there to help with overflow. 
 // A value of 150% will hide a total 50% of the image
-const Hill = ({ img, left, right, top, width, reverse, parentwidth, height}) => {
+const Hill = ({ left, right, top, width, reverse, parentwidth, height, smallHill}) => {
 
+    const smallScreen = window.innerWidth < 768;
 
+    const img = smallHill ? 
+        (bigScreenSmallHill) : 
+        (smallScreen ? smallScreenHill : bigScreenHill);
 
     //Height value. If there is one, then there is no width to preserve proportions
     const heightValue = height ? height: "";  

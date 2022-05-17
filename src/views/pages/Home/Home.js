@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, lazy, Suspense } from 'react';
 import ReactGA from 'react-ga'
 
 
@@ -24,7 +24,7 @@ import Button from '../../../components/Button/Button'
 
 //Illustrations import to save space below
 
-import hill2 from '../../../images/illustrations/lightBigHill.png'
+//import hill2 from '../../../images/illustrations/lightBigHill.png'
 import maelie from '../../../images/illustrations/Maelie.png'
 import notes from '../../../images/illustrations/notes.png'
 
@@ -32,8 +32,8 @@ import notes from '../../../images/illustrations/notes.png'
 import { ScrollEventProvider } from '../../../contexts/ScrollEvent'
 
 
-
 const Home = () => {
+
 
     const sceneSection = useRef({});
 
@@ -55,7 +55,8 @@ const Home = () => {
 
                         {/* Visual */}
                         <OverflowImagesContainer left="50%" width="100%" yTransformFactor="0.3" top="0.5">
-                            <Hill img={ hill2 } left="50%" top="0" width="175%" />
+                        
+                            <Hill left="50%" top="0" width="175%" />
 
                             {/* Top of the mountain */}
 
@@ -139,7 +140,7 @@ const Home = () => {
                             {/* Visuals */}
                             <OverflowImagesContainer left="50%" width="100%" yTransformFactor="0.2">
                                 <Dragon left="28%" top="0.285" width="43%" fadeIn={true} />
-                                <Hill img={ hill2 } left="60%" reverse={true} width="185%" />
+                                <Hill left="60%" reverse={true} width="185%" />
 
                                 <Tree top="0.31" left="30%" height="13vh" minHeight="5" reverse/>
                                 <Tree top="0.47" left="38%" height="16vh" minHeight="5" />
@@ -168,7 +169,7 @@ const Home = () => {
 
                                 {/* Visual */}
                                 <OverflowImagesContainer left="50%" width="100%" yTransformFactor="0.1" >
-                                    <Hill img={ hill2 } left="50%" width="175%" />
+                                    <Hill left="50%" width="175%" />
 
                                     {/* Top of the hill (third one) */}
                                     <House fileSize={200} top="0.017" left="79%" height="13vh" minHeight="5"/>

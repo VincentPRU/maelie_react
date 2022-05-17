@@ -11,6 +11,7 @@ import FormContainer from '../../../components/forms/container/FormContainer';
 import ContactForm from '../../../components/forms/form/contactForm/ContactForm';
 import ChoralForm from '../../../components/forms/form/ChoralForm/ChoralForm';
 import ChoralAudioForm from '../../../components/forms/form/ChoralAudioForm/ChoralAudioForm';
+import Spinner from '../../../utils/Spinner/Spinner'
 
 import styles from './ChoraleFormPage.module.scss';
 import Hill from '../../../images/illustrations/colline1.png'
@@ -19,6 +20,8 @@ import castle from '../../../images/illustrations/chateau.png'
 const ChoraleFormPage = () => {
 
   const [formSent, setFormSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const [message, setMessage] = useState({
     message: "",
@@ -27,7 +30,7 @@ const ChoraleFormPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+  }, [loading])
 
   const [userForm, setUserForm] = useState({
     occupation: '',
@@ -86,6 +89,9 @@ const ChoraleFormPage = () => {
               submittingStepThree();
 
             } catch(e){
+
+              setLoading(false)
+
               setMessage({
                 message: "Un problème est survenu. Assurez-vous que les données de contact que vous avez fournies sont du bon format.",
                 positive: false
@@ -105,6 +111,8 @@ const ChoraleFormPage = () => {
               //Add the main form data to the firestore collection as a new document
               //Include the new id as a reference
               await firestore.collection("choral").add(mainFormData)
+
+              setLoading(false)
               
               setMessage({
                 message: "Félicitations. Les informations ont bien été enregistrées",
@@ -143,6 +151,9 @@ const ChoraleFormPage = () => {
 
 
             } catch(e){
+
+              setLoading(false)
+
               setMessage({
                 message: "Un problème est survenu. N'hésitez pas à nous contacter pour nous faire part du problème.",
                 positive: false
@@ -197,6 +208,8 @@ const ChoraleFormPage = () => {
         */
 
        try{
+
+            setLoading(true)
             //1. one by one : 
             //                - try to upload file
             //                - keep trace of the url in the storage
@@ -235,6 +248,9 @@ const ChoraleFormPage = () => {
             submittingStepTwo();
 
           } catch(e){
+
+            setLoading(false)
+
             setMessage({
               message: "Un problème est survenu lors du téléversement des fichiers. \n\n Assurez-vous que ceux-ci ne soient pas trop lourds et soient de format audio.",
               positive: false
@@ -252,7 +268,7 @@ const ChoraleFormPage = () => {
       <section className={`${styles.choraleFormPage}`}>
         <div className={`maxWidthPageContainer`}>
           {
-            !formSent &&
+            !formSent && !loading &&
             <header>
               <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer au chant final de la "Chanson de Maélie"</h1>
           {/*     <h4 className="blue">Il est important de t'enregistrer en suivant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> avec un écouteur dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes grâce à la piste audio de référence. Attention ! Assure-toi qu'on entende seulement ta voix dans l'enregistrement, et pas le karaoké.</h4>*/}
@@ -279,10 +295,10 @@ const ChoraleFormPage = () => {
             { message.message && message.positive &&
                 <Message positiveReview>{ message.message }</Message>
             }
-
+            
+            { !formSent && !loading &&
             <form onSubmit={onSubmit} className="col-12">
-                { !formSent &&
-                <>
+                
                   {/* Section with all the personnal informations */}
                   <FormContainer 
                       title="Personne contact"
@@ -311,22 +327,25 @@ const ChoraleFormPage = () => {
                   </FormContainer>
 
                   <Button>Envoyer</Button>
-                  </>
+              </form>
+              }
 
+                { formSent && !loading &&
+                  <div className={styles.confirmationMessage}>
+                    <FormContainer 
+                        title="Félicitations !"
+                        subTitle='Ton formulaire a bien été envoyé. Merci pour ta participation à la "Chanson de Maélie" !' 
+                    >
+                    </FormContainer>
+                  </div>
+                }
+                { loading &&
+                  <div className={`${styles["spinner-container"]}`}>
+                      <Spinner />
+                  </div>
                 }
 
-                { formSent &&
-
-                  <FormContainer 
-                      title="Félicitations !"
-                      subTitle='Ton formulaire a bien été envoyé. Merci pour ta participation à la "Chanson de Maélie" !' 
-                  >
-                      
-                  </FormContainer>
-
-                }
-
-            </form>
+           
           
       
 

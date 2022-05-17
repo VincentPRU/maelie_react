@@ -9,6 +9,7 @@
   float: left;
 
   .confirmationMessage{
+
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -25,12 +26,27 @@
         color: rgb(var(--blue));
       }
 
-      > * {
-        width: 100%;
+      > * { width: 100%; }
 
-      }
+      small { font-size: 0.9rem;}
 
-    }
+
+  }
+
+  .spinner-container{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+
+    margin: 5vh 0px;
+    border-radius: 1rem;
+    max-width: 95%;
+    width: 40rem;
+    width: min(40rem, 95%);
+
+}
 
   > div {
 
@@ -56,8 +72,6 @@
           font-size: 1.5rem;
           margin: 0px;
         }
-    
-        
   
       }
 

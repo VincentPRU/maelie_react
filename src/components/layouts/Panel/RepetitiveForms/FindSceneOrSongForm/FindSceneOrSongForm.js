@@ -7,7 +7,6 @@ import { fetchAllAcceptedScenes } from '../../../Scene/sceneControl/utils/scenes
 //Components
 import Input from '../../../../forms/fields/Input/Input'
 import SearchResult from '../../SearchResult/SearchResult'
-import Button from '../../../../Button/Button'
 import styles from './FindSceneOrSongForm.module.scss'
 
 

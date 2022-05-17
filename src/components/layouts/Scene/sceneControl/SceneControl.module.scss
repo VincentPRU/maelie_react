@@ -363,10 +363,7 @@
                     color: rgb(var(--red));
                 }
             }
-
         }
-
-        
     }
 }
 
@@ -464,3 +461,25 @@
         transform: translate3d(0, 0, 0); 
       }
   }
+
+
+
+  
+
+/*
+*
+*
+*     Media queries for responsive design
+*
+*
+*
+*/
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+
+  
+  }
+  

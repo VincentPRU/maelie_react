@@ -40,6 +40,7 @@ const AdminCard = ({sceneForm, data}) => {
         getContactById(data.contactRef).then(setContactInfos)
     }, [])
 
+
     //Creation date display
     const dateOption = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
     const currentDate = new Date(createdAt.seconds * 1000).toLocaleDateString("fr-CA", dateOption)
@@ -185,16 +186,24 @@ const AdminCard = ({sceneForm, data}) => {
                     `}>
                         <div>
                             {   (status !== "accepted") && 
-                                <Button color="green" onClick={ () => validateForm(id, collection, "accepted", contactInfos.firstname, contactInfos.email) }>Accepter</Button>
+                                <Button color="green" onClick={ () => validateForm(id, collection, "accepted", contactInfos.firstname, contactInfos.email, (audioFiles["choraleIndependante"] ? true : false)) }>
+                                    Accepter
+                                </Button>
                             }
                             {   (status !== "refused") && 
-                            <Button color="pink" onClick={ () => validateForm(id, collection, "refused", contactInfos.firstname, contactInfos.email) }>Refuser</Button>
+                                <Button color="pink" onClick={ () => validateForm(id, collection, "refused", contactInfos.firstname, contactInfos.email, (audioFiles["choraleIndependante"] ? true : false)) }>
+                                    Refuser
+                                </Button>
                             }
                             {   (status === "accepted" || status === "refused") && 
-                            <Button color="yellow" onClick={ () => validateForm(id, collection, "") }>À valider</Button>
+                                <Button color="yellow" onClick={ () => validateForm(id, collection, "") }>
+                                    À valider
+                                </Button>
                             }
                             {   (status === "refused") && 
-                            <Button color="red" onClick={ () => { deleteSingleCard(id, collection, data.contactRef, audioFiles) }} >Supprimer</Button>
+                                <Button color="red" onClick={ () => { deleteSingleCard(id, collection, data.contactRef, audioFiles) }} >
+                                    Supprimer
+                                </Button>
                             }
                         </div>
                     </div>

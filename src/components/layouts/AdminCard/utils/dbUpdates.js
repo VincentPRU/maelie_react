@@ -1,6 +1,7 @@
 import firebase, { firestore, storage } from '../../../../firebase'
 
-const sendConfirmationEmail = (action, collection, firstName, email) => {
+
+const sendConfirmationEmail = (action, collection, firstName, email, isIndependentChoir) => {
 
     if(collection === "credit" && action === "accepted"){
         /*
@@ -16,8 +17,7 @@ const sendConfirmationEmail = (action, collection, firstName, email) => {
                         Tu peux maintenant aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
                         <p>Le menu te permettra de trouver ta bande sonore ou celle de tes amis. Tu peux aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
                         <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
-                        <p>Maélie et l’équipe de feu<br/>
-                        SMCQ Jeunesse</p>`
+                        <p>L’équipe de la SMCQ Jeunesse</p>`
 
             }).then(result => {
                 console.log(result.data);
@@ -48,8 +48,7 @@ const sendConfirmationEmail = (action, collection, firstName, email) => {
                             </ul>
                             <p>N’hésite pas à recommencer le processus en envoyant un fichier dans le bon format (mp3 de 5 à 90 secondes) en lien avec la scène du conte que tu as choisie.</p>
                             <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
-                            <p>Maélie et l’équipe de feu<br/>
-                            SMCQ Jeunesse</p>`
+                            <p>L’équipe de la SMCQ Jeunesse</p>`
     
                 }).then(result => {
                     console.log(result.data);
@@ -67,26 +66,55 @@ const sendConfirmationEmail = (action, collection, firstName, email) => {
                 /*
                     third option : send a message to informe the user that its participation to the choral has been accepted
                 */
-               try{
-                    const sendEmail = firebase.functions().httpsCallable('sendEmail');
-                    sendEmail({
-                    subject: 'Acceptation de fichier pour la chanson de Maélie',
-                    email: email,
-                    content: `<p>Bonjour ${firstName},</p>
-                                <p>Bonne nouvelle : ta contribution au « Chant de Maélie » a été approuvée !
-                                Un courriel sera envoyé à tous les participants lorsque la chorale virtuelle sera disponible dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
-                                <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
-                                <p>Maélie et l’équipe de feu<br/>
-                                SMCQ Jeunesse</p>`
-        
-                    }).then(result => {
-                        console.log(result.data);
-                        alert("Courriel envoyé avec succès.")
-                    })
-        
-               } catch (err) {
-                   alert("Un problème est survenue lors de l'envoie du courriel de confirmation. Cependant, la modification a bien fonctionné.")
-               }
+
+                //If the audio file is for the independant choir, then send a form a bit different
+                if(isIndependentChoir){
+
+                    try{
+                        const sendEmail = firebase.functions().httpsCallable('sendEmail');
+                        sendEmail({
+                        subject: 'Acceptation de fichier pour la chanson de Maélie',
+                        email: email,
+                        content: `<p>Bonjour ${firstName},</p>
+                                    <p>Bonne nouvelle : votre enregistrement de la « Chanson de Maélie » a été approuvée !
+                                    Un courriel vous sera envoyé lorsque la chorale virtuelle sera disponible dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
+                                    <p>Si vous avez des questions, écrivez-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                                    <p>L’équipe de la SMCQ Jeunesse</p>`
+            
+                        }).then(result => {
+                            console.log(result.data);
+                            alert("Courriel envoyé avec succès.")
+                        })
+            
+                    } catch (err) {
+                        alert("Un problème est survenue lors de l'envoie du courriel de confirmation. Cependant, la modification a bien fonctionné.")
+                    }
+
+                } else {
+
+                    try{
+                        const sendEmail = firebase.functions().httpsCallable('sendEmail');
+                        sendEmail({
+                        subject: 'Acceptation de fichier pour la chanson de Maélie',
+                        email: email,
+                        content: `<p>Bonjour ${firstName},</p>
+                                    <p>Bonne nouvelle : ta contribution au « Chant de Maélie » a été approuvée !
+                                    Un courriel sera envoyé à tous les participants lorsque la chorale virtuelle sera disponible dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
+                                    <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                                    <p>L’équipe de la SMCQ Jeunesse</p>`
+            
+                        }).then(result => {
+                            console.log(result.data);
+                            alert("Courriel envoyé avec succès.")
+                        })
+            
+                    } catch (err) {
+                        alert("Un problème est survenue lors de l'envoie du courriel de confirmation. Cependant, la modification a bien fonctionné.")
+                    }
+
+                }
+
+               
         
         
             } else {
@@ -111,8 +139,7 @@ const sendConfirmationEmail = (action, collection, firstName, email) => {
                                     </ul>
                                     <p>N’hésite pas à recommencer le processus en envoyant un fichier dans le bon format (mp3) enregistré en synchronicité avec la piste de référence du <a href="https://smcqeducation.ca/?artist=lodyssee-contemporaine">karaoké</a>.</p>
                                     <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
-                                    <p>Maélie et l’équipe de feu<br/>
-                                    SMCQ Jeunesse</p>`
+                                    <p>L’équipe de la SMCQ Jeunesse</p>`
             
                         }).then(result => {
                             console.log(result.data);
@@ -130,7 +157,7 @@ const sendConfirmationEmail = (action, collection, firstName, email) => {
 /*
     Function to accept or refuse a specific form
 */
-export const validateForm = async ( id, collectionName, action, firstName = null, email = null ) => {
+export const validateForm = async ( id, collectionName, action, firstName = null, email = null,  independentChoir = false) => {
 
     try {
 
@@ -139,7 +166,7 @@ export const validateForm = async ( id, collectionName, action, firstName = null
             await firestore.collection( collectionName ).doc( id ).update("status", action)
             alert("Félicitations. Les changements ont bien été effectués. Vous n'avez qu'à recharger la page pour voir les modifications.")
 
-            sendConfirmationEmail(action, collectionName, firstName, email)
+            sendConfirmationEmail(action, collectionName, firstName, email, independentChoir)
         } else {
             throw new Error("Mauvaise valeur d'acceptation entrée"); 
         }
