@@ -5,7 +5,6 @@ import { useState } from 'react'
 
 //components
 import SingleApprobationPanel from './../SingleApprobationPanel/SingleApprobationPanel'
-import FindSingleSceneForm from '../../../RepetitiveForms/FindSingleSceneForm/FindSingleSceneForm'
 import FindSingleSongForm from '../../../RepetitiveForms/FindSingleSceneForm/FindSingleSongForm/FindSingleSongForm'
 
 import styles from './FindMaelieForm.module.scss'
@@ -23,8 +22,6 @@ const FindMaelieForm = ({ functionCallBack }) => {
         if(functionCallBack){
             functionCallBack(returnedData)
         }
-        console.log("call back function")
-        console.log(returnedData)
     }
 
 

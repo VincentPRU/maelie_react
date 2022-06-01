@@ -1,6 +1,15 @@
 import firebase, { firestore, storage } from '../../../../firebase'
 
-
+/*
+          subject: 'Acceptation de la bande sonore',
+            email: email,
+            content: `<p>Bonjour ${firstName},</p>
+                        <p>Bonne nouvelle : ta bande sonore pour le conte « Maélie et le dragon » a été approuvée !
+                        Tu peux maintenant aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
+                        <p>Le menu te permettra de trouver ta bande sonore ou celle de tes amis. Tu peux aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
+                        <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                        <p>L’équipe de la SMCQ Jeunesse</p>`
+*/
 const sendConfirmationEmail = (action, collection, firstName, email, isIndependentChoir) => {
 
     if(collection === "credit" && action === "accepted"){
@@ -14,8 +23,8 @@ const sendConfirmationEmail = (action, collection, firstName, email, isIndepende
             email: email,
             content: `<p>Bonjour ${firstName},</p>
                         <p>Bonne nouvelle : ta bande sonore pour le conte « Maélie et le dragon » a été approuvée !
-                        Tu peux maintenant aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
-                        <p>Le menu te permettra de trouver ta bande sonore ou celle de tes amis. Tu peux aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
+                        Tu pourras bientôt aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
+                        <p>Le menu à droite te permettra trouver ta bande sonore ou celle de tes amis. Tu pourras aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
                         <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
                         <p>L’équipe de la SMCQ Jeunesse</p>`
 

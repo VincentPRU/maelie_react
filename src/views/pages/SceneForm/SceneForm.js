@@ -291,8 +291,9 @@ const SceneForm = () => {
             {
               !formSent && !loading &&
               <header>
-                <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer à la bande sonore du conte.</h1>
-                <h4 className="blue">Rappel : Les enregistrements doivent durer entre 5 et 90 secondes chacun.</h4>
+                <h2 className={`col-12 ${styles["grey-page-title"]}`}>[ Participer aux scènes ]</h2>
+                <h1 className="col-12 red">Envoie-nous ton ou tes enregistrement(s) audio pour participer à la bande sonore du conte.</h1>
+                <h4 className="col-12 blue">Rappel : Les enregistrements doivent durer entre 5 et 90 secondes chacun.</h4>
               </header>
             }
 

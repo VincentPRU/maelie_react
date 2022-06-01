@@ -31,7 +31,7 @@ const Footer = () => {
                       <li><Button reverse color="white" to="/">Accueil</Button></li>
                       <li><Button reverse color="white" to="/participer-aux-scenes">Participer aux scènes</Button></li>
                       <li><Button reverse color="white" to="/chant-de-maelie">Participer à la Chanson de Maélie</Button></li>
-                      <li><Button reverse color="white" to="/informations">Informations</Button></li>
+                      <li><Button reverse color="white" to="/informations">Détails du projet</Button></li>
                   </ul>
                 </section>
 

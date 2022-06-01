@@ -23,7 +23,8 @@ const Credits = () => {
             <header className="col-12">
                 <h1 className="red ">Détails du projet</h1>
             </header>
-            <div className="col-12">
+
+            <div className={`col-12 ${styles["main-content"]}`}>
               <p className="col-12">
               Le volet jeunesse de la Société de musique contemporaine du Québec (SMCQ) enrichit sa panoplie d’activités en ligne avec sa toute dernière innovation :
               Maélie et le dragon.
@@ -87,6 +88,12 @@ const Credits = () => {
               Cette initiative s’inscrit dans le prolongement du programme jeunesse de la SMCQ qui rejoint déjà plus de 200 écoles et 40 000 élèves à travers le pays par l’entremise d’ateliers, de concerts et d’activités. Rassemblant artistes et pédagogues, la SMCQ a développé au fil des ans une vaste gamme de projets et plus de 300 ressources éducatives pour découvrir les compositeurs d’aujourd’hui et la création musicale. Présentés sous forme de « trousses pédagogiques » thématiques, ces outils sont offerts gratuitement aux enseignants sur la plateforme <span className="pink" style={{cursor: "pointer"}} onClick={event =>  window.location.href='https://smcqeducation.ca/'} >smcqeducation.ca</span>.
               </p>
 
+            </div>
+          </div>
+          <div className={styles.pageBackground}>
+            <div className={styles.skyBackgroundGradient}>
+                <div></div>
+                <div></div>
             </div>
           </div>
       </section>

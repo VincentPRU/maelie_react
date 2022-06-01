@@ -13,7 +13,7 @@ const SearchResult = ({ artistName, choristNames, school, participantsName, date
                 <h5>{choristNames ? choristNames : artistName}</h5>
                 <div className={`${styles["search-result--type-container"]}`}>
                     <small className={`${styles["search-result--type"]} ${artistName ? "green_BG" : "yellow_BG"}`}>
-                        {artistName ? "Scènes" : "Chant de Maélie"}
+                        {artistName ? "Scènes" : "Chanson de Maélie"}
                     </small>
                 </div>
             </header>

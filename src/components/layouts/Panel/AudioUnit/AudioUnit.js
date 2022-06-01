@@ -66,7 +66,7 @@ const AudioUnit = ({data, index, dataName, map, setMap, editable}) => {
                         <> 
                             <div className="col-12">
                                 <h3 className="col-12">Sélectionne un artiste</h3>
-                                <p className="beige col-12">Ce sera sa version du chant de Maélie qui jouera lors de la lecture du conte.</p>
+                                <p className="beige col-12">Ce sera sa version de la chanson de Maélie qui jouera lors de la lecture du conte.</p>
                             </div>
                             {/* Form with searchinput and fields specifically  Maélie's song  */} 
                             <FindSingleSongForm
@@ -100,7 +100,7 @@ const AudioUnit = ({data, index, dataName, map, setMap, editable}) => {
             <div className={`${styles["audio-unit__text-container"]}`}>
                 <strong>
                     { isMaelieSong && 
-                        <>Chant de Maélie : </>
+                        <>Chanson de Maélie : </>
                     }
                     { !isMaelieSong &&
                         <>Scène {index + 1} : </>

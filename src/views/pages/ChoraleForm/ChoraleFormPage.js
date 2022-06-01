@@ -270,9 +270,10 @@ const ChoraleFormPage = () => {
           {
             !formSent && !loading &&
             <header>
-              <h1 className="red">Envoie-nous ton ou tes enregistrement(s) audio pour participer au chant final de la "Chanson de Maélie"</h1>
+              <h2 className={`col-12 ${styles["grey-page-title"]}`}>[ Participer à la Chanson de Maélie ]</h2>
+              <h1 className="col-12 red">Envoie-nous ton ou tes enregistrement(s) audio pour participer au chant final de la "Chanson de Maélie"</h1>
           {/*     <h4 className="blue">Il est important de t'enregistrer en suivant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> avec un écouteur dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes grâce à la piste audio de référence. Attention ! Assure-toi qu'on entende seulement ta voix dans l'enregistrement, et pas le karaoké.</h4>*/}
-              <h4 className="blue">Deux options sont possibles :</h4>
+              <h4 className="col-12 blue">Deux options sont possibles :</h4>
               <ul>
                 <li>
                   <h5>1. Participer à la chorale virtuelle </h5>

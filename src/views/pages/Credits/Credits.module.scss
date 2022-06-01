@@ -1,5 +1,8 @@
 .creditsComponent{
 
+    position: relative;
+    float:left;
+
     img {
         height: 8rem;
         float: left;
@@ -16,18 +19,13 @@
                 font-size: clamp(3rem, 6rem, 5vw);
               }
         }
-        > div {
+        > .main-content {
 
             padding-bottom: 15vh;
 
             h4 {
                 margin-bottom: 0rem;
                 margin-top: 2rem;
-            }
-
-            p {
-                
-                
             }
 
             ul {
@@ -43,5 +41,44 @@
                 }
             }
         }
+    }
+
+    .pageBackground {
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+
+         /* Background color */
+        .skyBackgroundGradient{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+
+            display: flex; 
+            flex-direction: column;
+
+            > * { width: 100%; }
+
+            > :first-of-type {
+                height: 100vh;
+                height: max(100vh, 50%);
+                background: rgba(235,239,255,1);
+                background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(235,239,255,1) 0%, rgba(255,252,245,0.7628093473717612) 35%, rgba(255,222,161,0.6) 100%);
+            }
+
+            > :last-of-type {
+                flex:1;
+                background: rgba(235,239,255,1);
+                background: linear-gradient(180deg, rgba(255,222,161,0.6) 0%, rgba(255,222,161,0.6) 100%);
+            }
+
+        }
+
     }
 }
