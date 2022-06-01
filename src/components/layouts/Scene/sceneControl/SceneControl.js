@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef} from 'react'
 
 // Auth context 
 import { useAuth } from '../../../../contexts/AuthContext';
@@ -11,8 +11,8 @@ import Spinner from '../../../../utils/Spinner/Spinner'
 import ArrowButton from '../../../Button/ArrowButton'
 import SingleAudioList from './components/SingleAudioList'
 import FindGroupForm from '../../Panel/subPanels/FindGroupForm/FindGroupForm'
-import FindMaelieForm from '../../Panel/subPanels/FindGroupForm/FindMaelieForm/FindMaelieForm'
 import PersonalizedSelection from '../../Panel/subPanels/FindGroupForm/PersonalizedSelection/PersonalizedSelection'
+import AudioInfosCard from './components/AudioInfosCard/AudioInfosCard'
 
 //Db queries
 import { getAllAudioScene, getRandomScenesMap, randomlyFetchSpecificScene } from './utils/scenesDbQueries'
@@ -67,6 +67,9 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
     const [menuSectionState, setMenuSectionState] = useState(true);
     const [menuStateSelectionLevel, setMenuStateSelectionLevel] = useState(0)
     const [constrolSectionState, setControlSectionState] = useState(false);
+
+    //Dialog element state that display the details of a single audio element
+    const [audioCardDisplay, setAudioCardDisplay] = useState(false)
 
     /*
         Informations display in the top menu 
@@ -169,11 +172,11 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
         }
 
 
-    }, [animationPlaying, currentAnimation, setAnimation, animWithMusic])
+    }, [animationPlaying, currentAnimation, setAnimation, animWithMusic, audioManager, currentText, totalTime])
 
 
     const timeJump = ( percentage, newIndex ) => {
-        console.log("time jump called")
+
         if(!animWithMusic){
             //if there is no music playing , we update the currenttime manually
             currentTime.current = (parseInt(percentage * totalTime / 100))
@@ -187,25 +190,39 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
         timeRef.current.innerText = convertToTime(currentTime.current);
     }
 
-    //Start the animation loop
+    /*
+        Animation options
+        Control the loop and the audio
+    */
+    const playAnimation = () => {
+        setAnimationPlaying(true);
+        if(animWithMusic){
+            audioManager.play()
+        }
+    }
+
+    const pauseAnimation = () => {
+        setAnimationPlaying(false);
+        if(animWithMusic){
+            audioManager.pause()
+        }
+    }
+
     const playButton = () => {
         if(animationPlaying){
-            setAnimationPlaying(false);
-            if(animWithMusic){
-                audioManager.pause()
-            }
-    
+            pauseAnimation()
         } else {
-            setAnimationPlaying(true);
-            if(animWithMusic){
-                audioManager.play()
-            }
+            playAnimation()
         }
     }
 
 
     //Going from menu to animation state and vice versa
     const reverseMenuStates = () => {
+
+        //If the animation is playing, stop it
+        if(animationPlaying) pauseAnimation()
+
         //Bring back the animation to 0 when alterning between animation and option modes
         if(currentTime.current !== 0){ 
             timeJump(0, 0) 
@@ -365,12 +382,6 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
     }
 
-
-    useEffect(() => {
-        console.log(controlScenesMap.current)
-    },[controlScenesMap.current,controlScenesMap.current.choraleIndependante ])
-
-
     return (
 
         <section className={styles.sceneControlComponent} ref={ controlSection }>
@@ -379,64 +390,76 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
             { constrolSectionState && !isLoading &&
 
-            <div className={`${styles.controlsSection}`} >
-            {/* Top menu */}
-          
+                <div className={`${styles.controlsSection}`} >
+                {/* Top menu */}
+            
+                    <div className={`${styles.topMenuContainer} ${constrolSectionState && styles.setVisible}`}>
+                        
+                        { animWithMusic &&
+                        <div className={`col-12 ${styles["top-bar-audio-details"]}`}>
+                            <div>
+                                <div className={`${infosListDisplay.display && styles["top-bar-audio-details--open"]}`} onClick={ () => { if(!infosListDisplay.display)  setInfosListDisplay({ ...infosListDisplay, display: true })} }   >
+                                    <ul>
 
-
-                <div className={`${styles.topMenuContainer} ${constrolSectionState && styles.setVisible}`}>
-                    
-                    { animWithMusic &&
-                    <div className={`col-12 ${styles["top-bar-audio-details"]}`}>
-                        <div>
-                            <div className={`${infosListDisplay.display && styles["top-bar-audio-details--open"]}`} onClick={ () => { if(!infosListDisplay.display)  setInfosListDisplay({ ...infosListDisplay, display: true })} }   >
-                                <ul>
-
-                                    {
-                                        infosListDisplay.display &&
-                                        Object.keys(audioManager.scenesMap).map((elem, index) => (
+                                        {
+                                            infosListDisplay.display &&
+                                            Object.keys(audioManager.scenesMap).map((elem, index) => (
+                                                <SingleAudioList 
+                                                    key={audioManager.scenesMap[elem].contactRef + "AudioList" + index} 
+                                                    artistName={audioManager.scenesMap[elem].artistName}
+                                                    index={index} 
+                                                    school={audioManager.scenesMap[elem].school} 
+                                                    city={audioManager.scenesMap[elem].city}
+                                                    country={audioManager.scenesMap[elem].country}
+                                                    active={ infosListDisplay.currentAudioIndex === index ? true : false }
+                                                    jumpToScene={ () => { timeJump( currentPercentages[index], index ) } }
+                                                    displayInfos={ () => setAudioCardDisplay(audioManager.scenesMap[elem]) }
+                                    
+                                                />
+                                            ))
+                                        }
+                                        {
+                                            infosListDisplay.display &&
                                             <SingleAudioList 
-                                                key={audioManager.scenesMap[elem].contactRef + "AudioList" + index} 
-                                                artistName={audioManager.scenesMap[elem].artistName}
-                                                index={index} 
-                                                school={audioManager.scenesMap[elem].school} 
-                                                city={audioManager.scenesMap[elem].city}
-                                                country={audioManager.scenesMap[elem].country}
-                                                active={ infosListDisplay.currentAudioIndex === index ? true : false }
+                                                    choristNames={audioManager.choralElem.choristNames}
+                                                    index={5}
+                                                    school={audioManager.choralElem.school} 
+                                                    city={audioManager.choralElem.city}
+                                                    country={audioManager.choralElem.country}
+                                                    active={ infosListDisplay.currentAudioIndex === 5 ? true : false }
+                                                    jumpToScene={ () => { timeJump( currentPercentages[5], 5 ) } }
+                                                    displayInfos={ () => setAudioCardDisplay(audioManager.choralElem) }
+                                                />
+                                        }
+                                        {
+                                            !infosListDisplay.display && audioManager.scenesMap &&
+                                            <SingleAudioList 
+                                                    artistName={infosListDisplay.currentAudioIndex < 5 ? audioManager.scenesMap[ Object.keys(audioManager.scenesMap)[infosListDisplay.currentAudioIndex] ].artistName : null} 
+                                                    choristNames={infosListDisplay.currentAudioIndex === 5 ? audioManager.choralElem.choristNames : null}
+                                                    index={infosListDisplay.currentAudioIndex} 
+                                                    singleLineMode
                                             />
-                                        ))
-                                    }
-                                    {
-                                        infosListDisplay.display &&
-                                        <SingleAudioList 
-                                                choristNames={audioManager.choralElem.choristNames}
-                                                index={5}
-                                                school={audioManager.choralElem.school} 
-                                                city={audioManager.choralElem.city}
-                                                country={audioManager.choralElem.country}
-                                                active={ infosListDisplay.currentAudioIndex === 5 ? true : false }
-                                            />
-                                    }
-                                    {
-                                        !infosListDisplay.display && audioManager.scenesMap &&
-                                        <SingleAudioList 
-                                                artistName={infosListDisplay.currentAudioIndex < 5 ? audioManager.scenesMap[ Object.keys(audioManager.scenesMap)[infosListDisplay.currentAudioIndex] ].artistName : null} 
-                                                choristNames={infosListDisplay.currentAudioIndex === 5 ? audioManager.choralElem.choristNames : null}
-                                                index={infosListDisplay.currentAudioIndex} 
-                                                singleLineMode
-                                        />
-                                    }
-                                
-                                </ul>
-                                <div>
-                                    <ArrowButton openned={infosListDisplay.display} color="red" onclick={() => { setInfosListDisplay(
-                                        {...infosListDisplay, display: !infosListDisplay.display}
-                                    )}}/>
+                                        }
+                                    
+                                    </ul>
+                                    <div>
+                                        <ArrowButton openned={infosListDisplay.display} color="red" onclick={() => { setInfosListDisplay(
+                                            {...infosListDisplay, display: !infosListDisplay.display}
+                                        )}}/>
+                                    </div>
                                 </div>
                             </div>
+                            
                         </div>
-                        
-                    </div>
+                    }
+
+                    {/* Dialog element to display the details of a single audio file */}
+                    {
+                        audioCardDisplay &&
+                        <AudioInfosCard 
+                            data={audioCardDisplay}
+                            hideInfos={ () => { setAudioCardDisplay(false) }}
+                        />
                     }
 
                     {/* Tome line notifications */}
@@ -449,6 +472,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
                                     <Tooltip color="pink">Scène {index + 1}</Tooltip>
                                 </div>
                             ))}
+                            
                         </div>
                     </div>
 

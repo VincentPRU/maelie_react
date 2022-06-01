@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, lazy, Suspense } from 'react';
+import React, { useRef, useEffect } from 'react';
 import ReactGA from 'react-ga'
 
 
@@ -32,7 +32,13 @@ import notes from '../../../images/illustrations/notes.png'
 import { ScrollEventProvider } from '../../../contexts/ScrollEvent'
 
 
-const Home = () => {
+const Home = ({ scrollOverFooter }) => {
+
+    const homeSection = useRef()
+
+    const scrollToBottom = () => {
+        
+    }
 
 
     const sceneSection = useRef({});
@@ -44,7 +50,7 @@ const Home = () => {
 
     return (
         <ScrollEventProvider>
-            <div className={`${styles.homePage} col-12`}>
+            <div ref={homeSection} className={`${styles.homePage} col-12`}>
 
                    <div className={`fade-Intro fade-Intro--In ${styles.skyBackgroundGradient}`}>
                         <div></div> 
@@ -85,10 +91,7 @@ const Home = () => {
                             <Tree top="0.5" left="80%" height="16vh" minHeight="5" />
                             <Tree top="0.51" left="90%" height="13vh" minHeight="5" reverse/>
                             <Tree top="0.57" left="84%" height="16vh" minHeight="5" />
-{/* 
-                            <div style={{ width: "100%", borderTop: "1px solid red", position: "absolute", top: "5vh"}}></div>
-                            <div style={{ width: "1px", height:"100%",  borderLeft: "1px solid green", position: "absolute", left: "80%"}}></div>
-*/}
+
                         </OverflowImagesContainer>
 
                         {/* Main content of the section */}
@@ -159,7 +162,9 @@ const Home = () => {
                                             header2="Tu veux participer à la bande sonore ?"
                                             paragraph="Invente la trame sonore d'une scène de l'histoire et/ou participe au chant final."
                                         />
+
                                         <div></div>
+
                                     </section>
                                 </section>
                             </article>
@@ -181,15 +186,17 @@ const Home = () => {
                                     {/* In the middle trees */}
                                     <Tree top="0.25" left="55%" height="17vh" minHeight="5" />
                                     <Tree top="0.35" left="47%"  height="17vh" minHeight="5" reverse/>
+
                                 </OverflowImagesContainer>
 
                                 {/* Main content of the section */}
                                 <article style={{padding: "15vh 0vh 20vh 0vh"}} className={`${styles.sectionContent} col-12`}>
                                     <section className={`col-12 ${styles.posterContainer}`}>
                                             <section className={`col-12 ${styles.multiPosterContainer}`}>
-                                            <Poster
+
+                                                <Poster
                                                     top={0}
-                                                    topWidth={15}
+                                                    topWidth={20}
                                                     header3="1. Sonoriser une scène"
                                                     paragraph="Regarde le conte ci-dessous et choisis une scène. Quels sons peuplent l’environnement sonore à
                                                     ce moment de l’histoire ? Si c’était un film, quelle musique pourrait-on entendre ? Invente une
@@ -199,27 +206,47 @@ const Home = () => {
                                                     buttonAction="/participer-aux-scenes"
 
                                                 />
-                                                <Poster
-                                                    top={10}
-                                                    bottom={0}
-                                                    header3='2. Chanter "Le Chant de Maélie"'
-                                                    paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprends cette
-                                                    chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
-                                                    karaokés d’apprentissage sont proposés sur la plateforme éducative."
-                                                    buttonText="Participer"
-                                                    buttonAction="/chant-de-maelie"
-                                                />
+
+                                                <div>
+
+                                                    <Poster
+                                                        top={10}
+                                                        bottom={0}
+                                                        header3='2. Chanter "La chanson de Maélie"'
+                                                        paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprends cette
+                                                        chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
+                                                        karaokés d’apprentissage sont proposés sur la plateforme éducative."
+                                                        buttonText="Participer"
+                                                        buttonAction="/chant-de-maelie"
+                                                    />
+
+{/*
+                                                    <Poster
+                                                        top={10}
+                                                        bottom={0}
+                                                        header3='3. Chanter "Le Chant de Maélie"'
+                                                        paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprends cette
+                                                        chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
+                                                        karaokés d’apprentissage sont proposés sur la plateforme éducative."
+                                                        buttonText="Visualiser"
+                                                        scrollTo={ () => {scrollOverFooter()}}
+                                                    />
+ */}
+                                                </div>
+                                                
                                                 
                                          </section>
 
                                     </section>
                                 </article>
+
                                 {/* New sub-section */}
                                 <section ref={ sceneSection } style={{height: "100vh"}} className={`${styles.sectionContainer} col-12`}>
 
                                     <Scene sceneSection={sceneSection} />
 
                                 </section>
+
                             </section>
                         </section>
                     </section>

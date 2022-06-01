@@ -35,7 +35,8 @@
             margin: 5vh max(1vw, 1rem);
              
 
-             h4 { margin-top: 0px;}
+             h4:first-of-type { margin-top: 0px;}
+             
 
              ul {
                  display: flex;
@@ -101,10 +102,19 @@
                     font-size: 0.9rem;
                     line-height: 1.4;
 
-                    li { font-size: inherit;}
-                    &:hover{
-                        color: #ff9898;
+                    li { 
+                        font-size: inherit;
+                        &:hover{
+                            color: #ff9898;
+                        }
+
+                        button {
+                            &:hover{
+                                color: #ff9898;
+                            }
+                        }
                     }
+                    
                  }
              }
         }

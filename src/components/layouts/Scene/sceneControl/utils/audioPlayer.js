@@ -23,7 +23,6 @@ export class AudioManager {
 
         this.scenesMap = scenesMap;
         this.choralElem = choralElem;
-        console.log(this.choralElem)
 
 
         this.listDisplay = listDisplay
@@ -157,8 +156,6 @@ export class AudioManager {
             99
         ]
 
-        console.log(this.textPercentages)
-
     }
 
     calculateAnimationPercentages = () => {
@@ -291,7 +288,7 @@ export class AudioManager {
 
         //Verify if audio is playing
         let previouslyPlaying = !this.audioElems[ this.currentAudioIndex ].audio.paused || (!this.audioElems[ this.currentAudioIndex ].audio.paused && this.audioElems[ this.currentAudioIndex ].audio.currentTime);
-        console.log(previouslyPlaying)
+
         //First step : stop the current element from playing
         this.audioElems[ this.currentAudioIndex ].audio.pause()
 

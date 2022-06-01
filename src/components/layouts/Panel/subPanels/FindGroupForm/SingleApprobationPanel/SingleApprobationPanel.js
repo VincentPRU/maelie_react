@@ -51,7 +51,7 @@ const SingleApprobationPanel = ( props ) => {
                     <div className={`${styles["single-approbation-panel__type-tag-container"]} col-12 `}>
                         <div className={`${props.choristNames ? "yellow_BG" : "green_BG"} beige`}>
                         {
-                            props.choristNames ? "Chant de Maélie" : "Scènes du conte"
+                            props.choristNames ? "Chanson de Maélie" : "Scènes du conte"
                         }
                         </div>
                     </div>

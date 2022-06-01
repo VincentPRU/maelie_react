@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect, useState, topWidth } from 'react'
+import React, { useRef, useContext, useEffect, useState } from 'react'
 
 import Button from '../../Button/Button'
 
@@ -16,7 +16,7 @@ const getOverflowClassName = value => {
     return " ";
 }
 
-const Poster = ({header2, header3, paragraph, buttonText, buttonReverse, buttonColor, buttonAction, floatRight, top, bottom, topWidth }) => {
+const Poster = ({header2, header3, paragraph, buttonText, buttonReverse, buttonColor, buttonAction, floatRight, top, bottom, topWidth, scrollTo }) => {
     
     const {scrollY} = useContext(ScrollContext);
 
@@ -66,7 +66,10 @@ const Poster = ({header2, header3, paragraph, buttonText, buttonReverse, buttonC
                 { header3 && <h3 className="beige col-12">{ header3 }</h3>}
                 { paragraph && <p className="col-12 beige">{ paragraph }</p>}
                 { buttonText && 
-                    <Button to={buttonAction} color={buttonColor} reverse={buttonReverse} >
+                    <Button to={buttonAction ? buttonAction : ""} 
+                            color={buttonColor} reverse={buttonReverse} 
+                            onClick={ scrollTo ? () => scrollTo() : null}
+                            >
                         {buttonText}
                     </Button>
                 }

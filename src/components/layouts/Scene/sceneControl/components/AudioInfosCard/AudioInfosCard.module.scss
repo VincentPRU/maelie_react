@@ -1,0 +1,46 @@
+.audio-infos-card {
+
+    border: 0px;
+    max-width: 95%;
+    width: 60ch;
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+    padding: clamp(1rem, 2vw, 2rem);
+    
+
+    h3 {
+        font-weight: bold;
+        margin: 0px;
+    }
+
+    h5 {
+        font-weight: bold;
+        color: rgba(var(--yellow), 0.8);
+        margin: 0px;
+        font-size: 0.9rem;
+    }
+
+    p {
+        color: rgba(68, 68, 68, 0.808);
+        margin-top:0px;
+    }
+
+    small {
+        color: rgba(128, 128, 128, 0.76);
+        font-weight: bold;
+    }
+
+    .line {
+        border-bottom: 0.1rem solid rgba(var(--blue), 0.1);
+        margin: 1rem 0px;
+    }
+
+    button {
+        width: 100%;
+    }
+
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}

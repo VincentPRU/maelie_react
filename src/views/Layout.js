@@ -1,5 +1,5 @@
-import React, {Suspense, lazy} from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, {Suspense, lazy, useRef} from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { useAuth } from '../contexts/AuthContext';
 
@@ -22,8 +22,16 @@ const AdminPage = lazy(() => import('./pages/AdminPage/AdminPage'));
 
 const Layout = () => {
 
-    //To know if the user is logged in
-    const { currentUser } = useAuth();
+    const footerRef = useRef();
+
+    const scrollToBottom = () => {
+        footerRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start", 
+            inline: "start"
+        })
+    }
+
 
     return(
 
@@ -32,7 +40,7 @@ const Layout = () => {
                 <main> 
                     <Suspense fallback={<Spinner/>}>
                         <Routes>
-                            <Route path="/" element={<Home />}/>
+                            <Route path="/" element={<Home  scrollOverFooter={scrollToBottom} />}/>
                             <Route path="/participer-aux-scenes" element={<SceneForm />}/>
                             <Route path="/chant-de-maelie" element={<ChoraleFormPage />}/>
                             <Route path="/informations" element={<Credits />}/>
@@ -41,7 +49,9 @@ const Layout = () => {
                         </Routes>
                     </Suspense>
                 </main>
-                <Footer />
+                <div ref={footerRef} className="col-12">
+                    <Footer  />
+                </div>
             </Router>
         </>
     );

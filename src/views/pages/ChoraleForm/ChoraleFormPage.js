@@ -276,13 +276,13 @@ const ChoraleFormPage = () => {
               <ul>
                 <li>
                   <h5>1. Participer à la chorale virtuelle </h5>
-                  <p>Dans ce cas, ton enregistrement sera combiné avec l'enregistrement de plusieurs autres enfants pour faire une grande chorale virtuelle. Il est important de t'enregistrer en suivant le karaoké avec un écouteur dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes grâce à la piste audio de référence. Attention ! Assure-toi qu'on entende seulement ta voix dans l'enregistrement, et pas le karaoké. </p>
+                  <p>Dans ce cas, ton enregistrement sera combiné avec l'enregistrement de plusieurs autres enfants pour faire une grande chorale virtuelle. Il est important de t'enregistrer en suivant le <span style={{cursor: "pointer"}} className="pink" onClick={event =>  window.location.href='https://smcqeducation.ca/?s=karaoke'} >karaoké</span> avec un écouteur dans une oreille. Cela te permettra d'être synchronisé avec les autres choristes grâce à la piste audio de référence. Attention ! Assure-toi qu'on entende seulement ta voix dans l'enregistrement, et pas le karaoké. </p>
                   <p>Date limite pour participer : 15 mai 2022 </p>
                   <p>Mise en ligne de la chorale virtuelle dans le module interactif : 8 juin 2022</p>
                 </li>
                 <li>
                   <h5>2. Soumettre l'enregistrement d'une chorale indépendante</h5>
-                  <p>Les chefs de chœur peuvent enregistrer leur chorale au complet interprétant "la Chanson de Maélie". Cela peut se faire à une ou deux voix, avec ou sans piano, au tempo de votre choix. N'hésitez pas à ajouter une touche personnelle (forme flexible, rubato ou rallentando, nuances, ajout de percussions ou d'autres instruments etc.).</p>
+                  <p>Les chefs de chœur peuvent enregistrer leur chorale au complet interprétant la "Chanson de Maélie". Cela peut se faire à une ou deux voix, avec ou sans piano, au tempo de votre choix. N'hésitez pas à ajouter une touche personnelle (forme flexible, rubato ou rallentando, nuances, ajout de percussions ou d'autres instruments etc.).</p>
                   <p>Soumissions en tout temps. Ajout direct au module interactif après approbation.</p>
                 </li>
               </ul>

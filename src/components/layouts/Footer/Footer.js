@@ -7,9 +7,9 @@ import styles from './Footer.module.scss';
 import { useAuth } from '../../../contexts/AuthContext';
 
 //Images
-import azrieli from '../../../images/logos/Azrieli Logo ENG-FR Final_NOIR.svg'
+import azrieli from '../../../images/logos/Azrieli-Foundation-Footer-Logo-1.svg'
 //import CSSDM from '../../../images/logos/Logo transparent CSSDM.png'
-import MCCQ from '../../../images/logos/Culture_et_Communications_Québec.svg'
+import MCCQ from '../../../images/logos/Culture_et_Communications_Québec_white.svg'
 import CSSDM from '../../../images/logos/CSSMontreal_inverse.svg'
 
 
@@ -30,7 +30,7 @@ const Footer = () => {
                   <ul className={styles.footerMenu}>
                       <li><Button reverse color="white" to="/">Accueil</Button></li>
                       <li><Button reverse color="white" to="/participer-aux-scenes">Participer aux scènes</Button></li>
-                      <li><Button reverse color="white" to="/chant-de-maelie">Participer au "Chant de Maélie</Button></li>
+                      <li><Button reverse color="white" to="/chant-de-maelie">Participer à la Chanson de Maélie</Button></li>
                       <li><Button reverse color="white" to="/informations">Informations</Button></li>
                   </ul>
                 </section>
@@ -48,18 +48,34 @@ const Footer = () => {
                   </ul>
                   <div className={`col-12 ${styles["logo-container"]}`}>
                     <img className={styles.logo} src={azrieli} alt="Logo de la fondation Azrieli"/>
-                    <img className={styles.logo} src={MCCQ} alt="Logo du Ministère de la Culture et des Communications"/>
+                    <img style={{marginTop: "1rem"}}className={styles.logo} src={MCCQ} alt="Logo du Ministère de la Culture et des Communications"/>
                     <img className={styles.logo} src={CSSDM} alt="Logo du Centre de services scolaire de Montréal"/>
 
                   </div>
                 </section>
 
                 <section className={`${styles.adminSection}`}>
-                  <h4>Administration</h4>
-                  <button className="beige" onClick={ currentUser ? logout : login }>
-                    {currentUser ? "Déconnexion" : "Se connecter"}
-                  </button>
+
+                  <h4>Ressources</h4>
+            
                   <ul>
+                    <li>
+                      <a href="https://smcqeducation.ca/">Plateforme éducative</a>
+                    </li>
+                    <li>
+                      <a href="https://smcqeducation.ca/?s=karaoke">Karaoké : Chanson de Maélie</a>
+                    </li>
+                  </ul>
+
+                  <h4>Administration</h4>
+                    
+                  <ul>
+                      <li>
+                        <button className="beige" onClick={ currentUser ? logout : login }>
+                          {currentUser ? "Déconnexion" : "Se connecter"}
+                        </button>
+
+                      </li>
                       { currentUser ? <li><Link to="/administration">Administration</Link></li> : ""}
                   </ul>
             
