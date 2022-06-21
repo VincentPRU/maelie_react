@@ -33,7 +33,6 @@
             align-items: center;
             z-index: 2;
 
-
             /*
                 Song informations
             */ 
@@ -112,21 +111,20 @@
                         > div {
 
                             > button { 
-                                padding: 1rem;
+                                padding: 0.5rem 1rem;
                             }
                         }
                     }
                 }
             }
 
-
-      
-
             /*  First layer of the top menu  */
             > div.loadingBar-container {
 
-                --markingsSize: 2.1rem;
-                --loadingBarHeight: 1.2rem;
+                --markingsSize: 2.5rem;
+                --markingsSize: max(2.5rem, 4vh);
+                --loadingBarHeight: 1.6rem;
+                --loadingBarHeight: max(1.6rem, 3vh);
 
                 width: 100%;
                 margin-top: var(--loadingBarHeight);
@@ -198,7 +196,7 @@
 
                 width: 100%;
                 display: grid;
-                grid-template-columns: auto auto auto;
+                grid-template-columns: auto auto;
                 grid-template-rows: 100%;
                 align-items: start;
                 justify-content:space-between;
@@ -216,7 +214,7 @@
                 .timeRef:first-of-type { text-align: left; }
 
                 .buttonsContainer {
-                    display: flex;
+                    display: none;
                     justify-content: center;
                     flex-wrap: wrap;
                     margin: 0rem 0.5rem;
@@ -279,38 +277,97 @@
               
     
                 button:last-of-type { text-align: left; }
-
-                
             }
             
         }
 
         .bottomMenuContainer{
+
             color: rgb(var(--beige));
             z-index: 5;
-
-            width: 95%;
-            max-width: min(95%, 75rem);
-            margin: 0px auto;
-
+            position: absolute;
+            bottom: 0px;
+            width:100%;
+            display: flex;
+            justify-content: center;
             
-            position: relative;
-            font-size: 2.5rem;
-         
 
-            p {
-                position: absolute;
-                margin: 0px;
-                text-align: center;
-                bottom: 0px;
-                left: 0px;
-                width: 100%;
+            > div {
+                width: 95%;
+                max-width: min(95%, 75rem);
+                position: relative;
+                font-size: 2.5rem;
 
-                text-shadow: 2px 2px 3px #000000;
-          
-                font-size: 4vw;
-                font-size: clamp(1.7rem, 3rem, 5vw);
-                line-height: 1;
+                p {
+                    position: relative;
+                    text-align: center;
+                    width: 100%;
+
+                    text-shadow: 2px 2px 3px #000000;
+            
+                    font-size: 4vw;
+                    font-size: clamp(2rem, 3rem, 5vw);
+                    line-height: 1;
+                }
+
+                .buttonsContainer--smallScreens {
+                    display: flex;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    margin: 0rem 0.5rem;
+                    margin-bottom: 2vh;
+                    margin-bottom: max(3vh, 2rem);
+                    position: relative;
+                    width: 100%;
+
+
+                    button {
+                        --buttonSize: 4rem;
+
+                        width: auto;
+                        padding: 0.5rem 1rem;
+                        font-weight: bold;
+                        font-size: 1.2rem;
+                        margin: 0px 0.5rem;
+                        text-align: right;
+                        cursor: pointer;
+                        height: var(--buttonSize);
+                        color: rgb(var(--blue));
+                        background-color: rgb(var(--beige));
+                        border-radius: calc(var(--buttonSize)/2);
+                        -webkit-box-shadow: 0px 0px 5px 1px #68686869; 
+                        box-shadow: 0px 0px 5px 1px #68686869;
+
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        .svgContainer {
+                            float: left;
+                            height: 2.5rem;
+                            height: calc(var(--buttonSize)/5 * 2.5);
+                            width: 2.5rem;
+                            width: calc(var(--buttonSize)/5 * 2.5);
+                            position: relative;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            svg {
+                                width: 100%;
+                                max-height: 100%;
+                                stroke: rgb(var(--pink));
+                            }
+
+                        }
+
+                        .textContainer {
+                            display: none;
+                            margin: 0rem 1rem;
+                        }
+
+                    }
+                }
             }
         }
         
@@ -478,11 +535,76 @@
 *
 */
 
+/* Small devices (landscape tablets, 500px and up) */
+@media only screen and (min-width: 500px) {
+
+    .sceneControlComponent {
+
+        .controlsSection {
+
+            .bottomMenuContainer {
+
+                > div {
+
+                    .buttonsContainer--smallScreens{
+
+                        button {
+                            .textContainer {
+                                display: block;
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+        }
+
+    }
+
+}
+  
+
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
 
+    .sceneControlComponent {
+
+        .controlsSection {
+
+            .topMenuContainer{
+
+                > div.loadingBar-infos-container {
+
+                    grid-template-columns: auto auto auto;
+
+
+                    .buttonsContainer{
+
+                        display: flex;
+
+                    }
+
+                }
+            }
+
+            .bottomMenuContainer {
+
+                > div {
+
+                    .buttonsContainer--smallScreens{
+
+                        display: none;
+                    }
+
+                }
+
+            }
+        }
+    }
 
   
-  }
+}
   

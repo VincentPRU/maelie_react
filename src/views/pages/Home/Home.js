@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, Suspense, lazy } from 'react';
 import ReactGA from 'react-ga'
 
 
@@ -14,7 +14,8 @@ import House from '../../../components/currentIllustrations/House/House'
 import Dragon from '../../../components/currentIllustrations/Dragon/Dragon'
 
 //Scene component
-import Scene from '../../../components/layouts/Scene/Scene'
+//import Scene from '../../../components/layouts/Scene/Scene'
+import Spinner from '../../../utils/Spinner/Spinner'
 
 //Poster component
 import Poster from '../../../components/layouts/Poster/Poster'
@@ -31,13 +32,19 @@ import notes from '../../../images/illustrations/notes.png'
 //import context for the scroll event
 import { ScrollEventProvider } from '../../../contexts/ScrollEvent'
 
+const Scene = lazy(() => import('../../../components/layouts/Scene/Scene'))
 
-const Home = ({ scrollOverFooter }) => {
+const Home = () => {
 
     const homeSection = useRef()
 
     const scrollToBottom = () => {
-        
+        homeSection.current.scrollIntoView({
+            block: "end", 
+            inline: "nearest",
+            behavior: "smooth"
+        });
+
     }
 
 
@@ -220,18 +227,16 @@ const Home = ({ scrollOverFooter }) => {
                                                         buttonAction="/chant-de-maelie"
                                                     />
 
-{/*
+
                                                     <Poster
                                                         top={10}
                                                         bottom={0}
-                                                        header3='3. Chanter "Le Chant de Maélie"'
-                                                        paragraph="Le conte se termine par « La chanson de Maélie » chantée par les villageois. Apprends cette
-                                                        chanson de Denis Gougeon et enregistre-toi pour faire partie de ce chœur final. Des partitions et
-                                                        karaokés d’apprentissage sont proposés sur la plateforme éducative."
+                                                        header3="3. Écouter les bandes sonores dans l'appli"
+                                                        paragraph='Découvre le conte illustré avec les différentes bandes sonores ! Tu peux "sélectionner les extraits audio" pour trouver tes enregistrements ou ceux de tes ami.e.s. Un mode de lecture aléatoire est également offert pour un effet de surprise.'
                                                         buttonText="Visualiser"
-                                                        scrollTo={ () => {scrollOverFooter()}}
+                                                        scrollTo={ () => scrollToBottom()}
                                                     />
- */}
+
                                                 </div>
                                                 
                                                 
@@ -243,7 +248,9 @@ const Home = ({ scrollOverFooter }) => {
                                 {/* New sub-section */}
                                 <section ref={ sceneSection } style={{height: "100vh"}} className={`${styles.sectionContainer} col-12`}>
 
-                                    <Scene sceneSection={sceneSection} />
+                                    <Suspense fallback={<Spinner/>}>
+                                        <Scene sceneSection={sceneSection} />
+                                    </Suspense>
 
                                 </section>
 

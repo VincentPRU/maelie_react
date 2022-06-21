@@ -45,8 +45,9 @@ const Scene = ({sceneSection}) => {
 
                 <Tree left="78vh" top="57vh" height="50vh" minHeight="20" viewportHeightRelative />
                 <House fileSize={400} top="57vh" left="60vh" height="40vh" minHeight="13" viewportHeightRelative reverse/>
-                <House fileSize={400} top="67vh" left="33vh" height="50vh" minHeight="15" viewportHeightRelative />
                 <House fileSize={400} top="65vh" right="-10vh" height="45vh" minHeight="14" viewportHeightRelative />
+                <House fileSize={400} top="67vh" left="33vh" height="50vh" minHeight="15" viewportHeightRelative />
+
 
             </OverflowImagesContainer>
           

@@ -1,16 +1,9 @@
 import firebase, { firestore, storage } from '../../../../firebase'
 
-/*
-          subject: 'Acceptation de la bande sonore',
-            email: email,
-            content: `<p>Bonjour ${firstName},</p>
-                        <p>Bonne nouvelle : ta bande sonore pour le conte « Maélie et le dragon » a été approuvée !
-                        Tu peux maintenant aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
-                        <p>Le menu te permettra de trouver ta bande sonore ou celle de tes amis. Tu peux aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
-                        <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
-                        <p>L’équipe de la SMCQ Jeunesse</p>`
-*/
+
 const sendConfirmationEmail = (action, collection, firstName, email, isIndependentChoir) => {
+
+    console.log("Trying to send email")
 
     if(collection === "credit" && action === "accepted"){
         /*
@@ -19,14 +12,14 @@ const sendConfirmationEmail = (action, collection, firstName, email, isIndepende
        try{
             const sendEmail = firebase.functions().httpsCallable('sendEmail');
             sendEmail({
-            subject: 'Acceptation de la bande sonore',
-            email: email,
-            content: `<p>Bonjour ${firstName},</p>
-                        <p>Bonne nouvelle : ta bande sonore pour le conte « Maélie et le dragon » a été approuvée !
-                        Tu pourras bientôt aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
-                        <p>Le menu à droite te permettra trouver ta bande sonore ou celle de tes amis. Tu pourras aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
-                        <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
-                        <p>L’équipe de la SMCQ Jeunesse</p>`
+                subject: 'Acceptation de la bande sonore',
+                email: email,
+                content: `<p>Bonjour ${firstName},</p>
+                            <p>Bonne nouvelle : ta bande sonore pour le conte « Maélie et le dragon » a été approuvée !
+                            Tu peux maintenant aller l’écouter dans le module interactif <strong><a href="https://maelie-et-le-dragon.web.app">ici</a></strong>.</p>
+                            <p>Le menu te permettra de trouver ta bande sonore ou celle de tes amis. Tu peux aussi écouter d’autres bandes sonores au hasard avec le mode aléatoire.</p>
+                            <p>Si tu as des questions, écris-nous à <a href="mailto:maelieetledragon@smcq.qc.ca" target="_blank">maelieetledragon@smcq.qc.ca</a> .</p>
+                            <p>L’équipe de la SMCQ Jeunesse</p>`
 
             }).then(result => {
                 console.log(result.data);
@@ -60,7 +53,6 @@ const sendConfirmationEmail = (action, collection, firstName, email, isIndepende
                             <p>L’équipe de la SMCQ Jeunesse</p>`
     
                 }).then(result => {
-                    console.log(result.data);
                     alert("Courriel envoyé avec succès.")
                 })
     
@@ -166,16 +158,25 @@ const sendConfirmationEmail = (action, collection, firstName, email, isIndepende
 /*
     Function to accept or refuse a specific form
 */
-export const validateForm = async ( id, collectionName, action, firstName = null, email = null,  independentChoir = false) => {
+export const validateForm = async ( id, collectionName, updateChange, action, firstName = null, email = null,  independentChoir = false) => {
 
     try {
 
         //Prevent an error that would hide some forms
         if(action === "accepted" || action === "refused" || action === ""){
             await firestore.collection( collectionName ).doc( id ).update("status", action)
-            alert("Félicitations. Les changements ont bien été effectués. Vous n'avez qu'à recharger la page pour voir les modifications.")
+            alert("Félicitations. Les changements ont bien été effectués.")
 
-            sendConfirmationEmail(action, collectionName, firstName, email, independentChoir)
+            //Send an alert to let the admin user is she wants to send an email
+            if(action === "accepted" || action === "refused"){
+                if(window.confirm("Voulez-vous envoyer un courriel à l'utilisateur pour l'informmer de ce changement ? \n\nOk pour OUI ou Annuler pour NON") == true){
+                    sendConfirmationEmail(action, collectionName, firstName, email, independentChoir)
+                }
+            }
+
+            //Update the visual
+            updateChange();
+            
         } else {
             throw new Error("Mauvaise valeur d'acceptation entrée"); 
         }
@@ -205,9 +206,7 @@ export const updateInformationUnit = async ( id, collectionName, field, value ) 
 /*
     Delete a whole card from database 
 */
-export const deleteSingleCard = async (formId, formCollection, contactId, storageRefs) => {
-
-    console.log("Deletion function called")
+export const deleteSingleCard = async (formId, formCollection, contactId, storageRefs, updateChange) => {
 
     const confirmationValues = [
         'Une erreur est survenue',
@@ -239,7 +238,6 @@ export const deleteSingleCard = async (formId, formCollection, contactId, storag
         */
         for(let property in storageRefs){
             if(storageRefs[property]){
-                console.log(storageRefs[property].address)
                 //get the url of the ref and delete the element
                 await storage.refFromURL(storageRefs[property].address).delete();
 
@@ -261,15 +259,14 @@ export const deleteSingleCard = async (formId, formCollection, contactId, storag
            "Status de suppression : \n" +
            "Formulaire principale : " + formDeletionConfirmation + "\n" +
            "Fichiers audio : " + storageDeletionConfirmation + "\n" +
-           "Informations de contact : " + contactDeletionConfirmation + "\n\n" +
-           "Veuillez rafraichir la page pour voir les changements."
+           "Informations de contact : " + contactDeletionConfirmation 
        )
 
-
+       //Display the visual changes
+       updateChange();
 
     
     } catch(error) {
-        console.log(error)
 
         alert(
             "Status de suppression : \n" +
@@ -277,6 +274,9 @@ export const deleteSingleCard = async (formId, formCollection, contactId, storag
             "Fichiers audio : " + storageDeletionConfirmation + "\n" +
             "Informations de contact : " + contactDeletionConfirmation
         )
+
+        //Display the visual changes
+        updateChange();
     }
     
 }

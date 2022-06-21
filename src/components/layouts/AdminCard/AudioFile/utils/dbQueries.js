@@ -20,7 +20,7 @@ export const changeAudioReference = async (e, collection, id, fieldName, newUrl,
     //If the random mode is not defined to a bool, then make it automatically at true
     //This is especially for the case where it is a new audio without a randomMode defined
     const randomStatus = 'boolean' === (typeof randomMode) ? randomMode : true;
-    console.log(randomMode)
+
     try {
 
 

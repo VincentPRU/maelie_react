@@ -1,7 +1,5 @@
-import React, {Suspense, lazy, useRef} from 'react';
+import React, {Suspense, lazy} from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import { useAuth } from '../contexts/AuthContext';
 
 /* Layouts */
 import Footer from '../components/layouts/Footer/Footer';
@@ -17,21 +15,7 @@ const Error404 = lazy(() => import('./pages/Errror/404/Error404'));
 const AdminPage = lazy(() => import('./pages/AdminPage/AdminPage'));
 
 
-
-
-
 const Layout = () => {
-
-    const footerRef = useRef();
-
-    const scrollToBottom = () => {
-        footerRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "start", 
-            inline: "start"
-        })
-    }
-
 
     return(
 
@@ -40,7 +24,7 @@ const Layout = () => {
                 <main> 
                     <Suspense fallback={<Spinner/>}>
                         <Routes>
-                            <Route path="/" element={<Home  scrollOverFooter={scrollToBottom} />}/>
+                            <Route path="/" element={<Home />}/>
                             <Route path="/participer-aux-scenes" element={<SceneForm />}/>
                             <Route path="/chant-de-maelie" element={<ChoraleFormPage />}/>
                             <Route path="/informations" element={<Credits />}/>
@@ -49,7 +33,7 @@ const Layout = () => {
                         </Routes>
                     </Suspense>
                 </main>
-                <div ref={footerRef} className="col-12">
+                <div className="col-12">
                     <Footer  />
                 </div>
             </Router>

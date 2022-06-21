@@ -17,7 +17,7 @@ import styles from './AdminCard.module.scss'
 
 
 
-const AdminCard = ({sceneForm, data}) => {
+const AdminCard = ({sceneForm, data, updateChange}) => {
 
     const [displayContent, setDisplayContent] = useState(false)
     const [contactInfos, setContactInfos] = useState();
@@ -186,22 +186,22 @@ const AdminCard = ({sceneForm, data}) => {
                     `}>
                         <div>
                             {   (status !== "accepted") && 
-                                <Button color="green" onClick={ () => validateForm(id, collection, "accepted", contactInfos.firstname, contactInfos.email, (audioFiles["choraleIndependante"] ? true : false)) }>
+                                <Button color="green" onClick={ () => validateForm(id, collection, () => {updateChange()},  "accepted", contactInfos.firstname, contactInfos.email, (audioFiles["choraleIndependante"] ? true : false)) }>
                                     Accepter
                                 </Button>
                             }
                             {   (status !== "refused") && 
-                                <Button color="pink" onClick={ () => validateForm(id, collection, "refused", contactInfos.firstname, contactInfos.email, (audioFiles["choraleIndependante"] ? true : false)) }>
+                                <Button color="pink" onClick={ () => validateForm(id, collection, () => {updateChange()}, "refused", contactInfos.firstname, contactInfos.email, (audioFiles["choraleIndependante"] ? true : false)) }>
                                     Refuser
                                 </Button>
                             }
                             {   (status === "accepted" || status === "refused") && 
-                                <Button color="yellow" onClick={ () => validateForm(id, collection, "") }>
+                                <Button color="yellow" onClick={ () => validateForm(id, collection, () => {updateChange()}, "") }>
                                     À valider
                                 </Button>
                             }
                             {   (status === "refused") && 
-                                <Button color="red" onClick={ () => { deleteSingleCard(id, collection, data.contactRef, audioFiles) }} >
+                                <Button color="red" onClick={ () => { deleteSingleCard(id, collection, () => {updateChange()},data.contactRef, audioFiles) }} >
                                     Supprimer
                                 </Button>
                             }

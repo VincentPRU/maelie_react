@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef} from 'react'
 
 // Auth context 
-import { useAuth } from '../../../../contexts/AuthContext';
+//import { useAuth } from '../../../../contexts/AuthContext';
 
 //Components
 import Button from '../../../Button/Button'
@@ -54,8 +54,10 @@ const scrollToElement = element => {
 
 const SceneControl = ({setAnimation, currentAnimation}) => {
 
-    /* Auth context */
-    const { currentUser } = useAuth();
+
+
+    //For the developpement stage
+    const displayMenu = true;
 
 
     /*
@@ -516,7 +518,39 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
                 </div>
                 <div></div>
                 <div className={styles.bottomMenuContainer}>
-                    <p>{currentText}</p>
+                    <div>
+                    <p className="col-12">{currentText}</p>
+                    <div className={`col-12 ${styles["buttonsContainer--smallScreens"]}`}>
+                                <button onClick={() => { playButton() }}>
+                                    <div className={styles.svgContainer}>
+                                        { animationPlaying ? 
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.5 17"><line x1="10" y1="15.5" x2="10" y2="1.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="4"/><line x1="1.5" y1="15.5" x2="1.5" y2="1.5" fill="none"  strokeLinecap="round" strokeMiterlimit="10" strokeWidth="4"/></svg>: 
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 17"><path d="M6,2.8V15.2c0,.67,1,1,1.62.63l10-6.2a.7.7,0,0,0,0-1.26l-10-6.2C7,1.76,6,2.13,6,2.8Z" transform="translate(-4.5 -0.5)" fill="none"  strokeMiterlimit="10" strokeWidth="3"/></svg> 
+                                        }
+                                    </div>
+                                    <div className={styles.textContainer}>
+                                        { animationPlaying ? "Pause" : "Jouer" }
+                                    </div>
+                                </button>
+                                <button onClick={ () => { scrollToElement(controlSection)
+                                    }}>
+                                    <div className={styles.svgContainer}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 17"><path d="M20.68,10.94v3.81a1.22,1.22,0,0,1-1.32,1.1H13.77" transform="translate(-0.18 -0.35)" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><path d="M13.77,1.85h5.59a1.22,1.22,0,0,1,1.32,1.09V6.77" transform="translate(-0.18 -0.35)" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><path d="M1.68,10.94v3.81A1.23,1.23,0,0,0,3,15.85H8.59" transform="translate(-0.18 -0.35)" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><path d="M8.59,1.85H3A1.23,1.23,0,0,0,1.68,2.94V6.77" transform="translate(-0.18 -0.35)" fill="none"  strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/></svg>
+                                    </div>
+                                    <div className={styles.textContainer}>
+                                        Centrer
+                                    </div>
+                                </button>
+                                <button onClick={reverseMenuStates}>
+                                    <div className={styles.svgContainer}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 15"><line x1="1.5" y1="1.5" x2="19.5" y2="1.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><line x1="1.5" y1="7.5" x2="19.5" y2="7.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/><line x1="1.5" y1="13.5" x2="19.5" y2="13.5" fill="none" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="3"/></svg>
+                                    </div>
+                                    <div className={styles.textContainer}>
+                                        Menu
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                 </div>
             </div>
             }
@@ -527,7 +561,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
 
                 
                 {/* If the user is logged in, then show the real menu */}
-                { currentUser &&
+                { displayMenu &&
 
                     <>
                     {menuStateSelectionLevel === 0 &&
@@ -628,7 +662,7 @@ const SceneControl = ({setAnimation, currentAnimation}) => {
                 }
 
                 {/* If the user is not logged in, then only show the temporary menu */}
-                { !currentUser && 
+                { !displayMenu && 
                     <Panel 
                     title="Conte musical" 
                     p1={`Clique ci-dessous pour visionner le conte de "Maélie et le dragon". Tu remarqueras qu'il manque un élément essentiel : la trame sonore !`}

@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense, lazy } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 
 import firebase from '../../../firebase'
 
@@ -13,7 +13,6 @@ import Spinner from '../../../utils/Spinner/Spinner'
 //Import components
 import Select from '../../../components/forms/fields/Select/Select'
 import AdminCard from '../../../components/layouts/AdminCard/AdminCard'
-import Button from '../../../components/Button/Button'
 
 //Styling
 import styles from './AdminPage.module.scss'
@@ -33,10 +32,15 @@ const AdminPage = () => {
     //Maelie's song form data
     const [maelieFormData, setMaelieFormData] = useState(null)
 
+    //Update display of cards
+    const [updateDisplay, setUpdateDisplay] = useState(true)
+    const iterateChange = () => setUpdateDisplay(!updateDisplay)
+    
+
     useEffect(() => {
       getSceneFormData().then(setSceneFormData)
       getMaelieSongFormData().then(setMaelieFormData)
-    }, [])
+    }, [updateDisplay])
 
 
   
@@ -72,13 +76,14 @@ const AdminPage = () => {
      {value: 4, text: "Masquer la section"} 
     ];
    
-    const sayHelloClick = () => {
+
+/*    const sayHelloClick = () => {
         const sendEmail = firebase.functions().httpsCallable('sendEmail');
         sendEmail().then(result => {
           console.log(result.data)
         })
     }
-
+*/
     return (
       <section className={`${styles.adminPage} maxWidthPageContainer`}>
 
@@ -113,7 +118,7 @@ const AdminPage = () => {
               {
                 sceneFormData && 
                   sceneFormData.map(element => (
-                    element.status === 'refused' && <AdminCard sceneForm={true} data={element} />  
+                    element.status === 'refused' && <AdminCard key={element.id} updateChange={iterateChange} sceneForm={true} data={element} />  
                   ))
               }
             </section>
@@ -123,7 +128,7 @@ const AdminPage = () => {
               {
                 sceneFormData && 
                   sceneFormData.map(element => (
-                    (element.status === undefined || element.status === "") && <AdminCard sceneForm={true} data={element} />
+                    (element.status === undefined || element.status === "") && <AdminCard key={element.id} updateChange={iterateChange} sceneForm={true} data={element} />
                   ))
               }
             </section>
@@ -133,7 +138,7 @@ const AdminPage = () => {
               {
                 sceneFormData && 
                   sceneFormData.map(element => (
-                    element.status === 'accepted' && <AdminCard sceneForm={true} data={element} />
+                    element.status === 'accepted' && <AdminCard key={element.id} updateChange={iterateChange} sceneForm={true} data={element} />
                   ))
               }
             </section>
@@ -146,7 +151,7 @@ const AdminPage = () => {
               {
                 sceneFormData && 
                   sceneFormData.map(element => (
-                    element.status === 'accepted' && <AdminCard sceneForm={true} data={element} />
+                    element.status === 'accepted' && <AdminCard key={element.id} updateChange={iterateChange} sceneForm={true} data={element} />
                   ))
               }
             </section>
@@ -159,7 +164,7 @@ const AdminPage = () => {
               {
                 sceneFormData && 
                   sceneFormData.map(element => (
-                    (element.status === undefined || element.status === "") && <AdminCard sceneForm={true} data={element} />
+                    (element.status === undefined || element.status === "") && <AdminCard key={element.id} updateChange={iterateChange} sceneForm={true} data={element} />
                   ))
               }
             </section>
@@ -171,7 +176,7 @@ const AdminPage = () => {
               {
                 sceneFormData && 
                   sceneFormData.map(element => (
-                    element.status === 'refused' && <AdminCard sceneForm={true} data={element} />
+                    element.status === 'refused' && <AdminCard key={element.id} updateChange={iterateChange} sceneForm={true} data={element} />
                   ))
               }
             </section>
@@ -208,7 +213,7 @@ const AdminPage = () => {
                 <h4 className="red">Formulaires refusés</h4>
                 {
                     maelieFormData.map(element => (
-                      element.status === 'refused' && <AdminCard data={element} />  
+                      element.status === 'refused' && <AdminCard key={element.id}  updateChange={iterateChange} data={element} />  
                     ))
                 }
               </section>
@@ -217,7 +222,7 @@ const AdminPage = () => {
                 <h4 className="yellow">En attente d'approbation</h4>
                 {
                     maelieFormData.map(element => (
-                      (element.status === undefined || element.status === "") && <AdminCard data={element} />
+                      (element.status === undefined || element.status === "") && <AdminCard key={element.id}  updateChange={iterateChange} data={element} />
                     ))
                 }
               </section>
@@ -226,7 +231,7 @@ const AdminPage = () => {
                 <h4 className="green">Formulaires approuvés</h4>
                 {
                     maelieFormData.map(element => (
-                      element.status === 'accepted' && <AdminCard data={element} />
+                      element.status === 'accepted' && <AdminCard key={element.id} updateChange={iterateChange} data={element} />
                     ))
                 }
               </section>
@@ -238,7 +243,7 @@ const AdminPage = () => {
               <section className={`${styles.pageContent} col-12`}>
                 {
                     maelieFormData.map(element => (
-                      element.status === 'accepted' && <AdminCard data={element} />
+                      element.status === 'accepted' && <AdminCard key={element.id} updateChange={iterateChange} data={element} />
                     ))
                 }
               </section>
@@ -249,7 +254,7 @@ const AdminPage = () => {
               <section className={`${styles.pageContent} col-12`}>
                 {
                     maelieFormData.map(element => (
-                      (element.status === undefined || element.status === "") && <AdminCard data={element} />
+                      (element.status === undefined || element.status === "") && <AdminCard key={element.id} updateChange={iterateChange} data={element} />
                     ))
                 }
               </section>
@@ -260,7 +265,7 @@ const AdminPage = () => {
               <section className={`${styles.pageContent} col-12`}>
                 {
                     maelieFormData.map(element => (
-                      element.status === 'refused' && <AdminCard data={element} />
+                      element.status === 'refused' && <AdminCard key={element.id} updateChange={iterateChange} data={element} />
                     ))
                 }
               </section>
