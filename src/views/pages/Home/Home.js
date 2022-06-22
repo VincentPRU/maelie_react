@@ -232,7 +232,7 @@ const Home = () => {
                                                         top={10}
                                                         bottom={0}
                                                         header3="3. Écouter les bandes sonores dans l'appli"
-                                                        paragraph='Découvre le conte illustré avec les différentes bandes sonores ! Tu peux "sélectionner les extraits audio" pour trouver tes enregistrements ou ceux de tes ami.e.s. Un mode de lecture aléatoire est également offert pour un effet de surprise.'
+                                                        paragraph='Découvre le conte illustré avec les différentes bandes sonores! Tu peux "sélectionner les extraits audio" pour trouver tes enregistrements ou ceux de tes ami.e.s. Un mode de lecture aléatoire est également offert pour un effet de surprise.'
                                                         buttonText="Visualiser"
                                                         scrollTo={ () => scrollToBottom()}
                                                     />
