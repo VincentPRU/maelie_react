@@ -7,9 +7,9 @@ import SceneControl from './sceneControl/SceneControl'
 
 
 //Illustrations components
-import Hill from '../../currentIllustrations/Hill/Hill'
-import House from '../../currentIllustrations/House/House'
-import Tree from '../../currentIllustrations/Tree/Tree'
+import { MemoizedHill as Hill} from '../../currentIllustrations/Hill/Hill'
+import { MemoizedHouse as House } from '../../currentIllustrations/House/House'
+import { MemoizedTree as Tree } from '../../currentIllustrations/Tree/Tree'
 import Castle from '../../currentIllustrations/Castle/Castle'
 import Floor from '../../currentIllustrations/Floor/Floor'
 

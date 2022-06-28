@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 
 import styles from "./Hill.module.scss";
@@ -36,6 +36,7 @@ const Hill = ({ left, right, top, width, reverse, parentwidth, height, smallHill
         'height': heightValue
     }
 
+    console.log("hill")
 
     return (
 
@@ -52,3 +53,6 @@ const Hill = ({ left, right, top, width, reverse, parentwidth, height, smallHill
 }
 
 export default Hill
+
+//Memoise to save useless rerender
+export const MemoizedHill = memo(Hill)

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import tree from '../../../images/illustrations/arbre.png'
 import styles from './Tree.module.scss'
@@ -17,7 +17,8 @@ const Tree = ( {top, left, right, height, background, blurBackground, reverse, p
     //**IMP** The unit is rem
     const minimumHeight = minHeight ? (parseFloat(minHeight) + "rem") : "5rem";
 
-
+    console.log("Arbre")
+    
     const style = {
         top: topPos,
         left: right ? "" : leftValue,
@@ -44,3 +45,6 @@ const Tree = ( {top, left, right, height, background, blurBackground, reverse, p
 }
 
 export default Tree;
+
+//This is the element to call if we want to memoize the tree
+export const MemoizedTree = memo(Tree)

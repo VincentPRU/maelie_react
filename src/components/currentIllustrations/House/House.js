@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import styles from './House.module.scss'
 import house200 from '../../../images/illustrations/maison_200.png'
@@ -22,6 +22,7 @@ const House = ( {fileSize, top, left, right, height, background, parentwidth, mi
     //**IMP** The unit is rem
     const minimumHeight = minHeight ? (parseFloat(minHeight) + "rem") : "4rem";
     
+    console.log("house")
     const style = {
         top: topPos,
         left: right ? "" : leftValue,
@@ -39,3 +40,5 @@ const House = ( {fileSize, top, left, right, height, background, parentwidth, mi
 }
 
 export default House;
+
+export const MemoizedHouse = memo(House)

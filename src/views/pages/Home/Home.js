@@ -8,9 +8,9 @@ import styles from './Home.module.scss'
 import OverflowImagesContainer from '../../../components/layouts/OverflowImagesContainer/OverflowImagesContainer'
 
 //Illustrations components 
-import Tree from '../../../components/currentIllustrations/Tree/Tree'
-import Hill from '../../../components/currentIllustrations/Hill/Hill'
-import House from '../../../components/currentIllustrations/House/House'
+import { MemoizedTree as Tree } from '../../../components/currentIllustrations/Tree/Tree'
+import { MemoizedHill as Hill} from '../../../components/currentIllustrations/Hill/Hill'
+import { MemoizedHouse as House } from '../../../components/currentIllustrations/House/House'
 import Dragon from '../../../components/currentIllustrations/Dragon/Dragon'
 
 //Scene component

@@ -47,19 +47,19 @@ export function ScrollEventProvider( {children} ){
             lastScrollCount++;
             
             //Reduce the fps to 4 / seconds
-            if(frame % 2 === 0){
-
+            if(frame % 1 === 0){
+/*
                 
                 //Update the scroll position if needed
                 if (yScrollEvent.current && (window.pageYOffset || 0) !== _scrollY.current){
                     
-
                     //set it back to false once the previous functions are done
                     yScrollEvent.current = false;
                     setScrollY(window.pageYOffset || 0);
-                } 
 
-/*
+                } 
+*/
+
                 //Update the scroll position if needed
                 if (yScrollEvent.current && (window.pageYOffset || 0) !== _scrollY.current){
                     
@@ -76,7 +76,7 @@ export function ScrollEventProvider( {children} ){
                         waitingToUpDateYScroll = false;
                     }
                 }
-      */          
+         
 
                 if(windowResized.current){
                     //Update window's height 

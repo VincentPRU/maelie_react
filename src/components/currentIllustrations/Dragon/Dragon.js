@@ -21,6 +21,8 @@ const Dragon = ( {dragonHypnotized, hypnotizable, top, width, left, height, back
     //Scrolling event
     const { scrollY } = useContext(ScrollContext);
 
+    console.log("dragon")
+
     useEffect(() => {
         if(ref && fadeIn){
             const elemTop = ref.current.getBoundingClientRect().top;
